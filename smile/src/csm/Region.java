@@ -4,26 +4,36 @@
 package csm;
 
 import java.awt.Point;
+import java.util.LinkedList;
 
 /**
- * @author hs
+ * @author hsi
  * 
  */
 public class Region extends CSMComponent {
+	private CompositeState parentComposite;
 
-	Region(Point position) {
+	private final LinkedList<InternalState> childInternalStates = new LinkedList<InternalState>();
+
+	Region(Point position, CompositeState parentComposite) {
 		super(position);
+		// XXX für die äußerste Region soll parent dann doch null sein
+		// assert parentComposite != null;
+		this.parentComposite = parentComposite;
+		this.parentComposite.addSubregion(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see csm.CSMComponent#parent()
-	 */
 	@Override
-	public CSMComponent parent() {
-		// TODO Auto-generated method stub
-		return null;
+	public final CSMComponent parent() {
+		return this.parentComposite;
+	}
+
+	public final void addChildInternalState(InternalState child) {
+		childInternalStates.add(child);
+	}
+
+	public final void removeChildInternalState(InternalState child) {
+		childInternalStates.remove(child);
 	}
 
 }

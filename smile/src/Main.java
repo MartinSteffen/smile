@@ -3,9 +3,9 @@
  */
 
 /**
- * @author hs
- *
  * Der Name ist Programm
+ * 
+ *  @author hsi
  */
 public final class Main {
 
