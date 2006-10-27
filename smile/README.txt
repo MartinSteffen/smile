@@ -16,6 +16,12 @@ src
 bin
     Das Verzeichnis für die Classfiles
 
+javadoc
+    Das Verzeichnis für die von javadoc generierte HTML-Dokumentation
+    (alle Inhalte werden von svn ignoriert, da die Property svn:ignore
+    auf '*' gesetzt wurde. Für handgeschriebene Dokumentation wird man
+    also ein anderes Verzeichnis verwenden müssen)
+
 ----
 Vorläufige Package-Struktur
 

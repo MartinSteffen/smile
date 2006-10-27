@@ -6,8 +6,12 @@ package csm;
 import java.awt.Point;
 
 /**
- * @author hs
- *
+ * Abstrakte Oberklasse aller States
+ * <p>
+ * besitzt die im Paper unter Definition 1 angegebenen Funktionen
+ * stateOf und regionOf 
+ * 
+ * @author hsi
  */
 public abstract class AbstractState extends CSMComponent {
 
