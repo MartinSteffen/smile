@@ -20,18 +20,18 @@ public class StateCounter implements CSMTraversal {
 	private int count = 0;
 
 	static int countStates(AbstractRegion r) {
-		StateCounter c = new StateCounter();
+		final StateCounter c = new StateCounter();
 		r.traverseCSM(c);
 		return c.count;
 	}
 
 	public boolean enterCompositeState(CompositeState scom) {
-		count++;
+		this.count++;
 		return true;
 	}
 
 	public boolean enterFinalState(FinalState sfin) {
-		count++;
+		this.count++;
 		return true;
 	}
 
@@ -49,15 +49,15 @@ public class StateCounter implements CSMTraversal {
 	}
 
 	public void visitChoiceState(ChoiceState schoice) {
-		count++;
+		this.count++;
 	}
 
 	public void visitEntryState(EntryState sentry) {
-		count++;
+		this.count++;
 	}
 
 	public void visitExitState(ExitState sexit) {
-		count++;
+		this.count++;
 	}
 
 }

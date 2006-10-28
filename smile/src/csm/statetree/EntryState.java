@@ -7,8 +7,9 @@ import java.awt.Point;
 
 
 /**
- * @author hsi
+ * im Paper als S_entry bekannt
  * 
+ * @author hsi
  */
 public final class EntryState extends ConnectionPoint {
 

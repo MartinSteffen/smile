@@ -5,10 +5,10 @@ package csm.statetree;
 
 import java.awt.Point;
 
-
 /**
+ * im Paper als Region \epsilon bekannt (parent() ist null)
+ * 
  * @author hs
- *
  */
 public final class OutermostRegion extends AbstractRegion {
 
@@ -18,7 +18,7 @@ public final class OutermostRegion extends AbstractRegion {
 	}
 
 	public OutermostRegion() {
-		super(new Point(0,0));
+		super(new Point(0, 0));
 	}
 
 }

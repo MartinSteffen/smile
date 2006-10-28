@@ -7,8 +7,9 @@ import java.awt.Point;
 import java.util.LinkedList;
 
 /**
- * @author hsi
+ * im Paper als S_com bekannt
  * 
+ * @author hsi
  */
 public final class CompositeState extends ExitableState {
 
@@ -44,9 +45,9 @@ public final class CompositeState extends ExitableState {
 		if (!visitor.enterCompositeState(this))
 			return;
 		visitMyExitStates(visitor);
-		for(EntryState s : childEntryStates)
+		for(final EntryState s : this.childEntryStates)
 			s.traverseCSM(visitor);
-		for(Region r : subregions)
+		for(final Region r : this.subregions)
 			r.traverseCSM(visitor);
 		visitor.exitCompositeState(this);
 	}

@@ -5,13 +5,13 @@ package csm.statetree;
 
 import java.awt.Point;
 
-
 /**
- * @author hsi
+ * eine Unterregion eines Composite State (parent() ungleich null)
  * 
+ * @author hsi
  */
 public final class Region extends AbstractRegion {
-	
+
 	private CompositeState parentComposite;
 
 	@Override
@@ -25,9 +25,5 @@ public final class Region extends AbstractRegion {
 		this.parentComposite = parentComposite;
 		this.parentComposite.addSubregion(this);
 	}
-
-
-
-
 
 }

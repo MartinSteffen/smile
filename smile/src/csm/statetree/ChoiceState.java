@@ -6,8 +6,9 @@ package csm.statetree;
 import java.awt.Point;
 
 /**
- * @author hsi
+ * im Paper als S_choice bekannt
  * 
+ * @author hsi
  */
 public final class ChoiceState extends InternalState {
 

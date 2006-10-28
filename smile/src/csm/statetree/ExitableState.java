@@ -30,7 +30,7 @@ public abstract class ExitableState extends InternalState {
 	}
 
 	void visitMyExitStates(CSMTraversal visitor) {
-		for(ExitState s : childExitStates)
+		for(final ExitState s : this.childExitStates)
 			s.traverseCSM(visitor);
 		
 	}

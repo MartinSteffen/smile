@@ -14,8 +14,9 @@ import java.awt.Point;
 
 
 /**
- * @author hsi
+ * im Paper als S_exit bekannt
  * 
+ * @author hsi
  */
 public final class ExitState extends ConnectionPoint {
 
