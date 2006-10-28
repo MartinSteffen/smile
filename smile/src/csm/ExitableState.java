@@ -13,7 +13,10 @@ import java.util.LinkedList;
 public abstract class ExitableState extends InternalState {
 	private final LinkedList<ExitState> childExitStates = new LinkedList<ExitState>();
 
-	public ExitableState(Point position, Region parentRegion) {
+	//
+	// Konstruktion *******************************
+
+	public ExitableState(Point position, AbstractRegion parentRegion) {
 		super(position, parentRegion);
 	}
 

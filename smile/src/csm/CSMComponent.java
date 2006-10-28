@@ -1,6 +1,3 @@
-/**
- * 
- */
 package csm;
 
 import java.awt.Point;
@@ -30,16 +27,8 @@ public abstract class CSMComponent {
 	 */
 	private Point position;
 
-	/**
-	 * Jede Komponente hat eine Position, deshalb stellen wir keinen
-	 * Default-Konstruktor zur Verfügung.
-	 * 
-	 * @param position
-	 *            die Position der Komponente (darf nicht null sein!)
-	 */
-	CSMComponent(Point position) {
-		setPosition(position);
-	}
+	//
+	// Semantik ***********************************
 
 	/**
 	 * die Funktion parent gemäß Definition 1 des Skripts
@@ -66,6 +55,23 @@ public abstract class CSMComponent {
 		return false;
 	}
 
+	//
+	// Konstruktion *******************************
+
+	/**
+	 * Jede Komponente hat eine Position, deshalb stellen wir keinen
+	 * Default-Konstruktor zur Verfügung.
+	 * 
+	 * @param position
+	 *            die Position der Komponente (darf nicht null sein!)
+	 */
+	CSMComponent(Point position) {
+		setPosition(position);
+	}
+
+	//
+	// GUI ****************************************
+
 	/**
 	 * @return die Position relativ zur parent-Komponente (niemals null)
 	 */
@@ -83,7 +89,7 @@ public abstract class CSMComponent {
 	}
 
 	/**
-	 * berechnet die Position relativ zur äußersten (root)-Komponente
+	 * @return die Position relativ zur äußersten (root)-Komponente
 	 */
 	public final Point getAbsolutePosition() {
 		int x = 0;

@@ -11,11 +11,15 @@ import java.util.LinkedList;
  * 
  */
 public final class CompositeState extends ExitableState {
+
 	private final LinkedList<EntryState> childEntryStates = new LinkedList<EntryState>();
 
 	private final LinkedList<Region> subregions = new LinkedList<Region>();
 
-	public CompositeState(Point position, Region parentRegion) {
+	//
+	// Konstruktion *******************************
+
+	public CompositeState(Point position, AbstractRegion parentRegion) {
 		super(position, parentRegion);
 	}
 
@@ -35,4 +39,26 @@ public final class CompositeState extends ExitableState {
 		subregions.remove(child);
 	}
 
+	//
+	// Connections ********************************
+
+	@Override
+	public final boolean mayConnectTo(State target) {
+		return this == target;
+	}
+
+	@Override
+	protected final boolean mayConnectFromChoiceState(ChoiceState source) {
+		return false;
+	}
+
+	@Override
+	protected final boolean mayConnectFromEntryState(EntryState source) {
+		return false;
+	}
+
+	@Override
+	protected boolean mayConnectFromExitState(ExitState source) {
+		return false;
+	}
 }

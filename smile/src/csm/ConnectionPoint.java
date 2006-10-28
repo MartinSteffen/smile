@@ -9,15 +9,15 @@ import java.awt.Point;
  * @author hsi
  *
  */
-public abstract class ConnectionPoint extends AbstractState {
+public abstract class ConnectionPoint extends State {
+
+	@Override
+	public final State stateOf() {
+		return (State) parent();
+	}
 
 	public ConnectionPoint(Point position) {
 		super(position);
-	}
-
-	@Override
-	public final AbstractState stateOf() {
-		return (AbstractState) parent();
 	}
 
 }
