@@ -1,9 +1,10 @@
 /**
  * 
  */
-package csm;
+package csm.statetree;
 
 import java.awt.Point;
+
 
 /**
  * @author hsi
@@ -22,14 +23,14 @@ public abstract class InternalState extends State {
 	}
 
 	@Override
-	public final State stateOf() {
+	public final InternalState stateOf() {
 		return this;
 	}
 
 	//
 	// Konstruktion *******************************
 
-	public InternalState(Point position, AbstractRegion parentRegion) {
+	protected InternalState(Point position, AbstractRegion parentRegion) {
 		super(position);
 		assert parentRegion != null;
 		this.parentRegion = parentRegion;

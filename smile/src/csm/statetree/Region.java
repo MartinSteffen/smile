@@ -1,20 +1,21 @@
 /**
  * 
  */
-package csm;
+package csm.statetree;
 
 import java.awt.Point;
+
 
 /**
  * @author hsi
  * 
  */
-public class Region extends AbstractRegion {
+public final class Region extends AbstractRegion {
 	
 	private CompositeState parentComposite;
 
 	@Override
-	public final CSMComponent parent() {
+	public CSMComponent parent() {
 		return this.parentComposite;
 	}
 
@@ -24,5 +25,9 @@ public class Region extends AbstractRegion {
 		this.parentComposite = parentComposite;
 		this.parentComposite.addSubregion(this);
 	}
+
+
+
+
 
 }

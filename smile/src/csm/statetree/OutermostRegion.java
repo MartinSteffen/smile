@@ -1,9 +1,10 @@
 /**
  * 
  */
-package csm;
+package csm.statetree;
 
 import java.awt.Point;
+
 
 /**
  * @author hs

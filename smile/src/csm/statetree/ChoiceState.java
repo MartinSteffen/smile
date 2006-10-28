@@ -1,7 +1,7 @@
 /**
  * 
  */
-package csm;
+package csm.statetree;
 
 import java.awt.Point;
 
@@ -15,29 +15,36 @@ public final class ChoiceState extends InternalState {
 		super(position, parentRegion);
 	}
 
+	@Override
+	public void traverseCSM(CSMTraversal visitor) {
+		visitor.visitChoiceState(this);
+	}
+
 	//
 	// Connections ********************************
 
 	@Override
-	public final boolean mayConnectTo(State target) {
-		if (this.regOf() != target.regOf())
+	public boolean mayConnectTo(State target) {
+		assert target != null;
+		if (regOf() != target.regOf())
 			return false;
 		return target.mayConnectFromChoiceState(this);
 	}
 
 	@Override
-	protected final boolean mayConnectFromChoiceState(ChoiceState source) {
+	boolean mayConnectFromChoiceState(ChoiceState source) {
 		return true;
 	}
 
 	@Override
-	protected final boolean mayConnectFromEntryState(EntryState source) {
+	boolean mayConnectFromEntryState(EntryState source) {
 		return true;
 	}
 
 	@Override
-	protected final boolean mayConnectFromExitState(ExitState source) {
+	boolean mayConnectFromExitState(ExitState source) {
 		boolean sourceInFinal = source.stateOf() instanceof FinalState;
-		return source.regOf() == this.regOf() && !sourceInFinal;
+		return source.regOf() == regOf() && !sourceInFinal;
 	}
+
 }

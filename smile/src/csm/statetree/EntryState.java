@@ -1,9 +1,10 @@
 /**
  * 
  */
-package csm;
+package csm.statetree;
 
 import java.awt.Point;
+
 
 /**
  * @author hsi
@@ -14,7 +15,7 @@ public final class EntryState extends ConnectionPoint {
 	private CompositeState parentComposite;
 
 	@Override
-	public final CSMComponent parent() {
+	public CSMComponent parent() {
 		return this.parentComposite;
 	}
 
@@ -25,29 +26,36 @@ public final class EntryState extends ConnectionPoint {
 		this.parentComposite.addChildEntryState(this);
 	}
 
+	@Override
+	public void traverseCSM(CSMTraversal visitor) {
+		visitor.visitEntryState(this);
+	}
+
 	//
 	// Connections ********************************
 
 	@Override
 	public boolean mayConnectTo(State target) {
-		if (this.stateOf() != target.stateOf().stateOf())
+		assert target != null;
+		if (stateOf() != target.stateOf().stateOf())
 			return false;
 		return target.mayConnectFromEntryState(this);
 	}
 
 	@Override
-	protected final boolean mayConnectFromChoiceState(ChoiceState source) {
+	boolean mayConnectFromChoiceState(ChoiceState source) {
 		return true;
 	}
 
 	@Override
-	protected final boolean mayConnectFromEntryState(EntryState source) {
+	boolean mayConnectFromEntryState(EntryState source) {
 		return true;
 	}
 
 	@Override
-	protected final boolean mayConnectFromExitState(ExitState source) {
+	boolean mayConnectFromExitState(ExitState source) {
 		boolean sourceInFinal = source.stateOf() instanceof FinalState;
-		return source.regOf() == this.regOf() && !sourceInFinal;
+		return source.regOf() == regOf() && !sourceInFinal;
 	}
+
 }

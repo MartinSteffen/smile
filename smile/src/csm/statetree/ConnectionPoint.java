@@ -1,9 +1,10 @@
 /**
  * 
  */
-package csm;
+package csm.statetree;
 
 import java.awt.Point;
+
 
 /**
  * @author hsi
@@ -12,11 +13,11 @@ import java.awt.Point;
 public abstract class ConnectionPoint extends State {
 
 	@Override
-	public final State stateOf() {
-		return (State) parent();
+	public final InternalState stateOf() {
+		return (InternalState) parent();
 	}
 
-	public ConnectionPoint(Point position) {
+	protected ConnectionPoint(Point position) {
 		super(position);
 	}
 

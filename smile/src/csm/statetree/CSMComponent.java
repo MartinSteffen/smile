@@ -1,4 +1,4 @@
-package csm;
+package csm.statetree;
 
 import java.awt.Point;
 
@@ -65,9 +65,14 @@ public abstract class CSMComponent {
 	 * @param position
 	 *            die Position der Komponente (darf nicht null sein!)
 	 */
-	CSMComponent(Point position) {
+	protected CSMComponent(Point position) {
 		setPosition(position);
 	}
+
+	//
+	// Traversal **********************************
+
+	public abstract void traverseCSM(CSMTraversal visitor);
 
 	//
 	// GUI ****************************************
@@ -76,7 +81,7 @@ public abstract class CSMComponent {
 	 * @return die Position relativ zur parent-Komponente (niemals null)
 	 */
 	public final Point getPosition() {
-		return position;
+		return this.position;
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package csm;
+package csm.statetree;
 
 //
 // Semantik ***********************************
@@ -12,6 +12,7 @@ package csm;
 
 import java.awt.Point;
 
+
 /**
  * @author hsi
  * 
@@ -21,7 +22,7 @@ public final class ExitState extends ConnectionPoint {
 	private ExitableState parentExitable;
 
 	@Override
-	public final CSMComponent parent() {
+	public CSMComponent parent() {
 		return this.parentExitable;
 	}
 
@@ -32,27 +33,34 @@ public final class ExitState extends ConnectionPoint {
 		this.parentExitable.addChildExitState(this);
 	}
 
+	@Override
+	public void traverseCSM(CSMTraversal visitor) {
+		visitor.visitExitState(this);
+	}
+
 	//
 	// Connections ********************************
 
 	@Override
 	public boolean mayConnectTo(State target) {
+		assert target != null;
 		return target.mayConnectFromExitState(this);
 	}
 
 	@Override
-	protected boolean mayConnectFromChoiceState(ChoiceState source) {
+	boolean mayConnectFromChoiceState(ChoiceState source) {
 		return true;
 	}
 
 	@Override
-	protected boolean mayConnectFromEntryState(EntryState source) {
+	boolean mayConnectFromEntryState(EntryState source) {
 		return false;
 	}
 
 	@Override
-	protected boolean mayConnectFromExitState(ExitState source) {
-		return source.stateOf().stateOf() == this.stateOf();
+	boolean mayConnectFromExitState(ExitState source) {
+		return source.stateOf().stateOf() == stateOf();
 	}
+
 
 }
