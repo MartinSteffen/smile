@@ -3,13 +3,6 @@
  */
 package csm.statetree;
 
-//
-// Semantik ***********************************
-//
-// Konstruktion *******************************
-//
-// Connections ********************************
-
 import java.awt.Point;
 
 
@@ -21,6 +14,12 @@ import java.awt.Point;
 public final class ExitState extends ConnectionPoint {
 
 	private ExitableState parentExitable;
+
+	public static enum KindOfExitstate {
+		PR, NPR, CP
+	};
+
+	public KindOfExitstate kindOf = KindOfExitstate.PR;
 
 	@Override
 	public CSMComponent parent() {
@@ -35,7 +34,7 @@ public final class ExitState extends ConnectionPoint {
 	}
 
 	@Override
-	public void traverseCSM(CSMTraversal visitor) {
+	public void visitMe(CSMVisitor visitor) {
 		visitor.visitExitState(this);
 	}
 
@@ -62,6 +61,5 @@ public final class ExitState extends ConnectionPoint {
 	boolean mayConnectFromExitState(ExitState source) {
 		return source.stateOf().stateOf() == stateOf();
 	}
-
 
 }

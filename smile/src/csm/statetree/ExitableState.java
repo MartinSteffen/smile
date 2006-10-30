@@ -12,7 +12,9 @@ import java.util.LinkedList;
  * 
  */
 public abstract class ExitableState extends InternalState {
-	private final LinkedList<ExitState> childExitStates = new LinkedList<ExitState>();
+
+	private final LinkedList<ExitState> childExitStates =
+			new LinkedList<ExitState>();
 
 	//
 	// Konstruktion *******************************
@@ -29,10 +31,10 @@ public abstract class ExitableState extends InternalState {
 		this.childExitStates.remove(child);
 	}
 
-	void visitMyExitStates(CSMTraversal visitor) {
-		for(final ExitState s : this.childExitStates)
-			s.traverseCSM(visitor);
-		
+	void visitMyExitStates(CSMVisitor visitor) {
+		for (final ExitState s : this.childExitStates)
+			s.visitMe(visitor);
+
 	}
-	
+
 }

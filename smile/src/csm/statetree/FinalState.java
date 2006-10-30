@@ -5,6 +5,7 @@ package csm.statetree;
 
 import java.awt.Point;
 
+
 /**
  * im Paper als S_final bekannt
  * 
@@ -17,10 +18,8 @@ public final class FinalState extends ExitableState {
 	}
 
 	@Override
-	public void traverseCSM(CSMTraversal visitor) {
-		if (!visitor.enterFinalState(this))
-			return;
-		visitMyExitStates(visitor);
+	public void visitMe(CSMVisitor visitor) {
+		visitor.visitFinalState(this);
 	}
 
 	//
@@ -46,6 +45,11 @@ public final class FinalState extends ExitableState {
 	boolean mayConnectFromExitState(ExitState source) {
 		boolean sourceInFinal = source.stateOf() instanceof FinalState;
 		return source.regOf() == regOf() && !sourceInFinal;
+	}
+
+	@Override
+	public void visitChildren(CSMVisitor visitor) {
+		visitMyExitStates(visitor);
 	}
 
 }

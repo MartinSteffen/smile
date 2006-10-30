@@ -2,6 +2,7 @@ package csm.statetree;
 
 import java.awt.Point;
 
+
 /**
  * CSMComponent ist die Oberklasse der States und Regions. Sie besitzt die im
  * Paper unter Definition 1 angegebenen Funktionen parent und '>' (hier:
@@ -70,9 +71,11 @@ public abstract class CSMComponent {
 	}
 
 	//
-	// Traversal **********************************
+	// Visitor-Pattern ****************************
 
-	public abstract void traverseCSM(CSMTraversal visitor);
+	protected abstract void visitMe(CSMVisitor visitor);
+
+	protected abstract void visitChildren(CSMVisitor visitor);
 
 	//
 	// GUI ****************************************

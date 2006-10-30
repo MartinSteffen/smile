@@ -5,6 +5,7 @@ package csm.statetree;
 
 import java.awt.Point;
 
+
 /**
  * eine Unterregion eines Composite State (parent() ungleich null)
  * 

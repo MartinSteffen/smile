@@ -10,6 +10,17 @@ import java.awt.Point;
  */
 public abstract class State extends CSMComponent {
 
+	/**
+	 * Damit beim Laden der CSM die Zuordnung der Connections zu ihren Source-
+	 * und Target-States erhalten bleibt, erh‰lt jeder State eine eindeutige ID.
+	 * Diese ID wird beim Modifizieren von States nicht geupdated. Deshalb wird
+	 * der Statetree bei jedem Speichern neu durchnummeriert.
+	 * <p>
+	 * <i>Wer die uniqueId auﬂerhalb des csm-Pakets verwendet, ist selbst
+	 * schuld.</i>
+	 */
+	private int uniqueId;
+
 	//
 	// Semantik ***********************************
 
@@ -35,6 +46,14 @@ public abstract class State extends CSMComponent {
 
 	protected State(Point position) {
 		super(position);
+	}
+
+	public int getUniqueId() {
+		return this.uniqueId;
+	}
+
+	protected void setUniqueId(int id) {
+		this.uniqueId = id;
 	}
 
 	/**

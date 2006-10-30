@@ -3,6 +3,7 @@ package csm.statetree;
 import java.awt.Point;
 import java.util.LinkedList;
 
+
 /**
  * Abstrakte Oberklasse aller Regionen
  * 
@@ -10,11 +11,12 @@ import java.util.LinkedList;
  */
 public abstract class AbstractRegion extends CSMComponent {
 
-	private final LinkedList<InternalState> childInternalStates = new LinkedList<InternalState>();
+	private final LinkedList<InternalState> childInternalStates =
+			new LinkedList<InternalState>();
 
 	//
 	// Konstruktion *******************************
-	
+
 	protected AbstractRegion(Point position) {
 		super(position);
 	}
@@ -26,14 +28,16 @@ public abstract class AbstractRegion extends CSMComponent {
 	final void removeChildInternalState(InternalState child) {
 		this.childInternalStates.remove(child);
 	}
-	
+
 	@Override
-	public void traverseCSM(CSMTraversal visitor) {
-		if(! visitor.enterRegion(this))
-			return;
-		for(final InternalState s : this.childInternalStates)
-			s.traverseCSM(visitor);
-		visitor.exitRegion(this);
-		
+	public void visitMe(CSMVisitor visitor) {
+		visitor.visitRegion(this);
 	}
+
+	@Override
+	public void visitChildren(CSMVisitor visitor) {
+		for (final InternalState s : this.childInternalStates)
+			s.visitMe(visitor);
+	}
+
 }

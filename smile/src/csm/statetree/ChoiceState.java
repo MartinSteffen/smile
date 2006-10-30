@@ -5,6 +5,7 @@ package csm.statetree;
 
 import java.awt.Point;
 
+
 /**
  * im Paper als S_choice bekannt
  * 
@@ -17,7 +18,7 @@ public final class ChoiceState extends InternalState {
 	}
 
 	@Override
-	public void traverseCSM(CSMTraversal visitor) {
+	public void visitMe(CSMVisitor visitor) {
 		visitor.visitChoiceState(this);
 	}
 
@@ -46,6 +47,11 @@ public final class ChoiceState extends InternalState {
 	boolean mayConnectFromExitState(ExitState source) {
 		boolean sourceInFinal = source.stateOf() instanceof FinalState;
 		return source.regOf() == regOf() && !sourceInFinal;
+	}
+
+	@Override
+	public void visitChildren(CSMVisitor visitor) {
+		// ChoiceStates haben keine Child-States
 	}
 
 }

@@ -8,7 +8,7 @@ import java.awt.Point;
 
 /**
  * @author hsi
- *
+ * 
  */
 public abstract class ConnectionPoint extends State {
 
@@ -19,6 +19,11 @@ public abstract class ConnectionPoint extends State {
 
 	protected ConnectionPoint(Point position) {
 		super(position);
+	}
+
+	@Override
+	public void visitChildren(CSMVisitor visitor) {
+		// ConnectionPoins haben keine Child-States
 	}
 
 }
