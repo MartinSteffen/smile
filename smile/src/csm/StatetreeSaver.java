@@ -54,6 +54,7 @@ public class StatetreeSaver extends CSMVisitor {
 
 	public static void statetreeToXML(StringBuilder xmlstring,
 			OutermostRegion outermostRegion) {
+		outermostRegion.enumerateStates();
 		final StatetreeSaver saver = new StatetreeSaver(xmlstring);
 		saver.printComponent(outermostRegion, StatetreeSaver.TAG_OUTERMOSTREGION);
 	}

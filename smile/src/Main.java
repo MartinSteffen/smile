@@ -1,18 +1,9 @@
-import javax.xml.parsers.DocumentBuilderFactory;
-
-
-/**
- * 
- */
-
 /**
  * Der Name ist Programm
  * 
  * @author hsi
  */
 public final class Main {
-
-	DocumentBuilderFactory x;
 
 	/**
 	 * @param args
