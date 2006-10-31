@@ -3,9 +3,8 @@ package csm;
 import java.util.HashMap;
 
 import csm.action.Action;
-import csm.guard.Guard;
+import csm.guards.Guard;
 import csm.statetree.State;
-
 
 public final class Transition {
 

@@ -1,4 +1,4 @@
-package csm.guard;
+package csm.guards;
 
 import csm.term.Term;
 

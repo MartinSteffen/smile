@@ -1,30 +1,41 @@
-/**
- * 
- */
 package csm.statetree;
 
 import java.awt.Point;
+import java.util.LinkedList;
 
 
 /**
- * eine Unterregion eines Composite State (parent() ungleich null)
+ * Abstrakte Oberklasse aller Regionen
  * 
  * @author hsi
  */
-public final class Region extends AbstractRegion {
+public abstract class Region extends CSMComponent {
 
-	private CompositeState parentComposite;
+	private final LinkedList<InternalState> childInternalStates =
+			new LinkedList<InternalState>();
 
-	@Override
-	public CSMComponent parent() {
-		return this.parentComposite;
+	Region(Point position) {
+		super(position);
 	}
 
-	public Region(Point position, CompositeState parentComposite) {
-		super(position);
-		assert parentComposite != null;
-		this.parentComposite = parentComposite;
-		this.parentComposite.addSubregion(this);
+	@Override
+	void visitMe(CSMVisitor visitor) {
+		visitor.visitRegion(this);
+	}
+
+	@Override
+	final void visitChildren(CSMVisitor visitor) {
+		for (final InternalState s : this.childInternalStates)
+			s.visitMe(visitor);
+	}
+
+	final void addChildInternalState(InternalState child) {
+		assert child.parent() == this;
+		this.childInternalStates.add(child);
+	}
+
+	final void removeChildInternalState(InternalState child) {
+		this.childInternalStates.remove(child);
 	}
 
 }
