@@ -1,7 +1,6 @@
-package csm.transitionproperties;
+package csm.action;
 
 import csm.VarAssignment;
-import csm.actions.Action;
 
 
 public final class SkipAction extends Action {

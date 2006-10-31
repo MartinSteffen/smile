@@ -5,6 +5,7 @@ package csm;
 
 import csm.statetree.OutermostRegion;
 
+
 /**
  * @author hs
  * 
@@ -14,6 +15,7 @@ public final class CoreStateMachine {
 	private final OutermostRegion region;
 
 	public final VariableList variableList = new VariableList();
+
 	/**
 	 * 
 	 */
@@ -28,7 +30,7 @@ public final class CoreStateMachine {
 		// TODO implementieren
 	}
 
-	public boolean containsVar(String vname){
+	public boolean containsVar(String vname) {
 		return false;
 		// TODO implementieren
 	}

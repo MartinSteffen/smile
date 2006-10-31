@@ -1,17 +1,17 @@
-package csm.transitionproperties;
+package csm.action;
 
 import csm.VarAssignment;
-import csm.Variable;
-import csm.actions.Action;
+import csm.term.Term;
+
 
 public final class AssignAction extends Action {
 
-	Variable var;
-	Term term;
+	final public String varname;
+	final public Term term;
 
-	AssignAction(Variable v, Term t) {
-		this.var = v;
-		this.term = t;
+	AssignAction(String varname, Term term) {
+		this.varname = varname;
+		this.term = term;
 	}
 
 	@Override

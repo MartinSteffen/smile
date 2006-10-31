@@ -56,7 +56,8 @@ public class StatetreeSaver extends CSMVisitor {
 			OutermostRegion outermostRegion) {
 		outermostRegion.enumerateStates();
 		final StatetreeSaver saver = new StatetreeSaver(xmlstring);
-		saver.printComponent(outermostRegion, StatetreeSaver.TAG_OUTERMOSTREGION);
+		saver.printComponent(outermostRegion,
+				StatetreeSaver.TAG_OUTERMOSTREGION);
 	}
 
 	// Hilfsfunktionen
@@ -89,7 +90,10 @@ public class StatetreeSaver extends CSMVisitor {
 
 	void positionElement(CSMComponent component) {
 		final Point p = component.getPosition();
-		final String attrs = StatetreeSaver.attr(StatetreeSaver.ATTR_X, p.x) + StatetreeSaver.attr(StatetreeSaver.ATTR_Y, p.y);
+		final String attrs =
+				StatetreeSaver.attr(StatetreeSaver.ATTR_X, p.x)
+						+ StatetreeSaver.attr(StatetreeSaver.ATTR_Y,
+								p.y);
 		singleTag(StatetreeSaver.TAG_POSITION, attrs);
 	}
 
@@ -106,7 +110,9 @@ public class StatetreeSaver extends CSMVisitor {
 	}
 
 	private void printState(State state, String tag) {
-		final String attrs = StatetreeSaver.attr(StatetreeSaver.ATTR_UNIQUE_ID, state.getUniqueId());
+		final String attrs =
+				StatetreeSaver.attr(StatetreeSaver.ATTR_UNIQUE_ID,
+						state.getUniqueId());
 		printComponent(state, tag, attrs);
 	}
 
@@ -125,8 +131,10 @@ public class StatetreeSaver extends CSMVisitor {
 	@Override
 	final public void visitExitState(ExitState state) {
 		final String attrs =
-				StatetreeSaver.attr(StatetreeSaver.ATTR_UNIQUE_ID, state.getUniqueId())
-						+ StatetreeSaver.attr(StatetreeSaver.ATTR_KIND, state.kindOf.toString());
+				StatetreeSaver.attr(StatetreeSaver.ATTR_UNIQUE_ID,
+						state.getUniqueId())
+						+ StatetreeSaver.attr(StatetreeSaver.ATTR_KIND,
+								state.kindOf.toString());
 		printComponent(state, StatetreeSaver.TAG_EXITSTATE, attrs);
 	}
 

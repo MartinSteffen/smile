@@ -1,22 +1,24 @@
-package csm.transitionproperties;
+package csm.action;
 
 import java.util.List;
 
 import csm.VarAssignment;
-import csm.Variable;
-import csm.actions.Action;
+
 
 public final class RandomAction extends Action {
 
-	Variable var;
+	final public String varname;
+
+	// XXX possibleValues auf Gültigkeit prüfen
+
 	List<Integer> possibleValues;
-	
-	RandomAction(Variable v, List<Integer> pv) {
-		this.var=v;
-		this.possibleValues=pv;
+
+	RandomAction(String varname, List<Integer> pv) {
+		this.varname = varname;
+		this.possibleValues = pv;
 		// TODO Werte im Bereich?
 	}
-	
+
 	@Override
 	VarAssignment doAction(VarAssignment pre) {
 		// TODO Auto-generated method stub
