@@ -7,7 +7,7 @@ public final class VarTerm extends Term {
 
 	String varname;
 
-	VarTerm(String varname) {
+	public VarTerm(String varname) {
 		this.varname = varname;
 	}
 

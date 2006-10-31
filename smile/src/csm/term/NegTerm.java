@@ -7,7 +7,7 @@ public final class NegTerm extends Term {
 
 	public final Term term;
 
-	NegTerm(Term term) {
+	public NegTerm(Term term) {
 		this.term = term;
 	}
 

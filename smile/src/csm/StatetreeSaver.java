@@ -5,7 +5,6 @@ package csm;
 
 import java.awt.Point;
 
-import csm.statetree.AbstractRegion;
 import csm.statetree.CSMComponent;
 import csm.statetree.CSMVisitor;
 import csm.statetree.ChoiceState;
@@ -14,6 +13,7 @@ import csm.statetree.EntryState;
 import csm.statetree.ExitState;
 import csm.statetree.FinalState;
 import csm.statetree.OutermostRegion;
+import csm.statetree.Region;
 import csm.statetree.State;
 
 
@@ -119,7 +119,7 @@ public class StatetreeSaver extends CSMVisitor {
 	// visitor pattern ****************************
 
 	@Override
-	final public void visitRegion(AbstractRegion region) {
+	final public void visitRegion(Region region) {
 		printComponent(region, StatetreeSaver.TAG_REGION);
 	}
 

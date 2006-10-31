@@ -35,16 +35,16 @@ public abstract class State extends CSMComponent {
 	/**
 	 * gem‰ﬂ Paper, Definition 1: stateOf(parent(this))
 	 * 
-	 * @return die umgebende Region dieses States
+	 * @return die umgebende SubRegion dieses States
 	 */
-	public final AbstractRegion regOf() {
-		return (AbstractRegion) stateOf().parent();
+	public final Region regOf() {
+		return (Region) stateOf().parent();
 	}
 
 	//
 	// Konstruktion *******************************
 
-	protected State(Point position) {
+	State(Point position) {
 		super(position);
 	}
 

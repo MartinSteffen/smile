@@ -7,7 +7,7 @@ abstract class MulTerm extends BinaryTerm {
 		return l * r;
 	}
 
-	MulTerm(Term l, Term r) {
+	public MulTerm(Term l, Term r) {
 		super(l, r);
 	}
 }

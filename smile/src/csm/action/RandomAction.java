@@ -13,14 +13,14 @@ public final class RandomAction extends Action {
 
 	List<Integer> possibleValues;
 
-	RandomAction(String varname, List<Integer> pv) {
+	public RandomAction(String varname, List<Integer> pv) {
 		this.varname = varname;
 		this.possibleValues = pv;
 		// TODO Werte im Bereich?
 	}
 
 	@Override
-	VarAssignment doAction(VarAssignment pre) {
+	public VarAssignment doAction(VarAssignment pre) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -5,18 +5,19 @@ import csm.VarAssignment;
 
 public final class OrGuard extends Guard {
 
-	Guard l;
+	Guard left;
+	Guard right;
 
-	Guard r;
-
-	OrGuard(Guard l, Guard r) {
-		this.l = l;
-		this.r = r;
+	public OrGuard(Guard left, Guard right) {
+		this.left = left;
+		this.right = right;
 
 	}
 
 	@Override
-	boolean evalGuard(VarAssignment va) {
-		return this.l.evalGuard(va) || this.r.evalGuard(va);
+	public boolean evalGuard(VarAssignment va) {
+		final boolean l = this.left.evalGuard(va);
+		// shortcut evaluation
+		return l || this.right.evalGuard(va);
 	}
 }

@@ -17,12 +17,12 @@ public abstract class ConnectionPoint extends State {
 		return (InternalState) parent();
 	}
 
-	protected ConnectionPoint(Point position) {
+	ConnectionPoint(Point position) {
 		super(position);
 	}
 
 	@Override
-	public void visitChildren(CSMVisitor visitor) {
+	final void visitChildren(CSMVisitor visitor) {
 		// ConnectionPoins haben keine Child-States
 	}
 

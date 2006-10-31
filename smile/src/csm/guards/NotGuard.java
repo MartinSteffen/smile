@@ -5,15 +5,16 @@ import csm.VarAssignment;
 
 public final class NotGuard extends Guard {
 
-	Guard g;
+	Guard guard;
 
-	NotGuard(Guard g) {
-		this.g = g;
+	public NotGuard(Guard guard) {
+		this.guard = guard;
 
 	}
 
 	@Override
-	boolean evalGuard(VarAssignment va) {
-		return !this.g.evalGuard(va);
+	public boolean evalGuard(VarAssignment va) {
+		boolean g = this.guard.evalGuard(va);
+		return !g;
 	}
 }

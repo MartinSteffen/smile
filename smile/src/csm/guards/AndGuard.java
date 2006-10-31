@@ -8,15 +8,16 @@ public final class AndGuard extends Guard {
 	public final Guard left;
 	public final Guard right;
 
-	AndGuard(Guard l, Guard r) {
+	public AndGuard(Guard l, Guard r) {
 		this.left = l;
 		this.right = r;
 
 	}
 
 	@Override
-	boolean evalGuard(VarAssignment va) {
-		return this.left.evalGuard(va) && this.right.evalGuard(va);
+	public boolean evalGuard(VarAssignment va) {
+		final boolean l = this.left.evalGuard(va);
+		// shortcut evauation
+		return l && this.right.evalGuard(va);
 	}
-
 }

@@ -8,6 +8,15 @@ public final class VariableList {
 	HashMap<String, Variable> variables;
 
 	/**
+	 * ermittelt, ob eine Variable in der Variablenliste enthalten ist
+	 */
+	public boolean containsVariable(String name) {
+		// TODO implementieren
+		return false;
+
+	}
+
+	/**
 	 * Eine Variable in der Liste suchen. Wenn sie nicht enthalten ist, wird sie
 	 * automatisch erzeugt und in die Liste eingefügt.
 	 */

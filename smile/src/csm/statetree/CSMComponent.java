@@ -66,16 +66,16 @@ public abstract class CSMComponent {
 	 * @param position
 	 *            die Position der Komponente (darf nicht null sein!)
 	 */
-	protected CSMComponent(Point position) {
+	CSMComponent(Point position) {
 		setPosition(position);
 	}
 
 	//
 	// Visitor-Pattern ****************************
 
-	protected abstract void visitMe(CSMVisitor visitor);
+	abstract void visitMe(CSMVisitor visitor);
 
-	protected abstract void visitChildren(CSMVisitor visitor);
+	abstract void visitChildren(CSMVisitor visitor);
 
 	//
 	// GUI ****************************************

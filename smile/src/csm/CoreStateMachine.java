@@ -12,27 +12,11 @@ import csm.statetree.OutermostRegion;
  */
 public final class CoreStateMachine {
 
-	private final OutermostRegion region;
+	public final OutermostRegion region = new OutermostRegion();
 
 	public final VariableList variableList = new VariableList();
 
-	/**
-	 * 
-	 */
-	public CoreStateMachine(OutermostRegion region) {
-		assert region != null;
-		this.region = region;
-	}
-
-	// TODO hier haben wir aufgehört
-	public boolean containsVar(Variable v) {
-		return false;
-		// TODO implementieren
-	}
-
-	public boolean containsVar(String vname) {
-		return false;
-		// TODO implementieren
+	public CoreStateMachine() {
 	}
 
 }

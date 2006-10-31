@@ -9,7 +9,7 @@ public abstract class CompareGuard extends Guard {
 	public final Term left;
 	public final Term right;
 
-	abstract boolean binaryOp(int l, int r);
+	abstract boolean binaryOp(int left, int right);
 
 	CompareGuard(Term left, Term right) {
 		this.left = left;
@@ -18,7 +18,7 @@ public abstract class CompareGuard extends Guard {
 	}
 
 	@Override
-	boolean evalGuard(VarAssignment va) {
+	public boolean evalGuard(VarAssignment va) {
 		return binaryOp(this.left.evaluate(va), this.right.evaluate(va));
 	}
 }

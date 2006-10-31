@@ -13,13 +13,18 @@ import java.awt.Point;
  */
 public final class FinalState extends ExitableState {
 
-	public FinalState(Point position, AbstractRegion parentRegion) {
+	public FinalState(Point position, Region parentRegion) {
 		super(position, parentRegion);
 	}
 
 	@Override
-	public void visitMe(CSMVisitor visitor) {
+	void visitMe(CSMVisitor visitor) {
 		visitor.visitFinalState(this);
+	}
+
+	@Override
+	void visitChildren(CSMVisitor visitor) {
+		visitMyExitStates(visitor);
 	}
 
 	//
@@ -45,11 +50,6 @@ public final class FinalState extends ExitableState {
 	boolean mayConnectFromExitState(ExitState source) {
 		boolean sourceInFinal = source.stateOf() instanceof FinalState;
 		return source.regOf() == regOf() && !sourceInFinal;
-	}
-
-	@Override
-	public void visitChildren(CSMVisitor visitor) {
-		visitMyExitStates(visitor);
 	}
 
 }

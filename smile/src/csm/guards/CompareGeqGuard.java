@@ -5,7 +5,7 @@ import csm.term.Term;
 
 public class CompareGeqGuard extends CompareGuard {
 
-	CompareGeqGuard(Term left, Term right) {
+	public CompareGeqGuard(Term left, Term right) {
 		super(left, right);
 	}
 

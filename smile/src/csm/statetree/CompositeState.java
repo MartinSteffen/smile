@@ -17,14 +17,28 @@ public final class CompositeState extends ExitableState {
 	private final LinkedList<EntryState> childEntryStates =
 			new LinkedList<EntryState>();
 
-	private final LinkedList<Region> subregions =
-			new LinkedList<Region>();
+	private final LinkedList<SubRegion> subregions =
+			new LinkedList<SubRegion>();
 
 	//
 	// Konstruktion *******************************
 
-	public CompositeState(Point position, AbstractRegion parentRegion) {
+	public CompositeState(Point position, Region parentRegion) {
 		super(position, parentRegion);
+	}
+
+	@Override
+	void visitMe(CSMVisitor visitor) {
+		visitor.visitCompositeState(this);
+	}
+
+	@Override
+	void visitChildren(CSMVisitor visitor) {
+		visitMyExitStates(visitor);
+		for (final EntryState s : this.childEntryStates)
+			s.visitMe(visitor);
+		for (final SubRegion r : this.subregions)
+			r.visitMe(visitor);
 	}
 
 	void addChildEntryState(EntryState child) {
@@ -35,26 +49,12 @@ public final class CompositeState extends ExitableState {
 		this.childEntryStates.remove(child);
 	}
 
-	void addSubregion(Region child) {
+	void addSubregion(SubRegion child) {
 		this.subregions.add(child);
 	}
 
-	void removeSubregion(Region child) {
+	void removeSubregion(SubRegion child) {
 		this.subregions.remove(child);
-	}
-
-	@Override
-	public void visitMe(CSMVisitor visitor) {
-		visitor.visitCompositeState(this);
-	}
-
-	@Override
-	public void visitChildren(CSMVisitor visitor) {
-		visitMyExitStates(visitor);
-		for (final EntryState s : this.childEntryStates)
-			s.visitMe(visitor);
-		for (final Region r : this.subregions)
-			r.visitMe(visitor);
 	}
 
 	//

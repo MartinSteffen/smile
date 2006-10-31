@@ -4,7 +4,7 @@ public class Event {
 
 	public final String name;
 
-	Event(String n) {
+	public Event(String n) {
 		this.name = n;
 	}
 }

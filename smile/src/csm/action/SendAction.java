@@ -16,9 +16,9 @@ public final class SendAction extends Action {
 
 	// XXX Event wird nur auf System.out ausgegeben
 	@Override
-	VarAssignment doAction(VarAssignment pre) {
+	public VarAssignment doAction(VarAssignment pre) {
 		final int y = this.value.evaluate(pre);
-		System.out.println("event " + this.event + " " + y);
+		System.out.println("event " + this.event + ' ' + y);
 		return pre;
 	}
 

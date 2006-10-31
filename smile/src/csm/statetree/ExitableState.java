@@ -19,8 +19,14 @@ public abstract class ExitableState extends InternalState {
 	//
 	// Konstruktion *******************************
 
-	protected ExitableState(Point position, AbstractRegion parentRegion) {
+	ExitableState(Point position, Region parentRegion) {
 		super(position, parentRegion);
+	}
+
+	final void visitMyExitStates(CSMVisitor visitor) {
+		for (final ExitState s : this.childExitStates)
+			s.visitMe(visitor);
+
 	}
 
 	final void addChildExitState(ExitState child) {
@@ -30,11 +36,4 @@ public abstract class ExitableState extends InternalState {
 	final void removeChildExitState(ExitState child) {
 		this.childExitStates.remove(child);
 	}
-
-	void visitMyExitStates(CSMVisitor visitor) {
-		for (final ExitState s : this.childExitStates)
-			s.visitMe(visitor);
-
-	}
-
 }

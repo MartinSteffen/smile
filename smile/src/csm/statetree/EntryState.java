@@ -28,7 +28,7 @@ public final class EntryState extends ConnectionPoint {
 	}
 
 	@Override
-	public void visitMe(CSMVisitor visitor) {
+	void visitMe(CSMVisitor visitor) {
 		visitor.visitEntryState(this);
 	}
 

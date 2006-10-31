@@ -5,6 +5,7 @@ import csm.VarAssignment;
 
 public abstract class Guard {
 
-	// TODO g Guards
-	abstract boolean evalGuard(VarAssignment va);
+	abstract public boolean evalGuard(VarAssignment va);
+
+	// XXX abstract String show();
 }

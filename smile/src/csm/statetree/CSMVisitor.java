@@ -32,7 +32,7 @@ public class CSMVisitor {
 
 	// ** Regionen
 
-	protected void visitRegion(AbstractRegion region) {
+	protected void visitRegion(Region region) {
 		visitCSMComponent(region);
 	}
 

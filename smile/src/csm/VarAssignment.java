@@ -7,7 +7,7 @@ public class VarAssignment {
 
 	VariableList variableList;
 
-	VarAssignment(VariableList variableList) {
+	public VarAssignment(VariableList variableList) {
 		assert variableList != null;
 		this.variableList = variableList;
 	}

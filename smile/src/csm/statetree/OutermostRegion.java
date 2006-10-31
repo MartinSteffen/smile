@@ -4,11 +4,11 @@ import java.awt.Point;
 
 
 /**
- * im Paper als Region \epsilon bekannt (parent() ist null)
+ * im Paper als SubRegion \epsilon bekannt (parent() ist null)
  * 
  * @author hs
  */
-public final class OutermostRegion extends AbstractRegion {
+public final class OutermostRegion extends Region {
 
 	@Override
 	public final CSMComponent parent() {

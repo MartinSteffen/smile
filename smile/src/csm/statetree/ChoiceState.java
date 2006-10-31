@@ -13,13 +13,18 @@ import java.awt.Point;
  */
 public final class ChoiceState extends InternalState {
 
-	public ChoiceState(Point position, AbstractRegion parentRegion) {
+	public ChoiceState(Point position, Region parentRegion) {
 		super(position, parentRegion);
 	}
 
 	@Override
-	public void visitMe(CSMVisitor visitor) {
+	void visitMe(CSMVisitor visitor) {
 		visitor.visitChoiceState(this);
+	}
+
+	@Override
+	void visitChildren(CSMVisitor visitor) {
+		// ChoiceStates haben keine Child-States
 	}
 
 	//
@@ -47,11 +52,6 @@ public final class ChoiceState extends InternalState {
 	boolean mayConnectFromExitState(ExitState source) {
 		boolean sourceInFinal = source.stateOf() instanceof FinalState;
 		return source.regOf() == regOf() && !sourceInFinal;
-	}
-
-	@Override
-	public void visitChildren(CSMVisitor visitor) {
-		// ChoiceStates haben keine Child-States
 	}
 
 }

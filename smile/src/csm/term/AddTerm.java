@@ -7,7 +7,7 @@ abstract class AddTerm extends BinaryTerm {
 		return l + r;
 	}
 
-	AddTerm(Term l, Term r) {
+	public AddTerm(Term l, Term r) {
 		super(l, r);
 	}
 }

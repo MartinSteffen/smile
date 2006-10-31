@@ -12,7 +12,7 @@ import java.awt.Point;
  */
 public abstract class InternalState extends State {
 
-	private AbstractRegion parentRegion;
+	private Region parentRegion;
 
 	//
 	// Semantik ***********************************
@@ -30,7 +30,7 @@ public abstract class InternalState extends State {
 	//
 	// Konstruktion *******************************
 
-	protected InternalState(Point position, AbstractRegion parentRegion) {
+	InternalState(Point position, Region parentRegion) {
 		super(position);
 		assert parentRegion != null;
 		this.parentRegion = parentRegion;

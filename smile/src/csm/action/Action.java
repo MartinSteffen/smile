@@ -13,5 +13,5 @@ public abstract class Action {
 	 * 
 	 * @returns neue Variablenbelegung
 	 */
-	abstract VarAssignment doAction(VarAssignment pre);
+	abstract public VarAssignment doAction(VarAssignment pre);
 }
