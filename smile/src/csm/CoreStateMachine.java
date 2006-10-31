@@ -28,8 +28,14 @@ public final class CoreStateMachine {
 	}
 
 	// TODO hier haben wir aufgehört
-	abstract public boolean containsVar(Variable v);
+	public boolean containsVar(Variable v) {
+		return false;
+		// TODO implementieren
+	}
 
-	abstract public boolean containsVar(String vname);
+	public boolean containsVar(String vname){
+		return false;
+		// TODO implementieren
+	}
 
 }
