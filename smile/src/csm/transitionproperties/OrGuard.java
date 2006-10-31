@@ -1,4 +1,4 @@
-package transitionproperties;
+package csm.transitionproperties;
 
 import csm.VarAssignment;
 
@@ -15,6 +15,6 @@ public final class OrGuard extends Guard {
 
 	@Override
 	boolean evalGuard(VarAssignment va) {
-		return l.evalGuard(va) || r.evalGuard(va);
+		return this.l.evalGuard(va) || this.r.evalGuard(va);
 	}
 }

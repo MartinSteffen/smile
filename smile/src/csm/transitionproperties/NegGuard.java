@@ -1,4 +1,4 @@
-package transitionproperties;
+package csm.transitionproperties;
 
 import csm.VarAssignment;
 
@@ -12,6 +12,6 @@ public final class NegGuard extends Guard {
 
 	@Override
 	boolean evalGuard(VarAssignment va) {
-		return !g.evalGuard(va);
+		return !this.g.evalGuard(va);
 	}
 }

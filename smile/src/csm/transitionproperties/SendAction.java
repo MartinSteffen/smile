@@ -1,6 +1,7 @@
-package transitionproperties;
+package csm.transitionproperties;
 
 import csm.VarAssignment;
+import csm.actions.Action;
 
 public final class SendAction extends Action {
 	String event;
@@ -8,15 +9,15 @@ public final class SendAction extends Action {
 	Term value;
 
 	public SendAction(String e, Term v) {
-		event = e;
-		value = v;
+		this.event = e;
+		this.value = v;
 	}
 
 	@Override
 	VarAssignment doAction(VarAssignment pre) {
-		int y=value.evaluate(pre);
+		final int y=this.value.evaluate(pre);
 		// TODO event, y ausgeben
-		System.out.println("event "+event+" "+y);
+		System.out.println("event "+this.event+" "+y);
 		return pre;
 	}
 

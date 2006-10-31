@@ -3,7 +3,7 @@
  * Erstellt von rachid
  * Projekt smile
  */
-package transitionproperties;
+package csm;
 
 /**
  * @author rachid
@@ -11,7 +11,7 @@ package transitionproperties;
  */
 public final class Variable {
 
-	private String name;
+	public final String name;
 
 	private int initialValue;
 
@@ -20,18 +20,23 @@ public final class Variable {
 	private int maxValue;
 
 	// TODO Werte prüfen
-	Variable(String n, int i, int min, int max) {
-		name = n;
-		initialValue = i;
-		minValue = min;
-		maxValue = max;
+
+	public Variable(String name, int i, int min, int max) {
+		this.name = name;
+		setInitialValue(i);
+		setMinValue(min);
+		setMaxValue(max);
+	}
+
+	public Variable(String name) {
+		this(name, 0, 0, 0);
 	}
 
 	/**
 	 * @return the initialValue
 	 */
 	public int getInitialValue() {
-		return initialValue;
+		return this.initialValue;
 	}
 
 	/**
@@ -46,7 +51,7 @@ public final class Variable {
 	 * @return the maxValue
 	 */
 	public int getMaxValue() {
-		return maxValue;
+		return this.maxValue;
 	}
 
 	/**
@@ -61,7 +66,7 @@ public final class Variable {
 	 * @return the minValue
 	 */
 	public int getMinValue() {
-		return minValue;
+		return this.minValue;
 	}
 
 	/**

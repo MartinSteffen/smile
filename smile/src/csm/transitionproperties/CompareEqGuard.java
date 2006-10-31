@@ -1,4 +1,4 @@
-package transitionproperties;
+package csm.transitionproperties;
 
 import csm.VarAssignment;
 
@@ -15,6 +15,6 @@ public class CompareEqGuard extends Guard {
 	@Override
 	boolean evalGuard(VarAssignment va) {
 		// TODO Auto-generated method stub
-		return l.evaluate(va) == r.evaluate(va);
+		return this.l.evaluate(va) == this.r.evaluate(va);
 	}
 }

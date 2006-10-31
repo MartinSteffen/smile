@@ -1,4 +1,4 @@
-package transitionproperties;
+package csm.transitionproperties;
 
 
 public final class MulTerm extends Term {
@@ -13,7 +13,7 @@ public final class MulTerm extends Term {
 	
 	@Override
 	int evaluate(Object vb) {
-		return l.evaluate(vb)*r.evaluate(vb);
+		return this.l.evaluate(vb)*this.r.evaluate(vb);
 	}
 
 }

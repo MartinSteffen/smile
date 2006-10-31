@@ -1,9 +1,11 @@
-package transitionproperties;
+package csm.transitionproperties;
+
+import csm.Variable;
 
 public final class VarTerm extends Term {
 	Variable var; 
 	VarTerm(Variable v) {
-		var = v;
+		this.var = v;
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-package transitionproperties;
+package csm.transitionproperties;
 
 import csm.VarAssignment;
 

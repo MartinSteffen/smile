@@ -1,4 +1,4 @@
-package transitionproperties;
+package csm.transitionproperties;
 
 
 public final class NegTerm extends Term {
@@ -11,7 +11,7 @@ public final class NegTerm extends Term {
 	
 	@Override
 	int evaluate(Object vb) {
-		return - t.evaluate(vb);
+		return - this.t.evaluate(vb);
 	}
 
 }

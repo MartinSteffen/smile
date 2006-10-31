@@ -1,6 +1,8 @@
-package transitionproperties;
+package csm.transitionproperties;
 
 import csm.VarAssignment;
+import csm.Variable;
+import csm.actions.Action;
 
 public final class AssignAction extends Action {
 
@@ -8,7 +10,7 @@ public final class AssignAction extends Action {
 	Term term;
 
 	AssignAction(Variable v, Term t) {
-		var = v;
+		this.var = v;
 		this.term = t;
 	}
 

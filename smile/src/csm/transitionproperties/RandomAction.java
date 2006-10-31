@@ -1,8 +1,10 @@
-package transitionproperties;
+package csm.transitionproperties;
 
 import java.util.List;
 
 import csm.VarAssignment;
+import csm.Variable;
+import csm.actions.Action;
 
 public final class RandomAction extends Action {
 
@@ -10,8 +12,8 @@ public final class RandomAction extends Action {
 	List<Integer> possibleValues;
 	
 	RandomAction(Variable v, List<Integer> pv) {
-		var=v;
-		possibleValues=pv;
+		this.var=v;
+		this.possibleValues=pv;
 		// TODO Werte im Bereich?
 	}
 	

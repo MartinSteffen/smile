@@ -3,10 +3,6 @@
  */
 package csm;
 
-import java.util.LinkedList;
-
-import transitionproperties.Variable;
-
 import csm.statetree.OutermostRegion;
 
 /**
@@ -17,8 +13,7 @@ public final class CoreStateMachine {
 
 	private final OutermostRegion region;
 
-	LinkedList<Variable> varlist;
-
+	public final VariableList variableList = new VariableList();
 	/**
 	 * 
 	 */
