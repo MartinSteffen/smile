@@ -22,6 +22,7 @@ public abstract class AbstractRegion extends CSMComponent {
 	}
 
 	final void addChildInternalState(InternalState child) {
+		assert child.parent() == this;
 		this.childInternalStates.add(child);
 	}
 
