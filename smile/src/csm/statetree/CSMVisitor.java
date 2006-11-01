@@ -12,7 +12,7 @@ package csm.statetree;
  * implementieren.
  * 
  * 
- * @author hs
+ * @author hsi
  */
 public class CSMVisitor {
 
