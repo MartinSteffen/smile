@@ -22,6 +22,9 @@ javadoc
     auf '*' gesetzt wurde. Für handgeschriebene Dokumentation wird man
     also ein anderes Verzeichnis verwenden müssen)
 
+Dokumentation
+    handgeschriebene Dokumentation
+
 ----
 Vorläufige Package-Struktur
 
@@ -44,6 +47,7 @@ nua
 testing
     Sammelstelle für alle Unit-Tests
     (gehört allein der Testing-Gruppe)
+
 
 ----
 Das ist alles vorläufig und unvollständig und soll nur einen

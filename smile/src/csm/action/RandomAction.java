@@ -9,8 +9,7 @@ public final class RandomAction extends Action {
 
 	final public String varname;
 
-	// XXX possibleValues auf Gültigkeit prüfen
-
+	// eventuell Werte checken?
 	List<Integer> possibleValues;
 
 	public RandomAction(String varname, List<Integer> pv) {
