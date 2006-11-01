@@ -17,7 +17,7 @@ public final class AndGuard extends Guard {
 	@Override
 	public boolean evalGuard(VarAssignment va) {
 		final boolean l = this.left.evalGuard(va);
-		// shortcut evauation
+		// shortcut evaluation
 		return l && this.right.evalGuard(va);
 	}
 }

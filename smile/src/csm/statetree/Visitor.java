@@ -14,20 +14,11 @@ package csm.statetree;
  * 
  * @author hsi
  */
-public class CSMVisitor {
-
-	/**
-	 * alle Child-Komponenten besuchen
-	 * <p>
-	 * mit dieser Methode können Visitors gebaut werden, die den
-	 * CSM-Komponentenbaum rekursiv besuchen
-	 */
-	protected final void visitChildren(CSMComponent component) {
-		component.visitChildren(this);
-	}
+public class Visitor {
 
 	protected void visitCSMComponent(CSMComponent component) {
-		visitChildren(component);
+		// die visitXXX-Methoden werden in den Child-Klassen
+		// überschrieben 
 	}
 
 	// ** Regionen

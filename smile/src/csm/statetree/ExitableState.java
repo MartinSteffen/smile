@@ -23,7 +23,7 @@ public abstract class ExitableState extends InternalState {
 		super(position, parentRegion);
 	}
 
-	final void visitMyExitStates(CSMVisitor visitor) {
+	final void visitMyExitStates(Visitor visitor) {
 		for (final ExitState s : this.childExitStates)
 			s.visitMe(visitor);
 

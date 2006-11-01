@@ -18,12 +18,12 @@ public final class ChoiceState extends InternalState {
 	}
 
 	@Override
-	void visitMe(CSMVisitor visitor) {
+	void visitMe(Visitor visitor) {
 		visitor.visitChoiceState(this);
 	}
 
 	@Override
-	void visitChildren(CSMVisitor visitor) {
+	void visitChildren(Visitor visitor) {
 		// ChoiceStates haben keine Child-States
 	}
 

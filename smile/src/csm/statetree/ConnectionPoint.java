@@ -22,7 +22,7 @@ public abstract class ConnectionPoint extends State {
 	}
 
 	@Override
-	final void visitChildren(CSMVisitor visitor) {
+	final void visitChildren(Visitor visitor) {
 		// ConnectionPoins haben keine Child-States
 	}
 

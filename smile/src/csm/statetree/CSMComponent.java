@@ -73,9 +73,9 @@ public abstract class CSMComponent {
 	//
 	// Visitor-Pattern ****************************
 
-	abstract void visitMe(CSMVisitor visitor);
+	abstract void visitMe(Visitor visitor);
 
-	abstract void visitChildren(CSMVisitor visitor);
+	abstract void visitChildren(Visitor visitor);
 
 	//
 	// GUI ****************************************

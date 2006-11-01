@@ -19,12 +19,12 @@ public abstract class Region extends CSMComponent {
 	}
 
 	@Override
-	void visitMe(CSMVisitor visitor) {
+	void visitMe(Visitor visitor) {
 		visitor.visitRegion(this);
 	}
 
 	@Override
-	final void visitChildren(CSMVisitor visitor) {
+	final void visitChildren(Visitor visitor) {
 		for (final InternalState s : this.childInternalStates)
 			s.visitMe(visitor);
 	}

@@ -29,12 +29,12 @@ public final class CompositeState extends ExitableState {
 	}
 
 	@Override
-	void visitMe(CSMVisitor visitor) {
+	void visitMe(Visitor visitor) {
 		visitor.visitCompositeState(this);
 	}
 
 	@Override
-	void visitChildren(CSMVisitor visitor) {
+	void visitChildren(Visitor visitor) {
 		visitMyExitStates(visitor);
 		for (final EntryState s : this.childEntryStates)
 			s.visitMe(visitor);

@@ -26,7 +26,7 @@ public final class OutermostRegion extends Region {
 		/*
 		 * Verwende einen CSMVisitor, um über alle Komponenten zu iterieren.
 		 */
-		new CSMVisitor() {
+		new TreeWalker() {
 
 			int count;
 

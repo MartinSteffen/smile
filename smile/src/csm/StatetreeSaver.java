@@ -6,7 +6,6 @@ package csm;
 import java.awt.Point;
 
 import csm.statetree.CSMComponent;
-import csm.statetree.CSMVisitor;
 import csm.statetree.ChoiceState;
 import csm.statetree.CompositeState;
 import csm.statetree.EntryState;
@@ -15,6 +14,7 @@ import csm.statetree.FinalState;
 import csm.statetree.OutermostRegion;
 import csm.statetree.Region;
 import csm.statetree.State;
+import csm.statetree.TreeWalker;
 
 
 /**
@@ -26,7 +26,7 @@ import csm.statetree.State;
  * 
  * @author hs
  */
-public class StatetreeSaver extends CSMVisitor {
+public class StatetreeSaver extends TreeWalker {
 
 	private static final String TAG_POSITION = "position";
 	private static final String ATTR_X = "x";

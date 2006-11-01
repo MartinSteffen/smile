@@ -18,12 +18,12 @@ public final class FinalState extends ExitableState {
 	}
 
 	@Override
-	void visitMe(CSMVisitor visitor) {
+	void visitMe(Visitor visitor) {
 		visitor.visitFinalState(this);
 	}
 
 	@Override
-	void visitChildren(CSMVisitor visitor) {
+	void visitChildren(Visitor visitor) {
 		visitMyExitStates(visitor);
 	}
 

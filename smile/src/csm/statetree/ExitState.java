@@ -34,7 +34,7 @@ public final class ExitState extends ConnectionPoint {
 	}
 
 	@Override
-	void visitMe(CSMVisitor visitor) {
+	void visitMe(Visitor visitor) {
 		visitor.visitExitState(this);
 	}
 
