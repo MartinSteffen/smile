@@ -4,20 +4,21 @@ import java.awt.Point;
 
 
 /**
- * CSMComponent ist die Oberklasse der States und Regions. Sie besitzt die im
- * Paper unter Definition 1 angegebenen Funktionen parent und '>' (hier:
- * isComponentOf), durch die die Baumstruktur der CSM definiert ist.
+ * CSMComponent ist die Oberklasse der States und Regions. Sie besitzt
+ * die im Paper unter Definition 1 angegebenen Funktionen parent und '>'
+ * (hier: isComponentOf), durch die die Baumstruktur der CSM definiert
+ * ist.
  * <p>
  * Daneben besitzt jede CSM-Komponente eine zweidimensionale Koordinate
- * position, die die Position der Komponente relativ zu ihrer parent-Komponente
- * angibt, sowie eine Funktion getAbsolutePosition, die die Position relativ zur
- * root-Komponente angibt. Wie diese Position zu interpretieren ist, ist Sache
- * der GUI.
+ * position, die die Position der Komponente relativ zu ihrer
+ * parent-Komponente angibt, sowie eine Funktion getAbsolutePosition,
+ * die die Position relativ zur root-Komponente angibt. Wie diese
+ * Position zu interpretieren ist, ist Sache der GUI.
  * <p>
- * (Anmerkung: Damit entscheiden wir, dass die Position der Komponenten ein Teil
- * des Modells ist. Das erspart uns erstens, die Objekte automatisch plazieren
- * zu müssen, und zweitens, die komplette Komponenten-Hierarchie in der View
- * spiegeln zu müssen)
+ * (Anmerkung: Damit entscheiden wir, dass die Position der Komponenten
+ * ein Teil des Modells ist. Das erspart uns erstens, die Objekte
+ * automatisch plazieren zu müssen, und zweitens, die komplette
+ * Komponenten-Hierarchie in der View spiegeln zu müssen)
  * 
  * @author hsi
  */
@@ -39,10 +40,11 @@ public abstract class CSMComponent {
 	public abstract CSMComponent parent();
 
 	/**
-	 * die Funktion > gemäß Definition 1 des Skripts, also die transitive Hülle
-	 * der parent-Funktion
+	 * die Funktion > gemäß Definition 1 des Skripts, also die
+	 * transitive Hülle der parent-Funktion
 	 * 
-	 * @return true, wenn dieses Objekt ein Unterobjekt des Parameters ist
+	 * @return true, wenn dieses Objekt ein Unterobjekt des Parameters
+	 *         ist
 	 */
 	public final boolean isComponentOf(CSMComponent possibleParent) {
 		// durchsuche von this ausgehend die Kette der Parents, bis
@@ -63,8 +65,8 @@ public abstract class CSMComponent {
 	 * Jede Komponente hat eine Position, deshalb stellen wir keinen
 	 * Default-Konstruktor zur Verfügung.
 	 * 
-	 * @param position
-	 *            die Position der Komponente (darf nicht null sein!)
+	 * @param position die Position der Komponente (darf nicht null
+	 *            sein!)
 	 */
 	CSMComponent(Point position) {
 		setPosition(position);
@@ -88,8 +90,8 @@ public abstract class CSMComponent {
 	}
 
 	/**
-	 * @param position
-	 *            die neue Position der Komponente (darf nicht null sein!)
+	 * @param position die neue Position der Komponente (darf nicht null
+	 *            sein!)
 	 */
 	public void setPosition(Point position) {
 		assert position != null;

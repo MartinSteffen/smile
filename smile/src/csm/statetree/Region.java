@@ -11,8 +11,7 @@ import java.util.LinkedList;
  */
 public abstract class Region extends CSMComponent {
 
-	private final LinkedList<InternalState> childInternalStates =
-			new LinkedList<InternalState>();
+	private final LinkedList<InternalState> childInternalStates = new LinkedList<InternalState>();
 
 	Region(Point position) {
 		super(position);

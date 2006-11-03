@@ -1,80 +1,94 @@
 /**
- * Erstellt am 31.10.200614:34:21
- * Erstellt von rachid
- * Projekt smile
+ * Erstellt am 31.10.200614:34:21 Erstellt von rachid Projekt smile
  */
 package csm;
 
+import csm.exceptions.ErrValueOutOfBounds;
+
+
 /**
  * @author rachid
- * 
  */
-public final class Variable {
-
-	public final String name;
+public final class Variable extends NamedObject {
 
 	private int initialValue;
-
 	private int minValue;
-
 	private int maxValue;
 
-	// TODO Werte prüfen
-
-	public Variable(String name, int i, int min, int max) {
-		this.name = name;
-		setInitialValue(i);
-		setMinValue(min);
-		setMaxValue(max);
-	}
-
-	public Variable(String name) {
-		this(name, 0, 0, 0);
+	/**
+	 * @throws ErrValueOutOfBounds wenn Minimal-, Maximal- und
+	 *             Initialwerte nicht konsistent sind
+	 */
+	public Variable(String name, int i, int min, int max)
+			throws ErrValueOutOfBounds {
+		super(name);
+		if (this.initialValue < this.minValue)
+			throw new ErrValueOutOfBounds("initial value " + this.initialValue
+					+ " is smaller than minimum value " + this.minValue);
+		if (this.initialValue > this.maxValue)
+			throw new ErrValueOutOfBounds("initial value " + this.initialValue
+					+ " is greater than maximum value " + this.maxValue);
+		this.initialValue = i;
+		this.minValue = min;
+		this.maxValue = max;
 	}
 
 	/**
-	 * @return the initialValue
+	 * setzt die Minimal-, Maximal- und Initialwerte auf 0
 	 */
+	public Variable(String name) {
+		super(name);
+		this.initialValue = 0;
+		this.minValue = 0;
+		this.maxValue = 0;
+	}
+
 	public int getInitialValue() {
 		return this.initialValue;
 	}
 
 	/**
-	 * @param initialValue
-	 *            the initialValue to set
+	 * @throws ErrValueOutOfBounds wenn der Initialwert außerhalb der
+	 *             Grenzen liegt
 	 */
-	public void setInitialValue(int initialValue) {
+	public void setInitialValue(int initialValue) throws ErrValueOutOfBounds {
+		if (initialValue < this.minValue)
+			throw new ErrValueOutOfBounds("new initial value " + initialValue
+					+ " is smaller than minimum value " + this.minValue);
+		if (initialValue > this.maxValue)
+			throw new ErrValueOutOfBounds("new initial value " + initialValue
+					+ " is greater than maximum value " + this.maxValue);
 		this.initialValue = initialValue;
 	}
 
-	/**
-	 * @return the maxValue
-	 */
-	public int getMaxValue() {
-		return this.maxValue;
-	}
-
-	/**
-	 * @param maxValue
-	 *            the maxValue to set
-	 */
-	public void setMaxValue(int maxValue) {
-		this.maxValue = maxValue;
-	}
-
-	/**
-	 * @return the minValue
-	 */
 	public int getMinValue() {
 		return this.minValue;
 	}
 
 	/**
-	 * @param minValue
-	 *            the minValue to set
+	 * @throws ErrValueOutOfBounds wenn der Minimalwert außerhalb der
+	 *             Grenzen liegt
 	 */
-	public void setMinValue(int minValue) {
+	public void setMinValue(int minValue) throws ErrValueOutOfBounds {
+		if (minValue > this.initialValue)
+			throw new ErrValueOutOfBounds("new minimum value " + minValue
+					+ " is greater than initial value " + this.initialValue);
 		this.minValue = minValue;
+	}
+
+	public int getMaxValue() {
+		return this.maxValue;
+	}
+
+	/**
+	 * @throws ErrValueOutOfBounds wenn der Maximalwert außerhalb der
+	 *             Grenzen liegt
+	 */
+	public void setMaxValue(int maxValue) throws ErrValueOutOfBounds {
+		if (maxValue < this.initialValue)
+			throw new ErrValueOutOfBounds("new maximum value " + maxValue
+					+ " is smaller than initial value " + this.initialValue);
+		this.maxValue = maxValue;
 	}
 
 }

@@ -21,8 +21,8 @@ import csm.statetree.TreeWalker;
  * Worker-Klasse, die einen StringBuilder mit der XML-Darstellung eines
  * Komponenten-Baums füllt.
  * <p>
- * (und nebenbei ist sie ein Beispiel dafür, wie man die CSMVisitor-Klasse
- * verwendet)
+ * (und nebenbei ist sie ein Beispiel dafür, wie man die
+ * CSMVisitor-Klasse verwendet)
  * 
  * @author hs
  */
@@ -90,10 +90,8 @@ public class StatetreeSaver extends TreeWalker {
 
 	void positionElement(CSMComponent component) {
 		final Point p = component.getPosition();
-		final String attrs =
-				StatetreeSaver.attr(StatetreeSaver.ATTR_X, p.x)
-						+ StatetreeSaver.attr(StatetreeSaver.ATTR_Y,
-								p.y);
+		final String attrs = StatetreeSaver.attr(StatetreeSaver.ATTR_X, p.x)
+				+ StatetreeSaver.attr(StatetreeSaver.ATTR_Y, p.y);
 		singleTag(StatetreeSaver.TAG_POSITION, attrs);
 	}
 
@@ -110,9 +108,8 @@ public class StatetreeSaver extends TreeWalker {
 	}
 
 	private void printState(State state, String tag) {
-		final String attrs =
-				StatetreeSaver.attr(StatetreeSaver.ATTR_UNIQUE_ID,
-						state.getUniqueId());
+		final String attrs = StatetreeSaver.attr(StatetreeSaver.ATTR_UNIQUE_ID,
+				state.getUniqueId());
 		printComponent(state, tag, attrs);
 	}
 
@@ -130,11 +127,10 @@ public class StatetreeSaver extends TreeWalker {
 
 	@Override
 	final public void visitExitState(ExitState state) {
-		final String attrs =
-				StatetreeSaver.attr(StatetreeSaver.ATTR_UNIQUE_ID,
-						state.getUniqueId())
-						+ StatetreeSaver.attr(StatetreeSaver.ATTR_KIND,
-								state.kindOf.toString());
+		final String attrs = StatetreeSaver.attr(StatetreeSaver.ATTR_UNIQUE_ID,
+				state.getUniqueId())
+				+ StatetreeSaver.attr(StatetreeSaver.ATTR_KIND, state.kindOf
+						.toString());
 		printComponent(state, StatetreeSaver.TAG_EXITSTATE, attrs);
 	}
 

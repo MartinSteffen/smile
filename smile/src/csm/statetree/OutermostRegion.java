@@ -24,15 +24,16 @@ public final class OutermostRegion extends Region {
 	 */
 	public void enumerateStates() {
 		/*
-		 * Verwende einen CSMVisitor, um über alle Komponenten zu iterieren.
+		 * Verwende einen CSMVisitor, um über alle Komponenten zu
+		 * iterieren.
 		 */
 		new TreeWalker() {
 
 			int count;
 
 			/*
-			 * States werden neu nummeriert, Regionen werden ohne Änderung
-			 * traversiert
+			 * States werden neu nummeriert, Regionen werden ohne
+			 * Änderung traversiert
 			 */
 			@Override
 			final public void visitState(State s) {

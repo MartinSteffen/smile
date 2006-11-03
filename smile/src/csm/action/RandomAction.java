@@ -9,17 +9,19 @@ public final class RandomAction extends Action {
 
 	final public String varname;
 
-	// eventuell Werte checken?
-	List<Integer> possibleValues;
+	/**
+	 * Die Werte werden nicht auf Gültigkeit geprüft. Eine solche
+	 * Prüfung findet erst in der semantischen Analyse statt. 
+	 */
+	final public List<Integer> possibleValues;
 
 	public RandomAction(String varname, List<Integer> pv) {
 		this.varname = varname;
 		this.possibleValues = pv;
-		// TODO Werte im Bereich?
 	}
 
 	@Override
-	public VarAssignment doAction(VarAssignment pre) {
+	public final VarAssignment doAction(VarAssignment pre) {
 		// TODO Auto-generated method stub
 		return null;
 	}

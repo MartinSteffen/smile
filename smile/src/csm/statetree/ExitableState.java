@@ -9,12 +9,10 @@ import java.util.LinkedList;
 
 /**
  * @author hsi
- * 
  */
 public abstract class ExitableState extends InternalState {
 
-	private final LinkedList<ExitState> childExitStates =
-			new LinkedList<ExitState>();
+	private final LinkedList<ExitState> childExitStates = new LinkedList<ExitState>();
 
 	//
 	// Konstruktion *******************************

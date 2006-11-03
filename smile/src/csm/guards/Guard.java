@@ -7,5 +7,4 @@ public abstract class Guard {
 
 	abstract public boolean evalGuard(VarAssignment va);
 
-	// XXX abstract String show();
 }

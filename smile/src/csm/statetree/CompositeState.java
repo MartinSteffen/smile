@@ -14,12 +14,10 @@ import java.util.LinkedList;
  */
 public final class CompositeState extends ExitableState {
 
-	private final LinkedList<EntryState> childEntryStates =
-			new LinkedList<EntryState>();
+	private final LinkedList<EntryState> childEntryStates = new LinkedList<EntryState>();
 
 	// entspricht dsr aus Def. 4
-	private final LinkedList<SubRegion> subregions =
-			new LinkedList<SubRegion>();
+	private final LinkedList<SubRegion> subregions = new LinkedList<SubRegion>();
 
 	//
 	// Konstruktion *******************************

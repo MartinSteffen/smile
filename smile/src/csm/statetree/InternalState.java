@@ -8,7 +8,6 @@ import java.awt.Point;
 
 /**
  * @author hsi
- * 
  */
 public abstract class InternalState extends State {
 
