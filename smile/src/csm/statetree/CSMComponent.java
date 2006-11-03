@@ -46,7 +46,7 @@ public abstract class CSMComponent {
 	 * @return true, wenn dieses Objekt ein Unterobjekt des Parameters
 	 *         ist
 	 */
-	public final boolean isComponentOf(CSMComponent possibleParent) {
+	public final boolean isSubComponentOf(CSMComponent possibleParent) {
 		// durchsuche von this ausgehend die Kette der Parents, bis
 		// entweder das Argument oder das Ende der Kette erreicht ist
 		CSMComponent p = this;
@@ -56,6 +56,14 @@ public abstract class CSMComponent {
 				return true;
 		} while (p != null);
 		return false;
+	}
+
+	/**
+	 * die Funktion >= gemäß Def. 1 des Skriptes, also die
+	 * reflexiv-transitive Hülle der parent-Funktion
+	 */
+	public final boolean isComponentOf(CSMComponent possibleParent) {
+		return possibleParent == this || isComponentOf(possibleParent);
 	}
 
 	//

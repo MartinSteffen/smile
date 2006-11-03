@@ -3,6 +3,9 @@
  */
 package csm;
 
+import java.util.List;
+
+import csm.statetree.CSMComponent;
 import csm.statetree.OutermostRegion;
 import csm.statetree.State;
 
@@ -21,12 +24,28 @@ public final class CoreStateMachine {
 	public CoreStateMachine() {
 	}
 
-	public  Transition connect(State source, State target) {
+	public Transition connect(State source, State target) {
 		// TODO connect implementieren
 		return null;
 	}
-	
+
 	public void disconnect(Transition t) {
 		// TODO disconnect implementieren
-	}  
+	}
+
+	/*
+	 * sollen die parent-Felder gelöschter States auf null gesetzt
+	 * werden? wohin mit den transitionen? 
+	 */
+	public List<Transition> deleteComponent(CSMComponent component) {
+		// alle Transitionen unterhalb der Komponente entfernen
+		// und in die Ergebnisliste eintragen
+		// dann die Komponente aus ihrem parent entfernen
+		// TODO implementieren
+		return null;
+	}
+
+	public void reinsertComponent(CSMComponent component) {
+		// XXX wirklich so?
+	}
 }
