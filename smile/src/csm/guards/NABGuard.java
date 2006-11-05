@@ -7,7 +7,7 @@ public final class NABGuard extends Guard {
 
 	@Override
 	public boolean evalGuard(VarAssignment va) {
-		// TODO implementieren
+		// TODO nab-guard implementieren
 		return false;
 	}
 

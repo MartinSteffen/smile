@@ -40,14 +40,11 @@ public final class ExitState extends ConnectionPoint {
 		// TODO Harald: this.regOf().stateOf() ... ?
 				&& this.stateOf().stateOf() == target.stateOf())
 			return target.stateOf();
-		else {
-			// entry, final, choice:
-			if (this.stateOf() instanceof FinalState)
-				return null;
-			if (this.regOf() == target.regOf())
-				return this.regOf();
-			else
-				return null;
-		}
+		// entry, final, choice:
+		if (this.stateOf() instanceof FinalState)
+			return null;
+		if (this.regOf() == target.regOf())
+			return this.regOf();
+		return null;
 	}
 }

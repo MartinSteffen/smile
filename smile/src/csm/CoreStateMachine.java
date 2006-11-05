@@ -47,7 +47,4 @@ public final class CoreStateMachine {
 		return null;
 	}
 
-	public void reinsertComponent(CSMComponent component) {
-		// XXX wirklich so?
-	}
 }

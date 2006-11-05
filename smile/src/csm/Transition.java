@@ -28,7 +28,7 @@ public final class Transition {
 	}
 
 	public final Action getAction() {
-		return action;
+		return this.action;
 	}
 
 	/**
@@ -42,7 +42,7 @@ public final class Transition {
 	}
 
 	public final NamedObject getEvent() {
-		return event;
+		return this.event;
 	}
 
 	/**
@@ -55,7 +55,7 @@ public final class Transition {
 	}
 
 	public final Guard getGuard() {
-		return guard;
+		return this.guard;
 	}
 
 	/**

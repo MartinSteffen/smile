@@ -19,7 +19,7 @@ public final class AssignAction extends Action {
 
 	@Override
 	public VarAssignment doAction(VarAssignment pre) {
-		// TODO assignment ausführen
+		// TODO assignment-action
 		return null;
 	}
 

@@ -6,6 +6,8 @@ package csm.statetree;
 import java.awt.Point;
 import java.util.LinkedList;
 
+import csm.exceptions.ErrTreeNotChanged;
+
 
 /**
  * im Paper als S_com bekannt
@@ -37,25 +39,25 @@ public final class CompositeState extends ExitableState {
 			r.accept(visitor);
 	}
 
-	public void add(EntryState child) {
+	public void add(EntryState child) throws ErrTreeNotChanged {
 		assert child != null;
 		child.setParent(this);
 		this.childEntryStates.add(child);
 	}
 
-	public void remove(EntryState child) {
+	public void remove(EntryState child) throws ErrTreeNotChanged {
 		assert child != null;
 		child.unsetParent(this);
 		this.childEntryStates.remove(child);
 	}
 
-	public void add(SubRegion child) {
+	public void add(SubRegion child) throws ErrTreeNotChanged {
 		assert child != null;
 		child.setParent(this);
 		this.subregions.add(child);
 	}
 
-	public void removeSubregion(SubRegion child) {
+	public void removeSubregion(SubRegion child) throws ErrTreeNotChanged {
 		assert child != null;
 		child.unsetParent(this);
 		this.subregions.remove(child);

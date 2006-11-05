@@ -7,7 +7,7 @@ public final class WLAGuard extends Guard {
 
 	@Override
 	public boolean evalGuard(VarAssignment va) {
-		// TODO implementieren
+		// TODO wla-guard implementieren
 		return false;
 	}
 

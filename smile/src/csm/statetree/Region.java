@@ -3,6 +3,8 @@ package csm.statetree;
 import java.awt.Point;
 import java.util.LinkedList;
 
+import csm.exceptions.ErrTreeNotChanged;
+
 
 /**
  * Abstrakte Oberklasse aller Regionen
@@ -28,13 +30,13 @@ public abstract class Region extends CSMComponent {
 			s.accept(visitor);
 	}
 
-	final public void add(InternalState child) {
+	final public void add(InternalState child) throws ErrTreeNotChanged {
 		assert child != null;
 		child.setParent(this);
 		this.childInternalStates.add(child);
 	}
 
-	final public void remove(InternalState child) {
+	final public void remove(InternalState child) throws ErrTreeNotChanged {
 		assert child != null;
 		child.unsetParent(this);
 		this.childInternalStates.remove(child);

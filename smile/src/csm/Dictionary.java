@@ -20,7 +20,7 @@ public final class Dictionary<Elem extends NamedObject> {
 
 	public Elem get(String key) throws ErrUndefinedElement {
 		assert key != null;
-		Elem elem = this.contents.get(key);
+		final Elem elem = this.contents.get(key);
 		if (elem != null)
 			return elem;
 		else

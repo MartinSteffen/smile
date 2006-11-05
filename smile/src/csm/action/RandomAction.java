@@ -18,6 +18,7 @@ public final class RandomAction extends Action {
 	public RandomAction(String varname, List<Integer> pv) {
 		assert varname != null;
 		assert pv != null;
+		assert pv.size()>0; // wir nehmen das einfach mal an...
 
 		this.varname = varname;
 		this.possibleValues = pv;
@@ -31,8 +32,14 @@ public final class RandomAction extends Action {
 
 	@Override
 	public String prettyprint() {	
-		// TODO rand-Action prettyprinten
-		return varname + " := XXX";
+		final StringBuilder b = new StringBuilder(this.varname+'(');
+		b.append(this.possibleValues.get(0));
+		for(int i=1;i<this.possibleValues.size();i++) {
+			b.append(", ");
+			b.append(this.possibleValues.get(i));
+		};
+		b.append(')');
+		return b.toString();
 	}
 
 }

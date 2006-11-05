@@ -21,7 +21,10 @@ public final class SendAction extends Action {
 	@Override
 	public VarAssignment doAction(VarAssignment pre) {
 		final int y = this.value.evaluate(pre);
-		System.out.println("event " + this.event + ' ' + y);
+		System.out.println("event ");
+		System.out.print(this.event);
+		System.out.print(' ');
+		System.out.println(y);
 		return pre;
 	}
 

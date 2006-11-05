@@ -5,19 +5,24 @@ package csm;
  * semantischen Analyse verwendet. Die initiale Variablenbelegung wird
  * in den Variablen-Objekten gesetzt.
  */
-public class VarAssignment {
+public final class VarAssignment {
 
 	// XXX vorerst nicht implementieren
 
-	Dictionary variableList;
+	Dictionary<Variable> variableList;
 
-	public VarAssignment(Dictionary variableList) {
+	public VarAssignment(Dictionary<Variable> variableList) {
 		assert variableList != null;
 		this.variableList = variableList;
 	}
 
 	public int lookup(String varname) {
-		// TODO implementieren
+		assert false; // oops
 		return 0;
+	}
+	
+	public VarAssignment setVar(String n, int value) {
+		assert false; // oops
+		return null;
 	}
 }

@@ -6,6 +6,8 @@ package csm.statetree;
 import java.awt.Point;
 import java.util.LinkedList;
 
+import csm.exceptions.ErrTreeNotChanged;
+
 
 /**
  * @author hsi
@@ -24,13 +26,13 @@ public abstract class ExitableState extends InternalState {
 
 	}
 
-	final public void add(ExitState child) {
+	final public void add(ExitState child) throws ErrTreeNotChanged {
 		assert child != null;
 		child.setParent(this);
 		this.childExitStates.add(child);
 	}
 
-	final public void remove(ExitState child) {
+	final public void remove(ExitState child) throws ErrTreeNotChanged {
 		assert child != null;
 		child.unsetParent(this);
 		this.childExitStates.remove(child);
