@@ -9,4 +9,11 @@ public final class SkipAction extends Action {
 	public VarAssignment doAction(VarAssignment pre) {
 		return pre;
 	}
+
+	@Override
+	public String prettyprint() {
+		return "skip";
+	}
+	
+	
 }

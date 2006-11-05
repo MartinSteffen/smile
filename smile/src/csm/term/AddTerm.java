@@ -1,6 +1,6 @@
 package csm.term;
 
-abstract class AddTerm extends BinaryTerm {
+public final class AddTerm extends BinaryTerm {
 
 	@Override
 	final int binaryOp(int l, int r) {
@@ -9,5 +9,10 @@ abstract class AddTerm extends BinaryTerm {
 
 	public AddTerm(Term l, Term r) {
 		super(l, r);
+	}
+
+	@Override
+	public String prettyprint() {
+		return pp_bin("+");
 	}
 }

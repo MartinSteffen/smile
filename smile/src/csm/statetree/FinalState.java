@@ -28,9 +28,9 @@ public final class FinalState extends ExitableState {
 	}
 
 	@Override
-	public boolean mayConnectTo(State target) {
+	public CSMComponent connectionLocation(State target) {
 		assert target != null;
-		return false;
+		return null;
 	}
 
 }

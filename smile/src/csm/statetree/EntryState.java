@@ -26,22 +26,16 @@ public final class EntryState extends ConnectionPoint {
 	// Connections ********************************
 
 	@Override
-	public boolean mayConnectTo(State target) {
+	public CSMComponent connectionLocation(State target) {
 		assert target != null;
+		// TODO Harald: regof or stateof
 		if (stateOf() != target.stateOf().stateOf())
-			return false;
-		if (target instanceof EntryState)
-			return true;
-		if (target instanceof ExitState)
-			return false;
-		if (target instanceof ChoiceState)
-			return true;
-		if (target instanceof CompositeState)
-			return false;
-		if (target instanceof FinalState)
-			return true;
-		assert false; // never reached
-		return false;
+			return null;
+		if (target instanceof EntryState
+				|| target instanceof ChoiceState
+				|| target instanceof FinalState)
+			return stateOf();
+		else
+			return null;
 	}
-
 }

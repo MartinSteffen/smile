@@ -10,6 +10,9 @@ public final class SendAction extends Action {
 	public final Term value;
 
 	public SendAction(String event, Term value) {
+		assert event != null;
+		assert value != null;
+		
 		this.event = event;
 		this.value = value;
 	}
@@ -20,6 +23,11 @@ public final class SendAction extends Action {
 		final int y = this.value.evaluate(pre);
 		System.out.println("event " + this.event + ' ' + y);
 		return pre;
+	}
+
+	@Override
+	public String prettyprint() {
+		return "send(" + event + ", " + value.prettyprint() + ')';
 	}
 
 }

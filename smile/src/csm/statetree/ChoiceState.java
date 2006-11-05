@@ -28,12 +28,14 @@ public final class ChoiceState extends InternalState {
 	}
 
 	@Override
-	public boolean mayConnectTo(State target) {
+	public CSMComponent connectionLocation(State target) {
 		assert target != null;
-		if (regOf() != target.regOf())
-			return false;
 		if (target instanceof CompositeState)
-			return false;
-		return true;
+			return null;
+		if (regOf() == target.regOf())
+			return regOf();
+		else
+			return null;
+
 	}
 }

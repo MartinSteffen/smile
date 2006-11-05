@@ -3,9 +3,11 @@ package csm;
 /**
  * eine Variablenbelegung Variablenbelegungen werden nur in der
  * semantischen Analyse verwendet. Die initiale Variablenbelegung wird
- * in den Variablen-Objekten gesetzt. XXX vorerst nicht implementieren
+ * in den Variablen-Objekten gesetzt.
  */
 public class VarAssignment {
+
+	// XXX vorerst nicht implementieren
 
 	Dictionary variableList;
 

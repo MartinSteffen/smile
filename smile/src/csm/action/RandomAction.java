@@ -16,6 +16,9 @@ public final class RandomAction extends Action {
 	final public List<Integer> possibleValues;
 
 	public RandomAction(String varname, List<Integer> pv) {
+		assert varname != null;
+		assert pv != null;
+
 		this.varname = varname;
 		this.possibleValues = pv;
 	}
@@ -24,6 +27,12 @@ public final class RandomAction extends Action {
 	public final VarAssignment doAction(VarAssignment pre) {
 		// TODO RandomAction
 		return null;
+	}
+
+	@Override
+	public String prettyprint() {	
+		// TODO rand-Action prettyprinten
+		return varname + " := XXX";
 	}
 
 }

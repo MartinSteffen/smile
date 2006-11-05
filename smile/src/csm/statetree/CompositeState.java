@@ -62,9 +62,12 @@ public final class CompositeState extends ExitableState {
 	}
 
 	@Override
-	public boolean mayConnectTo(State target) {
+	public CSMComponent connectionLocation(State target) {
 		assert target != null;
-		return this == target;
+		if (this == target)
+			return this;
+		else
+			return null;
 	}
 
 }

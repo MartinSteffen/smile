@@ -20,7 +20,7 @@ public final class Transition {
 	Transition(CoreStateMachine owner, State source, State target) {
 		assert owner != null;
 		assert source != null;
-		assert source.mayConnectTo(target);
+		assert source.connectionLocation(target) != null;
 
 		this.owner = owner;
 		this.source = source;

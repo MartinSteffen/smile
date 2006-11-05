@@ -61,7 +61,7 @@ public abstract class CSMComponent {
 			;
 		this.parent = parent;
 	}
-
+	
 	public final void unsetParent(CSMComponent parent) {
 		if (this.parent != parent)
 			// TODO throw error

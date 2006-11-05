@@ -6,4 +6,6 @@ import csm.VarAssignment;
 public abstract class Term {
 
 	abstract public int evaluate(VarAssignment varAssignment);
+
+	abstract public String prettyprint();
 }

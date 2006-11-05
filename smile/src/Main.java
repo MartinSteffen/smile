@@ -6,7 +6,7 @@
 public final class Main {
 
 	/**
-	 * @param args
+	 * @param Die Kommandozeilenargumente werden bisher ignoriert
 	 */
 	public static void main(String[] args) {
 		// eventuell Kommandozeile auswerten und

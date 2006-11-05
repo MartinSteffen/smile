@@ -3,7 +3,7 @@ package csm.term;
 import csm.VarAssignment;
 
 
-public class ConstTerm extends Term {
+public final class ConstTerm extends Term {
 
 	public final int value;
 
@@ -14,6 +14,11 @@ public class ConstTerm extends Term {
 	@Override
 	public int evaluate(VarAssignment varAssignment) {
 		return this.value;
+	}
+
+	@Override
+	public String prettyprint() {
+		return String.valueOf(value);
 	}
 
 }

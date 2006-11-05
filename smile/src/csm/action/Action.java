@@ -3,6 +3,9 @@ package csm.action;
 import csm.VarAssignment;
 
 
+/*
+ * ein abstrakter Syntaxbaum, der einen Action-Ausdruck darstellt.    
+ */
 public abstract class Action {
 
 	/**
@@ -12,4 +15,7 @@ public abstract class Action {
 	 * @returns neue Variablenbelegung
 	 */
 	abstract public VarAssignment doAction(VarAssignment pre);
+
+	abstract public String prettyprint();
+	
 }

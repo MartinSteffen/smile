@@ -1,6 +1,6 @@
 package csm.term;
 
-abstract class MulTerm extends BinaryTerm {
+public final class MulTerm extends BinaryTerm {
 
 	@Override
 	final int binaryOp(int l, int r) {
@@ -10,4 +10,11 @@ abstract class MulTerm extends BinaryTerm {
 	public MulTerm(Term l, Term r) {
 		super(l, r);
 	}
+
+	@Override
+	public String prettyprint() {
+		return pp_bin("*");
+	}
+	
+	
 }

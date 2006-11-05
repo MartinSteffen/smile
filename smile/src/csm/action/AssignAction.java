@@ -10,6 +10,9 @@ public final class AssignAction extends Action {
 	final public Term term;
 
 	public AssignAction(String varname, Term term) {
+		assert varname != null;
+		assert term != null;
+
 		this.varname = varname;
 		this.term = term;
 	}
@@ -19,4 +22,9 @@ public final class AssignAction extends Action {
 		// TODO assignment ausführen
 		return null;
 	}
+
+	@Override
+	public String prettyprint() {
+		return varname + " := " + term.prettyprint();  
+		}
 }

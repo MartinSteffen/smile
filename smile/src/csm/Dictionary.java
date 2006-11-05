@@ -23,7 +23,8 @@ public final class Dictionary<Elem extends NamedObject> {
 		Elem elem = this.contents.get(key);
 		if (elem != null)
 			return elem;
-		throw new ErrUndefinedElement(key);
+		else
+			throw new ErrUndefinedElement(key);
 	}
 
 	public void set(Elem elem) throws ErrAlreadyDefinedElement {

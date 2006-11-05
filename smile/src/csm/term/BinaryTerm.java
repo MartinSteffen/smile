@@ -21,4 +21,9 @@ abstract class BinaryTerm extends Term {
 		final int r = this.right.evaluate(va);
 		return binaryOp(l, r);
 	}
+
+	protected String pp_bin(String op) {
+		return '(' + left.prettyprint() + ' ' + op + ' '
+				+ right.prettyprint() + ')';
+	}
 }

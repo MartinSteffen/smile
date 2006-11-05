@@ -32,14 +32,22 @@ public final class ExitState extends ConnectionPoint {
 	// Connections ********************************
 
 	@Override
-	public boolean mayConnectTo(State target) {
+	public CSMComponent connectionLocation(State target) {
 		assert target != null;
-		if (target instanceof ExitState)
-			return this.stateOf().stateOf() == target.stateOf();
 		if (target instanceof CompositeState)
-			return false;
-		// entry, final, choice:
-		boolean sourceInFinal = this.stateOf() instanceof FinalState;
-		return this.regOf() == target.regOf() && !sourceInFinal;
+			return null;
+		if (target instanceof ExitState
+		// TODO Harald: this.regOf().stateOf() ... ?
+				&& this.stateOf().stateOf() == target.stateOf())
+			return target.stateOf();
+		else {
+			// entry, final, choice:
+			if (this.stateOf() instanceof FinalState)
+				return null;
+			if (this.regOf() == target.regOf())
+				return this.regOf();
+			else
+				return null;
+		}
 	}
 }
