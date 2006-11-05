@@ -11,7 +11,7 @@ public final class RandomAction extends Action {
 
 	/**
 	 * Die Werte werden nicht auf Gültigkeit geprüft. Eine solche
-	 * Prüfung findet erst in der semantischen Analyse statt. 
+	 * Prüfung findet erst in der semantischen Analyse statt.
 	 */
 	final public List<Integer> possibleValues;
 
@@ -22,7 +22,7 @@ public final class RandomAction extends Action {
 
 	@Override
 	public final VarAssignment doAction(VarAssignment pre) {
-		// TODO Auto-generated method stub
+		// TODO RandomAction
 		return null;
 	}
 

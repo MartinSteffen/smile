@@ -25,6 +25,8 @@ public final class CoreStateMachine {
 	}
 
 	public Transition connect(State source, State target) {
+		assert source != null;
+		assert target != null;
 		// TODO connect implementieren
 		return null;
 	}
@@ -35,7 +37,7 @@ public final class CoreStateMachine {
 
 	/*
 	 * sollen die parent-Felder gelöschter States auf null gesetzt
-	 * werden? wohin mit den transitionen? 
+	 * werden? wohin mit den transitionen?
 	 */
 	public List<Transition> deleteComponent(CSMComponent component) {
 		// alle Transitionen unterhalb der Komponente entfernen

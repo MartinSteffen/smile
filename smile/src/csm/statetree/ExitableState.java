@@ -14,24 +14,25 @@ public abstract class ExitableState extends InternalState {
 
 	private final LinkedList<ExitState> childExitStates = new LinkedList<ExitState>();
 
-	//
-	// Konstruktion *******************************
-
-	ExitableState(Point position, Region parentRegion) {
-		super(position, parentRegion);
+	ExitableState(Point position) {
+		super(position);
 	}
 
 	final void visitMyExitStates(Visitor visitor) {
 		for (final ExitState s : this.childExitStates)
-			s.visitMe(visitor);
+			s.accept(visitor);
 
 	}
 
-	final void addChildExitState(ExitState child) {
+	final public void add(ExitState child) {
+		assert child != null;
+		child.setParent(this);
 		this.childExitStates.add(child);
 	}
 
-	final void removeChildExitState(ExitState child) {
+	final public void remove(ExitState child) {
+		assert child != null;
+		child.unsetParent(this);
 		this.childExitStates.remove(child);
 	}
 }

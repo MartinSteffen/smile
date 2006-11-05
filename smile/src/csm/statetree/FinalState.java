@@ -13,12 +13,12 @@ import java.awt.Point;
  */
 public final class FinalState extends ExitableState {
 
-	public FinalState(Point position, Region parentRegion) {
-		super(position, parentRegion);
+	public FinalState(Point position) {
+		super(position);
 	}
 
 	@Override
-	void visitMe(Visitor visitor) {
+	void accept(Visitor visitor) {
 		visitor.visitFinalState(this);
 	}
 
@@ -27,29 +27,10 @@ public final class FinalState extends ExitableState {
 		visitMyExitStates(visitor);
 	}
 
-	//
-	// Connections ********************************
-
 	@Override
 	public boolean mayConnectTo(State target) {
 		assert target != null;
 		return false;
-	}
-
-	@Override
-	boolean mayConnectFromChoiceState(ChoiceState source) {
-		return true;
-	}
-
-	@Override
-	boolean mayConnectFromEntryState(EntryState source) {
-		return true;
-	}
-
-	@Override
-	boolean mayConnectFromExitState(ExitState source) {
-		boolean sourceInFinal = source.stateOf() instanceof FinalState;
-		return source.regOf() == regOf() && !sourceInFinal;
 	}
 
 }

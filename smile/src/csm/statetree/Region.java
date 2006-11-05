@@ -18,22 +18,25 @@ public abstract class Region extends CSMComponent {
 	}
 
 	@Override
-	void visitMe(Visitor visitor) {
+	final void accept(Visitor visitor) {
 		visitor.visitRegion(this);
 	}
 
 	@Override
 	final void visitChildren(Visitor visitor) {
 		for (final InternalState s : this.childInternalStates)
-			s.visitMe(visitor);
+			s.accept(visitor);
 	}
 
-	final void addChildInternalState(InternalState child) {
-		assert child.parent() == this;
+	final public void add(InternalState child) {
+		assert child != null;
+		child.setParent(this);
 		this.childInternalStates.add(child);
 	}
 
-	final void removeChildInternalState(InternalState child) {
+	final public void remove(InternalState child) {
+		assert child != null;
+		child.unsetParent(this);
 		this.childInternalStates.remove(child);
 	}
 

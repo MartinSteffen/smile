@@ -16,7 +16,7 @@ public final class AssignAction extends Action {
 
 	@Override
 	public VarAssignment doAction(VarAssignment pre) {
-		// TODO Auto-generated method stub
+		// TODO assignment ausführen
 		return null;
 	}
 }

@@ -39,7 +39,7 @@ public abstract class State extends CSMComponent {
 	 * @return die umgebende SubRegion dieses States
 	 */
 	public final Region regOf() {
-		return (Region) stateOf().parent();
+		return (Region) stateOf().getParent();
 	}
 
 	//
@@ -61,13 +61,26 @@ public abstract class State extends CSMComponent {
 	 * Connections ******************************* Definition 4 des
 	 * Papers gibt an, welche States durch Transitionen verbunden werden
 	 * dürfen. Daraus ergibt sich folgende Tabelle, die in der Methode
-	 * mayConnectTo implementiert ist: source, target, Bedingung Sfin, *,
-	 * false Scom, *, source == target Sexit, Sexit,
-	 * stateOf(stateOf(source)) == stateOf(target) Sexit, {Sentry,
-	 * Sfinal, Schoice}, regOf(target)==regOf(source) Sexit, Scom, false
-	 * Sentry, *, stateOf(source) == stateOf(stateOf(target)) Schoice, *,
-	 * regOf(target)==regOf(source) {Sentry, Schoice}, {Sexit, Scom},
-	 * false {Sentry, Schoice}, {Sentry, Sfinal, Schoice}, true
+	 * mayConnectTo implementiert ist: <table> </table>
+	 * <p>
+	 * source, target, Bedingung
+	 * <p>
+	 * Sfin, *,false <br>
+	 * Scom, *, source == target
+	 * <p>
+	 * Sexit, Sexit, stateOf(stateOf(source)) == stateOf(target)
+	 * <p>
+	 * Sexit, {Sentry, Sfinal, Schoice}, regOf(target)==regOf(source)
+	 * <p>
+	 * Sexit, Scom, false
+	 * <p>
+	 * Sentry, *, stateOf(source) == stateOf(stateOf(target))
+	 * <p>
+	 * Schoice, *,regOf(target)==regOf(source)
+	 * <p>
+	 * {Sentry, Schoice}, {Sexit, Scom},false
+	 * <p>
+	 * {Sentry, Schoice}, {Sentry, Sfinal, Schoice}, true
 	 */
 
 	/**
@@ -79,9 +92,4 @@ public abstract class State extends CSMComponent {
 	 */
 	public abstract boolean mayConnectTo(State target);
 
-	abstract boolean mayConnectFromEntryState(EntryState source);
-
-	abstract boolean mayConnectFromExitState(ExitState source);
-
-	abstract boolean mayConnectFromChoiceState(ChoiceState source);
 }

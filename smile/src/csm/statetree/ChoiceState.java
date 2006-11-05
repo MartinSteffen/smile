@@ -13,12 +13,12 @@ import java.awt.Point;
  */
 public final class ChoiceState extends InternalState {
 
-	public ChoiceState(Point position, Region parentRegion) {
-		super(position, parentRegion);
+	public ChoiceState(Point position) {
+		super(position);
 	}
 
 	@Override
-	void visitMe(Visitor visitor) {
+	void accept(Visitor visitor) {
 		visitor.visitChoiceState(this);
 	}
 
@@ -27,31 +27,13 @@ public final class ChoiceState extends InternalState {
 		// ChoiceStates haben keine Child-States
 	}
 
-	//
-	// Connections ********************************
-
 	@Override
 	public boolean mayConnectTo(State target) {
 		assert target != null;
 		if (regOf() != target.regOf())
 			return false;
-		return target.mayConnectFromChoiceState(this);
-	}
-
-	@Override
-	boolean mayConnectFromChoiceState(ChoiceState source) {
+		if (target instanceof CompositeState)
+			return false;
 		return true;
 	}
-
-	@Override
-	boolean mayConnectFromEntryState(EntryState source) {
-		return true;
-	}
-
-	@Override
-	boolean mayConnectFromExitState(ExitState source) {
-		boolean sourceInFinal = source.stateOf() instanceof FinalState;
-		return source.regOf() == regOf() && !sourceInFinal;
-	}
-
 }

@@ -19,15 +19,12 @@ public final class CompositeState extends ExitableState {
 	// entspricht dsr aus Def. 4
 	private final LinkedList<SubRegion> subregions = new LinkedList<SubRegion>();
 
-	//
-	// Konstruktion *******************************
-
-	public CompositeState(Point position, Region parentRegion) {
-		super(position, parentRegion);
+	public CompositeState(Point position) {
+		super(position);
 	}
 
 	@Override
-	void visitMe(Visitor visitor) {
+	void accept(Visitor visitor) {
 		visitor.visitCompositeState(this);
 	}
 
@@ -35,29 +32,34 @@ public final class CompositeState extends ExitableState {
 	void visitChildren(Visitor visitor) {
 		visitMyExitStates(visitor);
 		for (final EntryState s : this.childEntryStates)
-			s.visitMe(visitor);
+			s.accept(visitor);
 		for (final SubRegion r : this.subregions)
-			r.visitMe(visitor);
+			r.accept(visitor);
 	}
 
-	void addChildEntryState(EntryState child) {
+	public void add(EntryState child) {
+		assert child != null;
+		child.setParent(this);
 		this.childEntryStates.add(child);
 	}
 
-	void removeChildEntryState(EntryState child) {
+	public void remove(EntryState child) {
+		assert child != null;
+		child.unsetParent(this);
 		this.childEntryStates.remove(child);
 	}
 
-	void addSubregion(SubRegion child) {
+	public void add(SubRegion child) {
+		assert child != null;
+		child.setParent(this);
 		this.subregions.add(child);
 	}
 
-	void removeSubregion(SubRegion child) {
+	public void removeSubregion(SubRegion child) {
+		assert child != null;
+		child.unsetParent(this);
 		this.subregions.remove(child);
 	}
-
-	//
-	// Connections ********************************
 
 	@Override
 	public boolean mayConnectTo(State target) {
@@ -65,18 +67,4 @@ public final class CompositeState extends ExitableState {
 		return this == target;
 	}
 
-	@Override
-	boolean mayConnectFromChoiceState(ChoiceState source) {
-		return false;
-	}
-
-	@Override
-	boolean mayConnectFromEntryState(EntryState source) {
-		return false;
-	}
-
-	@Override
-	boolean mayConnectFromExitState(ExitState source) {
-		return false;
-	}
 }

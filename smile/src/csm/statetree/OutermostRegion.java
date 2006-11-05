@@ -10,11 +10,6 @@ import java.awt.Point;
  */
 public final class OutermostRegion extends Region {
 
-	@Override
-	public final CSMComponent parent() {
-		return null;
-	}
-
 	public OutermostRegion() {
 		super(new Point(0, 0));
 	}

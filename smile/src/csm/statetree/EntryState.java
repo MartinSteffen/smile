@@ -13,22 +13,12 @@ import java.awt.Point;
  */
 public final class EntryState extends ConnectionPoint {
 
-	private CompositeState parentComposite;
-
-	@Override
-	public CSMComponent parent() {
-		return this.parentComposite;
-	}
-
-	public EntryState(Point position, CompositeState parentComposite) {
+	public EntryState(Point position) {
 		super(position);
-		assert parentComposite != null;
-		this.parentComposite = parentComposite;
-		this.parentComposite.addChildEntryState(this);
 	}
 
 	@Override
-	void visitMe(Visitor visitor) {
+	void accept(Visitor visitor) {
 		visitor.visitEntryState(this);
 	}
 
@@ -40,23 +30,18 @@ public final class EntryState extends ConnectionPoint {
 		assert target != null;
 		if (stateOf() != target.stateOf().stateOf())
 			return false;
-		return target.mayConnectFromEntryState(this);
-	}
-
-	@Override
-	boolean mayConnectFromChoiceState(ChoiceState source) {
-		return true;
-	}
-
-	@Override
-	boolean mayConnectFromEntryState(EntryState source) {
-		return true;
-	}
-
-	@Override
-	boolean mayConnectFromExitState(ExitState source) {
-		boolean sourceInFinal = source.stateOf() instanceof FinalState;
-		return source.regOf() == regOf() && !sourceInFinal;
+		if (target instanceof EntryState)
+			return true;
+		if (target instanceof ExitState)
+			return false;
+		if (target instanceof ChoiceState)
+			return true;
+		if (target instanceof CompositeState)
+			return false;
+		if (target instanceof FinalState)
+			return true;
+		assert false; // never reached
+		return false;
 	}
 
 }

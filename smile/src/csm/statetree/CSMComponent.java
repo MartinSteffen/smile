@@ -24,20 +24,50 @@ import java.awt.Point;
  */
 public abstract class CSMComponent {
 
+	private CSMComponent parent;
+
 	/**
 	 * Die Position relativ zur Position der parent-Komponente
+	 * <p>
+	 * Die Konstruktoren und die Setter-Methode stellen sicher, dass
+	 * position niemals null ist.
 	 */
 	private Point position;
 
-	//
-	// Semantik ***********************************
+	/**
+	 * Jede Komponente hat eine Position, deshalb stellen wir keinen
+	 * Default-Konstruktor zur Verfügung.
+	 */
+	CSMComponent(Point position) {
+		setPosition(position);
+	}
 
 	/**
 	 * die Funktion parent gemäß Definition 1 des Skripts
 	 * 
 	 * @return die CSM-Komponente, in der diese Komponente enthalten ist
 	 */
-	public abstract CSMComponent parent();
+	public final CSMComponent getParent() {
+		return this.parent;
+	}
+
+	public final void setParent(CSMComponent parent) {
+		if (this.parent != null)
+			// throw new ErrDoubleInsert()
+			;
+		if (this.isComponentOf(parent))
+			// Kreis erzeugt
+			// throw new ErrDoubleInsert()
+			;
+		this.parent = parent;
+	}
+
+	public final void unsetParent(CSMComponent parent) {
+		if (this.parent != parent)
+			// TODO throw error
+			;
+		this.parent = null;
+	}
 
 	/**
 	 * die Funktion > gemäß Definition 1 des Skripts, also die
@@ -51,7 +81,7 @@ public abstract class CSMComponent {
 		// entweder das Argument oder das Ende der Kette erreicht ist
 		CSMComponent p = this;
 		do {
-			p = p.parent();
+			p = p.getParent();
 			if (p == possibleParent)
 				return true;
 		} while (p != null);
@@ -66,41 +96,19 @@ public abstract class CSMComponent {
 		return possibleParent == this || isComponentOf(possibleParent);
 	}
 
-	//
-	// Konstruktion *******************************
+	/** die Accept-Methode des Visitor-Patterns */
+	abstract void accept(Visitor visitor);
 
 	/**
-	 * Jede Komponente hat eine Position, deshalb stellen wir keinen
-	 * Default-Konstruktor zur Verfügung.
-	 * 
-	 * @param position die Position der Komponente (darf nicht null
-	 *            sein!)
+	 * ruft die accept-Methode aller Child-Komponenten mit dem
+	 * angegebenen Visitor auf
 	 */
-	CSMComponent(Point position) {
-		setPosition(position);
-	}
-
-	//
-	// Visitor-Pattern ****************************
-
-	abstract void visitMe(Visitor visitor);
-
 	abstract void visitChildren(Visitor visitor);
 
-	//
-	// GUI ****************************************
-
-	/**
-	 * @return die Position relativ zur parent-Komponente (niemals null)
-	 */
 	public final Point getPosition() {
 		return this.position;
 	}
 
-	/**
-	 * @param position die neue Position der Komponente (darf nicht null
-	 *            sein!)
-	 */
 	public void setPosition(Point position) {
 		assert position != null;
 		this.position = position;
@@ -113,7 +121,7 @@ public abstract class CSMComponent {
 		int x = 0;
 		int y = 0;
 		CSMComponent p = this;
-		for (p = this; p != null; p = p.parent()) {
+		for (p = this; p != null; p = p.getParent()) {
 			x += p.getPosition().x;
 			y += p.getPosition().y;
 		}

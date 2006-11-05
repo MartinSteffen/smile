@@ -21,6 +21,7 @@ abstract class CSMEditException extends Exception {
 	 * @param message
 	 * @param cause
 	 */
+	@Deprecated
 	public CSMEditException(String message, Throwable cause) {
 		super(message, cause);
 

@@ -13,18 +13,8 @@ import java.awt.Point;
  */
 public final class SubRegion extends Region {
 
-	private CompositeState parentComposite;
-
-	@Override
-	public CSMComponent parent() {
-		return this.parentComposite;
-	}
-
-	public SubRegion(Point position, CompositeState parentComposite) {
+	public SubRegion(Point position) {
 		super(position);
-		assert parentComposite != null;
-		this.parentComposite = parentComposite;
-		this.parentComposite.addSubregion(this);
 	}
 
 }
