@@ -1,28 +1,37 @@
-package csm;
+package csm.statetree;
 
+import java.awt.Point;
+
+import csm.CoreStateMachine;
+import csm.NamedObject;
 import csm.action.Action;
 import csm.exceptions.ErrUndefinedElement;
 import csm.guards.Guard;
-import csm.statetree.State;
 
 
-public final class Transition {
+public final class Transition extends CSMComponent {
 
+	// TODO als Methode
 	final private CoreStateMachine owner;
 
 	final State source;
 	final State target;
 
+	// TODO  Getter und Setter mit Strings
 	private NamedObject event;
 	private Guard guard;
 	private Action action;
 
-	Transition(CoreStateMachine owner, State source, State target) {
-		assert owner != null;
+	Transition(Point location, State source, State target) {
+		super(location);
 		assert source != null;
-		assert source.connectionLocation(target) != null;
+		assert target != null;
+		
+		// stattdessen Exception werfen
+		assert source.transitionLocation(target) != null;
 
-		this.owner = owner;
+		// TODO in Connectionlocation eintragen
+		//this.owner = owner;
 		this.source = source;
 		this.target = target;
 	}
@@ -68,5 +77,16 @@ public final class Transition {
 	public final void setGuard(Guard guard) throws ErrUndefinedElement {
 		// TODO checken, ob Variablen existieren
 		this.guard = guard;
+	}
+
+	@Override
+	void accept(Visitor visitor) {
+		visitor.visitTransition(this);
+	}
+
+	@Override
+	void visitChildren(Visitor visitor) {
+		// eine Transition hat keine Children
+		
 	}
 }

@@ -6,6 +6,7 @@ package csm.statetree;
 import java.awt.Point;
 import java.util.LinkedList;
 
+import csm.action.Action;
 import csm.exceptions.ErrTreeNotChanged;
 
 
@@ -16,6 +17,11 @@ import csm.exceptions.ErrTreeNotChanged;
  */
 public final class CompositeState extends ExitableState {
 
+	// TODO getter, setter, check ob variablen def. sind
+	Action doAction;
+	
+	// TODO deferredEvents
+	
 	private final LinkedList<EntryState> childEntryStates = new LinkedList<EntryState>();
 
 	// entspricht dsr aus Def. 4
@@ -64,7 +70,7 @@ public final class CompositeState extends ExitableState {
 	}
 
 	@Override
-	public CSMComponent connectionLocation(State target) {
+	public CSMComponent transitionLocation(State target) {
 		assert target != null;
 		if (this == target)
 			return this;

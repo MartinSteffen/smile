@@ -1,12 +1,13 @@
 package csm;
 
 import java.util.HashMap;
+import java.util.Observable;
 
 import csm.exceptions.ErrAlreadyDefinedElement;
 import csm.exceptions.ErrUndefinedElement;
 
 
-public final class Dictionary<Elem extends NamedObject> {
+public final class Dictionary<Elem extends NamedObject> extends Observable{
 
 	final private HashMap<String, Elem> contents = new HashMap<String, Elem>();
 
@@ -18,6 +19,8 @@ public final class Dictionary<Elem extends NamedObject> {
 
 	}
 
+	// TODO void check() throws ...
+	
 	public Elem get(String key) throws ErrUndefinedElement {
 		assert key != null;
 		final Elem elem = this.contents.get(key);
@@ -31,5 +34,6 @@ public final class Dictionary<Elem extends NamedObject> {
 		assert elem != null;
 		if (contains(elem.getName()))
 			throw new ErrAlreadyDefinedElement(elem.getName());
+		contents.put(elem.getName(), elem);
 	}
 }

@@ -28,7 +28,7 @@ public final class FinalState extends ExitableState {
 	}
 
 	@Override
-	public CSMComponent connectionLocation(State target) {
+	public CSMComponent transitionLocation(State target) {
 		assert target != null;
 		return null;
 	}

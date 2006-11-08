@@ -1,38 +1,42 @@
 package csm.statetree;
 
 import java.awt.Point;
+import java.util.Observable;
 
 import csm.exceptions.ErrTreeNotChanged;
 
-
 /**
- * CSMComponent ist die Oberklasse der States und Regions. Sie besitzt
- * die im Paper unter Definition 1 angegebenen Funktionen parent und '>'
- * (hier: isComponentOf), durch die die Baumstruktur der CSM definiert
- * ist.
+ * CSMComponent ist die Oberklasse der States und Regions. Sie besitzt die im
+ * Paper unter Definition 1 angegebenen Funktionen parent und '>' (hier:
+ * isComponentOf), durch die die Baumstruktur der CSM definiert ist.
  * <p>
  * Daneben besitzt jede CSM-Komponente eine zweidimensionale Koordinate
- * position, die die Position der Komponente relativ zu ihrer
- * parent-Komponente angibt, sowie eine Funktion getAbsolutePosition,
- * die die Position relativ zur root-Komponente angibt. Wie diese
- * Position zu interpretieren ist, ist Sache der GUI.
+ * position, die die Position der Komponente relativ zu ihrer parent-Komponente
+ * angibt, sowie eine Funktion getAbsolutePosition, die die Position relativ zur
+ * root-Komponente angibt. Wie diese Position zu interpretieren ist, ist Sache
+ * der GUI.
  * <p>
- * (Anmerkung: Damit entscheiden wir, dass die Position der Komponenten
- * ein Teil des Modells ist. Das erspart uns erstens, die Objekte
- * automatisch plazieren zu müssen, und zweitens, die komplette
- * Komponenten-Hierarchie in der View spiegeln zu müssen)
+ * (Anmerkung: Damit entscheiden wir, dass die Position der Komponenten ein Teil
+ * des Modells ist. Das erspart uns erstens, die Objekte automatisch plazieren
+ * zu müssen, und zweitens, die komplette Komponenten-Hierarchie in der View
+ * spiegeln zu müssen)
  * 
  * @author hsi
  */
-public abstract class CSMComponent {
-
+public abstract class CSMComponent extends Observable {
+	// TODO parents benachrichtigen bei änderungen (observable)
 	private CSMComponent parent;
+
+	/**
+	 * Name oder Kommentar, muß nicht eindeutig sein, kann auch null sein
+	 */
+	public String nameComment;
 
 	/**
 	 * Die Position relativ zur Position der parent-Komponente
 	 * <p>
-	 * Die Konstruktoren und die Setter-Methode stellen sicher, dass
-	 * position niemals null ist.
+	 * Die Konstruktoren und die Setter-Methode stellen sicher, dass position
+	 * niemals null ist.
 	 */
 	private Point position;
 
@@ -56,57 +60,54 @@ public abstract class CSMComponent {
 	/**
 	 * Der Komponente wird eine parent-Komponente zugewiesen
 	 * <p>
-	 * nach setParent muss der Aufrufer dafür sorgen, dass diese
-	 * Komponente auch in der Child-Liste von parent eingetragen wird.
+	 * nach setParent muss der Aufrufer dafür sorgen, dass diese Komponente auch
+	 * in der Child-Liste von parent eingetragen wird.
 	 * <p>
-	 * wegen dieser Anforderung ist setParent nur für Package-internen
-	 * Gebrauch
+	 * wegen dieser Anforderung ist setParent nur für Package-internen Gebrauch
 	 * 
-	 * @throws ErrTreeNotChanged wenn die Komponente bereits eine
-	 *             parent-Komponente besitzt, oder wenn versucht wird,
-	 *             sie zu ihrer eigenen Unterkomponente zu machen
+	 * @throws ErrTreeNotChanged
+	 *             wenn die Komponente bereits eine parent-Komponente besitzt,
+	 *             oder wenn versucht wird, sie zu ihrer eigenen Unterkomponente
+	 *             zu machen
 	 */
 	final void setParent(CSMComponent parent) throws ErrTreeNotChanged {
 		if (this.parent != null)
-			throw new ErrTreeNotChanged("component is in use");
+			throw new ErrTreeNotChanged("component is already in use");
 		// throw new ErrDoubleInsert()
 		;
-		if (isComponentOf(parent))
+		if (parent.isComponentOf(this))
 			// Kreis erzeugt
-			// throw new ErrDoubleInsert()
-			throw new ErrTreeNotChanged(
-					"tried to create circular dependency");
+			throw new ErrTreeNotChanged("tried to create circular dependency");
 		;
 		this.parent = parent;
 	}
 
 	/**
-	 * Der Komponente wird als parent-Komponente null zugewiesen, wenn
-	 * sie die direkte Unterkomponente der als Parameter angegebenen
-	 * Komponente ist.
+	 * Der Komponente wird als parent-Komponente null zugewiesen, wenn sie die
+	 * direkte Unterkomponente der als Parameter angegebenen Komponente ist.
 	 * <p>
-	 * nach setParent muss der Aufrufer dafür sorgen, dass diese
-	 * Komponente auch aus der Child-Liste von parent ausgetragen wird.
+	 * nach setParent muss der Aufrufer dafür sorgen, dass diese Komponente auch
+	 * aus der Child-Liste von parent ausgetragen wird.
 	 * <p>
 	 * wegen dieser Anforderung ist unsetParent nur für Package-internen
 	 * Gebrauch
 	 * 
-	 * @throws ErrTreeNotChanged wenn die Komponente keine direkte
-	 *             Unterkomponente der übergebenen Komponente ist.
+	 * @throws ErrTreeNotChanged
+	 *             wenn die Komponente keine direkte Unterkomponente der
+	 *             übergebenen Komponente ist.
 	 */
-	final void unsetParent(CSMComponent parent)
-			throws ErrTreeNotChanged {
+	final void unsetParent(CSMComponent parent) throws ErrTreeNotChanged {
+		// TODO unterscheidung null - falsches parent
 		if (this.parent != parent)
 			throw new ErrTreeNotChanged("no parent to delete from");
 		this.parent = null;
 	}
 
 	/**
-	 * die Funktion > gemäß Definition 1 des Skripts, also die
-	 * transitive Hülle der parent-Funktion
+	 * die Funktion > gemäß Definition 1 des Skripts, also die transitive Hülle
+	 * der parent-Funktion
 	 * 
-	 * @return true, wenn dieses Objekt ein Unterobjekt des Parameters
-	 *         ist
+	 * @return true, wenn dieses Objekt ein Unterobjekt des Parameters ist
 	 */
 	public final boolean isSubComponentOf(CSMComponent possibleParent) {
 		// durchsuche von this ausgehend die Kette der Parents, bis
@@ -121,8 +122,8 @@ public abstract class CSMComponent {
 	}
 
 	/**
-	 * die Funktion >= gemäß Def. 1 des Skriptes, also die
-	 * reflexiv-transitive Hülle der parent-Funktion
+	 * die Funktion >= gemäß Def. 1 des Skriptes, also die reflexiv-transitive
+	 * Hülle der parent-Funktion
 	 */
 	public final boolean isComponentOf(CSMComponent possibleParent) {
 		return possibleParent == this || isComponentOf(possibleParent);
@@ -132,8 +133,8 @@ public abstract class CSMComponent {
 	abstract void accept(Visitor visitor);
 
 	/**
-	 * ruft die accept-Methode aller Child-Komponenten mit dem
-	 * angegebenen Visitor auf
+	 * ruft die accept-Methode aller Child-Komponenten mit dem angegebenen
+	 * Visitor auf
 	 */
 	abstract void visitChildren(Visitor visitor);
 

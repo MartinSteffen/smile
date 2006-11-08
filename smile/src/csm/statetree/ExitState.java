@@ -32,7 +32,7 @@ public final class ExitState extends ConnectionPoint {
 	// Connections ********************************
 
 	@Override
-	public CSMComponent connectionLocation(State target) {
+	public CSMComponent transitionLocation(State target) {
 		assert target != null;
 		if (target instanceof CompositeState)
 			return null;

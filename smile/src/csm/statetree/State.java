@@ -65,7 +65,7 @@ public abstract class State extends CSMComponent {
 	 *         diesem State eine Transition zu dem State target gehen
 	 *         darf; null, wenn nicht.
 	 */
-	public abstract CSMComponent connectionLocation(State target);
+	public abstract CSMComponent transitionLocation(State target);
 
 	public int getUniqueId() {
 		return this.uniqueId;

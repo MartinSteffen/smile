@@ -28,7 +28,7 @@ public final class ChoiceState extends InternalState {
 	}
 
 	@Override
-	public CSMComponent connectionLocation(State target) {
+	public CSMComponent transitionLocation(State target) {
 		assert target != null;
 		if (target instanceof CompositeState)
 			return null;

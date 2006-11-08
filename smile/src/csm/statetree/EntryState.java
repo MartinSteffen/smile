@@ -26,7 +26,7 @@ public final class EntryState extends ConnectionPoint {
 	// Connections ********************************
 
 	@Override
-	public CSMComponent connectionLocation(State target) {
+	public CSMComponent transitionLocation(State target) {
 		assert target != null;
 		// TODO Harald: regof or stateof
 		if (stateOf() != target.stateOf().stateOf())
