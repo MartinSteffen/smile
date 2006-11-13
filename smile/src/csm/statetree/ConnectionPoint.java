@@ -19,10 +19,4 @@ public abstract class ConnectionPoint extends State {
 	ConnectionPoint(Point position) {
 		super(position);
 	}
-
-	@Override
-	final void visitChildren(Visitor visitor) {
-		// ConnectionPoins haben keine Child-States
-	}
-
 }

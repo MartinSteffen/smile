@@ -18,13 +18,8 @@ public final class ChoiceState extends InternalState {
 	}
 
 	@Override
-	void accept(Visitor visitor) {
+	final void accept(Visitor visitor) {
 		visitor.visitChoiceState(this);
-	}
-
-	@Override
-	void visitChildren(Visitor visitor) {
-		// ChoiceStates haben keine Child-States
 	}
 
 	@Override
@@ -32,7 +27,9 @@ public final class ChoiceState extends InternalState {
 		assert target != null;
 		if (target instanceof CompositeState)
 			return null;
-		if (regOf() == target.regOf())
+		else if(this==target)
+			return this;
+		else if (regOf() == target.regOf())
 			return regOf();
 		else
 			return null;

@@ -1,9 +1,8 @@
-/**
- * 
- */
 package csm.statetree;
 
 import java.awt.Point;
+
+import csm.exceptions.ErrTreeNotChanged;
 
 
 /**
@@ -11,20 +10,19 @@ import java.awt.Point;
  * 
  * @author hsi
  */
-public final class FinalState extends ExitableState {
+public final class FinalState extends InternalState {
 
 	public FinalState(Point position) {
 		super(position);
 	}
 
 	@Override
-	void accept(Visitor visitor) {
+	final void accept(Visitor visitor) {
 		visitor.visitFinalState(this);
 	}
 
-	@Override
-	void visitChildren(Visitor visitor) {
-		visitMyExitStates(visitor);
+	final public void add(ExitState child) throws ErrTreeNotChanged {
+		addAnyChild(child);
 	}
 
 	@Override

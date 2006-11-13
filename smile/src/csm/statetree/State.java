@@ -52,7 +52,7 @@ public abstract class State extends CSMComponent {
 	 * <p>
 	 * {Sentry, Schoice}, {Sentry, Sfinal, Schoice}, true
 	 * <p>
-	 * <i>connectionLocation()</i> gibt gemäß Def. 4 des Papers an, ob
+	 * <i>transitionLocation()</i> gibt gemäß Def. 4 des Papers an, ob
 	 * von diesem State eine Transition zum Target-State ausgehen darf.
 	 * <p>
 	 * Wenn eine solche Transition erlaubt ist, dann ermittelt die
@@ -60,12 +60,20 @@ public abstract class State extends CSMComponent {
 	 * verläuft. Also der Scom selbst bei inneren Transitionen, der
 	 * stateOf eines EntryStates bei Transitionen hin zu inneren States,
 	 * die umgebende Region bei Transitionen zwischen InternalStates.
+	 * <p>
+	 * <i> Aufgrund der Komplexität der Bedingungen ist diese Funktion
+	 * in Methoden der potentiellen Source-States aufgeteilt worden.
+	 * <p>
+	 * Diese Funktion ist das Herzstück des
+	 * Connect-/Disconnect-Mechanismus. Wenn sich irgendwann mal die
+	 * Bedingungen ändern, unter denen eine Transition zwei States
+	 * verbinden darf, muss nur diese Funktion angepasst werden. </i>
 	 * 
 	 * @return die Komponente, innerhalb derer verbunden wird, wenn von
 	 *         diesem State eine Transition zu dem State target gehen
 	 *         darf; null, wenn nicht.
 	 */
-	public abstract CSMComponent transitionLocation(State target);
+	abstract CSMComponent transitionLocation(State target);
 
 	public int getUniqueId() {
 		return this.uniqueId;
@@ -90,6 +98,14 @@ public abstract class State extends CSMComponent {
 
 	protected void setUniqueId(int id) {
 		this.uniqueId = id;
+	}
+
+	/**
+	 * @return true, wenn eine Transition diesen State mit dem
+	 *         angegebenen Target-State verbinden darf
+	 */
+	public boolean mayConnectTo(State target) {
+		return transitionLocation(target) != null;
 	}
 
 }

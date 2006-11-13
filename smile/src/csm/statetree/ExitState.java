@@ -17,6 +17,12 @@ public final class ExitState extends ConnectionPoint {
 		PR, NPR, CP
 	};
 
+	/**
+	 * Der Typ des ExitStates.
+	 * <p>
+	 * Da dieser Typ keinen Einschränkungen unterliegt, ist er als
+	 * öffentlich beschreibbare Variable implementiert.
+	 */
 	public KindOfExitstate kindOf = KindOfExitstate.PR;
 
 	public ExitState(Point position) {
@@ -24,12 +30,9 @@ public final class ExitState extends ConnectionPoint {
 	}
 
 	@Override
-	void accept(Visitor visitor) {
+	final void accept(Visitor visitor) {
 		visitor.visitExitState(this);
 	}
-
-	//
-	// Connections ********************************
 
 	@Override
 	public CSMComponent transitionLocation(State target) {
@@ -37,10 +40,10 @@ public final class ExitState extends ConnectionPoint {
 		if (target instanceof CompositeState)
 			return null;
 		if (target instanceof ExitState
-		// TODO Harald: this.regOf().stateOf() ... ?
-				&& this.stateOf().stateOf() == target.stateOf())
+				&& this.regOf().getParent() == target.stateOf())
 			return target.stateOf();
 		// entry, final, choice:
+		// TODO Bedingung checken: Exitstate ausschließen?
 		if (this.stateOf() instanceof FinalState)
 			return null;
 		if (this.regOf() == target.regOf())

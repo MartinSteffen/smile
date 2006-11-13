@@ -18,7 +18,7 @@ public final class EntryState extends ConnectionPoint {
 	}
 
 	@Override
-	void accept(Visitor visitor) {
+	final void accept(Visitor visitor) {
 		visitor.visitEntryState(this);
 	}
 
@@ -26,10 +26,9 @@ public final class EntryState extends ConnectionPoint {
 	// Connections ********************************
 
 	@Override
-	public CSMComponent transitionLocation(State target) {
+	public final CSMComponent transitionLocation(State target) {
 		assert target != null;
-		// TODO Harald: regof or stateof
-		if (stateOf() != target.stateOf().stateOf())
+		if (stateOf() != target.regOf().getParent())
 			return null;
 		if (target instanceof EntryState
 				|| target instanceof ChoiceState
