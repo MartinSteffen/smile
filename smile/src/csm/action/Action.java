@@ -12,7 +12,7 @@ public abstract class Action {
 	 * eine Aktion auf einer Variablenbelegung durchführen und die neue
 	 * Variablenbelegung zurückgeben
 	 * 
-	 * @returns neue Variablenbelegung
+	 * @return neue Variablenbelegung
 	 */
 	abstract public VarAssignment doAction(VarAssignment pre);
 

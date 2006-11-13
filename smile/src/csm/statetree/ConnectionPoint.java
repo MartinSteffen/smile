@@ -7,6 +7,8 @@ import java.awt.Point;
 
 
 /**
+ * Abstrakte Oberklasse der Entry- und ExitStates
+ * 
  * @author hsi
  */
 public abstract class ConnectionPoint extends State {

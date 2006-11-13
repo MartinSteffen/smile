@@ -7,7 +7,7 @@ import java.awt.Point;
 
 
 /**
- * eine Unterregion eines Composite State (parent() ungleich null)
+ * eine Unterregion eines Composite State
  * <p>
  * Diese Klasse kann als Unterregion in CompositeStates eingetragen
  * werden. Ansonsten ist sie mit der Region identisch.

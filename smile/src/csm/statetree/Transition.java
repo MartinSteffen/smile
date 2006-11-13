@@ -20,12 +20,25 @@ public final class Transition extends CSMComponent {
 	private Guard guard;
 	private Action action;
 
+	/**
+	 * @param source der Source-State dieser Transition
+	 * @param target der Target-State dieser Transition
+	 * @throws ErrMayNotConnect wenn Source- und Traget-State nicht
+	 *             durch eine Transition verbunden werden dürfen.
+	 */
 	public Transition(Point location, State source, State target)
 			throws ErrMayNotConnect {
 		super(location);
 		assert source != null;
 		assert target != null;
 
+		/*
+		 * ob eine Transition erlaubt ist, wird nur in der Methode
+		 * transitionLocation entschieden. Dort wird auch gleich
+		 * bestimmt, in welchen parent-State die Transition eingetragen
+		 * wird. In der Regel sollte die innerste gemeinsame Komponente
+		 * von Source und Traget sein.
+		 */
 		CSMComponent loc = source.transitionLocation(target);
 		if (loc == null)
 			throw new ErrMayNotConnect();
@@ -48,7 +61,8 @@ public final class Transition extends CSMComponent {
 	}
 
 	/**
-	 * @param action the action to set
+	 * @param action eine Aktion oder null, falls dieser Transition
+	 *            keine Aktion zugeordnet ist
 	 * @throws ErrUndefinedElement wenn in der Action undefinierte
 	 *             Variablen referenziert werden
 	 */
@@ -63,11 +77,11 @@ public final class Transition extends CSMComponent {
 	}
 
 	/**
-	 * @param event the event to set
+	 * @param event ein Event oder null, falls dieser Transition kein
+	 *            Event zugeordnet ist
 	 * @throws ErrUndefinedElement wenn der Event nicht definiert ist
 	 */
-	public final void setEvent(Event event)
-			throws ErrUndefinedElement {
+	public final void setEvent(Event event) throws ErrUndefinedElement {
 		this.getCSM().events.mustContain(event);
 		this.event = event;
 	}

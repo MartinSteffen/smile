@@ -27,7 +27,7 @@ import csm.statetree.Visitor;
  * 
  * @author hs
  */
-public class CSMSaver extends Visitor implements FileTagNames {
+class CSMSaver extends Visitor implements FileTagNames {
 
 	private StringBuilder xml;
 
@@ -119,8 +119,8 @@ public class CSMSaver extends Visitor implements FileTagNames {
 	final protected void visitExitState(ExitState state) {
 		final String attrs = CSMSaver.attr(CSMSaver.ATTR_UNIQUE_ID,
 				state.getUniqueId())
-				+ CSMSaver.attr(CSMSaver.ATTR_KIND, state.kindOf
-						.toString());
+				+ CSMSaver.attr(CSMSaver.ATTR_KIND, state
+						.getKindOfExitstate().toString());
 		printComponent(state, CSMSaver.TAG_EXITSTATE, attrs);
 	}
 

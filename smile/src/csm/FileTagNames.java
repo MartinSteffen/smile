@@ -3,7 +3,7 @@ package csm;
 /**
  * definiert alle Tag-Namen für das XML-Dateiformat
  */
-public interface FileTagNames {
+interface FileTagNames {
 
 	// für das Positions-Attribut aller Komponenten
 	String TAG_POSITION = "position";

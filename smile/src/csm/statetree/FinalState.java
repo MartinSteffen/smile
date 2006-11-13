@@ -21,12 +21,19 @@ public final class FinalState extends InternalState {
 		visitor.visitFinalState(this);
 	}
 
+	/**
+	 * Fügt den Child-States dieser Komponente einen ExitState hinzu
+	 * 
+	 * @param child der hinzuzufügende ExitState
+	 * @throws ErrTreeNotChanged wenn der ExitState schon das Child
+	 *             irgendeiner Komponente ist
+	 */
 	final public void add(ExitState child) throws ErrTreeNotChanged {
 		addAnyChild(child);
 	}
 
 	@Override
-	public CSMComponent transitionLocation(State target) {
+	CSMComponent transitionLocation(State target) {
 		assert target != null;
 		return null;
 	}

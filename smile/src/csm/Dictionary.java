@@ -6,7 +6,7 @@ import java.util.Observable;
 import csm.exceptions.ErrAlreadyDefinedElement;
 import csm.exceptions.ErrUndefinedElement;
 
-
+// TODO kommentieren
 public final class Dictionary<Elem extends NamedObject> extends
 		Observable {
 

@@ -19,7 +19,7 @@ public final class NegTerm extends Term {
 
 	@Override
 	public String prettyprint() {
-		return "- "+term.prettyprint();
+		return "- " + term.prettyprint();
 	}
 
 }

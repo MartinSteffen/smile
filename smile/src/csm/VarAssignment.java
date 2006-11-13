@@ -1,9 +1,11 @@
 package csm;
 
 /**
- * eine Variablenbelegung Variablenbelegungen werden nur in der
- * semantischen Analyse verwendet. Die initiale Variablenbelegung wird
- * in den Variablen-Objekten gesetzt.
+ * eine Variablenbelegung
+ * <p>
+ * Variablenbelegungen werden nur in der semantischen Analyse verwendet.
+ * Die initiale Variablenbelegung wird in den Variablen-Objekten
+ * gesetzt.
  */
 public final class VarAssignment {
 
@@ -20,7 +22,7 @@ public final class VarAssignment {
 		assert false; // oops
 		return 0;
 	}
-	
+
 	public VarAssignment setVar(String n, int value) {
 		assert false; // oops
 		return null;

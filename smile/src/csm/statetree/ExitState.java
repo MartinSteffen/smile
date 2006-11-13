@@ -13,20 +13,34 @@ import java.awt.Point;
  */
 public final class ExitState extends ConnectionPoint {
 
+	/**
+	 * Der Typ des ExitStates.
+	 */
 	public static enum KindOfExitstate {
 		PR, NPR, CP
 	};
 
-	/**
-	 * Der Typ des ExitStates.
-	 * <p>
-	 * Da dieser Typ keinen Einschränkungen unterliegt, ist er als
-	 * öffentlich beschreibbare Variable implementiert.
-	 */
-	public KindOfExitstate kindOf = KindOfExitstate.PR;
+	private KindOfExitstate kindOf = KindOfExitstate.PR;
 
 	public ExitState(Point position) {
 		super(position);
+	}
+
+	/**
+	 * @return der Typ des Exitstates
+	 */
+	public KindOfExitstate getKindOfExitstate() {
+		return kindOf;
+	}
+
+	/**
+	 * setzt den Typ des Exitstates
+	 * 
+	 * @param kindOf muss ungleich null sein
+	 */
+	public void setKindOfExitstate(KindOfExitstate kindOf) {
+		assert kindOf != null;
+		this.kindOf = kindOf;
 	}
 
 	@Override
@@ -35,7 +49,7 @@ public final class ExitState extends ConnectionPoint {
 	}
 
 	@Override
-	public CSMComponent transitionLocation(State target) {
+	CSMComponent transitionLocation(State target) {
 		assert target != null;
 		if (target instanceof CompositeState)
 			return null;

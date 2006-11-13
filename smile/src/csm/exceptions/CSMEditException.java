@@ -6,7 +6,7 @@ package csm.exceptions;
 /**
  * @author hsi
  */
-abstract class CSMEditException extends Exception {
+abstract public class CSMEditException extends Exception {
 
 	public CSMEditException(String message) {
 		super(message);

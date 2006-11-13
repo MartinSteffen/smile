@@ -1,6 +1,11 @@
 package csm;
 
-// Testklasse, wird nicht in der endgültigen Version enthalten sein
+/**
+ * Testklasse für unsere internen Zwecke, wird nicht in der endgültigen
+ * Version enthalten sein
+ * 
+ * @author hsi
+ */
 public class Scratch {
 
 	/**

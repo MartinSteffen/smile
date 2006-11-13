@@ -8,8 +8,8 @@ import java.util.LinkedList;
 
 import csm.Event;
 import csm.action.Action;
-import csm.exceptions.ErrAlreadyDefinedElement;
 import csm.exceptions.ErrTreeNotChanged;
+import csm.exceptions.ErrUndefinedElement;
 
 
 /**
@@ -32,28 +32,45 @@ public final class CompositeState extends InternalState {
 		visitor.visitCompositeState(this);
 	}
 
-	final public void add(EntryState child) throws ErrTreeNotChanged {
+	/**
+	 * Fügt den Child-States dieser Komponente einen ConnectionPoint
+	 * hinzu
+	 * 
+	 * @param child der hinzuzufügende State
+	 * @throws ErrTreeNotChanged wenn der ConnectionPoint schon das
+	 *             Child irgendeiner Komponente ist
+	 */
+	final public void add(ConnectionPoint child)
+			throws ErrTreeNotChanged {
 		addAnyChild(child);
 	}
 
+	/**
+	 * Fügt den Child-States dieser Komponente eine SubRegion hinzu
+	 * 
+	 * @param child die hinzuzufügende SubRegion
+	 * @throws ErrTreeNotChanged wenn 1. die Region schon das Child
+	 *             irgendeiner Komponente ist, oder wenn 2. versucht
+	 *             wurde, eine Komponente zu ihrer eigenen
+	 *             Unterkomponente zu machen
+	 */
 	final public void add(SubRegion child) throws ErrTreeNotChanged {
 		addAnyChild(child);
 	}
 
-	final public void add(ExitState child) throws ErrTreeNotChanged {
-		addAnyChild(child);
-	}
-
+	// TODO kommentieren
 	final public Action getDoAction() {
 		return doAction;
 	}
 
-	final public void setDoAction(Action action) {
+	// TODO kommentieren
+	final public void setDoAction(Action action)
+			throws ErrUndefinedElement {
 		// TODO checken, ob Variablen existieren
 	}
 
 	/**
-	 * die in diesem State als deferred markierten Events
+	 * gibt die in diesem State als deferred markierten Events zurück
 	 * 
 	 * @return eine neue Kopie der Eventliste
 	 */
@@ -61,15 +78,21 @@ public final class CompositeState extends InternalState {
 		return new LinkedList<Event>(deferredEvents);
 	}
 
+	/**
+	 * setzt die Liste der in diesem State als deferred markierten Events
+	 * 
+	 * @param events eine Liste von Events 
+	 * @throws ErrUndefinedElement wenn auf der Liste ein Event ist, der noch nicht in der CSM definiert ist 
+	 */
 	final public void setDeferredEvents(LinkedList<Event> events)
-			throws ErrAlreadyDefinedElement {
+			throws ErrUndefinedElement {
 		for (Event i : deferredEvents)
-			getCSM().events.mayNotContain(i);
-		this.deferredEvents = events;
+			getCSM().events.mustContain(i);
+		this.deferredEvents = new LinkedList<Event>(events);
 	}
 
 	@Override
-	final public CSMComponent transitionLocation(State target) {
+	final CSMComponent transitionLocation(State target) {
 		assert target != null;
 		if (this == target)
 			return this;

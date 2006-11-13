@@ -9,7 +9,7 @@ import csm.exceptions.ErrTreeNotChanged;
 /**
  * eine spezielle Region, die keine Parent-Komponente hat. Sie hat
  * zusätzlich einen Start-State und einen (unveränderlichen) Verweis auf
- * die CoreStateMachine, deren Teil sie ist.  
+ * die CoreStateMachine, deren Teil sie ist.
  * <p>
  * im Paper als SubRegion \epsilon bekannt
  * 
@@ -17,20 +17,28 @@ import csm.exceptions.ErrTreeNotChanged;
  */
 public final class OutermostRegion extends Region {
 
-	CompositeState startState;
+	private CompositeState startState;
 
 	private final CoreStateMachine containingCSM;
 
+	/**
+	 * @param containingCSM die CoreStateMachine, zu der diese Region
+	 *            gehört; muss ungleich null sein
+	 */
 	public OutermostRegion(CoreStateMachine containingCSM) {
 		super(new Point(0, 0));
 		assert containingCSM != null;
 		this.containingCSM = containingCSM;
 	}
 
+	@Override
 	public CoreStateMachine getCSM() {
 		return containingCSM;
 	}
 
+	/**
+	 * @return der StartState der CoreStateMachine
+	 */
 	public CompositeState getStartState() {
 		return startState;
 	}
@@ -39,6 +47,7 @@ public final class OutermostRegion extends Region {
 	 * setzt den Start-State, wenn er 1. ein Composite-State und 2.
 	 * direkt in dieser äußersten Region enthalten ist.
 	 * 
+	 * @param state der Start-State
 	 * @throws ErrTreeNotChanged wenn der neue Start-State nicht direkt
 	 *             in dieser äußersten Region liegt.
 	 */

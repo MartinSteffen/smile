@@ -71,7 +71,7 @@ public abstract class CSMComponent extends Observable {
 	 * @return entweder die CoreStateMachine oder null, wenn die
 	 *         Komponente in keiner CSM verbaut ist
 	 */
-	// ist nur in OutermostRegion überschrieben 
+	// ist nur in OutermostRegion überschrieben
 	public CoreStateMachine getCSM() {
 		if (parent != null)
 			return parent.getCSM();
@@ -105,6 +105,7 @@ public abstract class CSMComponent extends Observable {
 		addAnyUncheckedChild(child);
 	}
 
+	// TODO komemntieren
 	final public void remove(CSMComponent child)
 			throws ErrTreeNotChanged {
 		assert child != null;
@@ -112,6 +113,9 @@ public abstract class CSMComponent extends Observable {
 			throw new ErrTreeNotChanged("no parent to delete from");
 		if (child.parent != this)
 			throw new ErrTreeNotChanged("wrong parent to delete from");
+		// TODO checken, ob nocjh connected:
+		// if(firstOuterConnection(child)!=null)
+		// throw new ErrStillConnected(child);
 		child.parent = null;
 		this.children.remove(child);
 	}
@@ -120,6 +124,8 @@ public abstract class CSMComponent extends Observable {
 	 * die Funktion > gemäß Definition 1 des Skripts, also die
 	 * transitive Hülle der parent-Funktion
 	 * 
+	 * @param possibleParent die Komponente, in der möglicherweise this
+	 *            enthalten ist
 	 * @return true, wenn dieses Objekt ein Unterobjekt des Parameters
 	 *         ist
 	 */
@@ -138,6 +144,11 @@ public abstract class CSMComponent extends Observable {
 	/**
 	 * die Funktion >= gemäß Def. 1 des Skriptes, also die
 	 * reflexiv-transitive Hülle der parent-Funktion
+	 * 
+	 * @param possibleParent die Komponente, in der möglicherweise this
+	 *            enthalten ist
+	 * @return true, wenn dieses Objekt ein Unterobjekt von
+	 *         possibleParent oder possibleParent selbst ist
 	 */
 	public final boolean isComponentOf(CSMComponent possibleParent) {
 		return possibleParent == this || isComponentOf(possibleParent);
@@ -159,13 +170,20 @@ public abstract class CSMComponent extends Observable {
 		return this.position;
 	}
 
+	/**
+	 * setzt die Koordinate dieser Komponente
+	 * 
+	 * @param position muss ungleich null sein
+	 */
 	public final void setPosition(Point position) {
 		assert position != null;
 		this.position = position;
 	}
 
 	/**
-	 * @return die Position relativ zur äußersten (root)-Komponente
+	 * ermittelt die Position relativ zur äußersten (root)-Komponente
+	 * 
+	 * @return die Position
 	 */
 	public final Point getAbsolutePosition() {
 		int x = 0;
