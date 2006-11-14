@@ -43,11 +43,7 @@ public abstract class CSMComponent extends Observable {
 	private CSMComponent parent;
 	private final LinkedList<CSMComponent> children = new LinkedList<CSMComponent>();
 
-	/**
-	 * Name oder Kommentar, muﬂ nicht eindeutig sein, kann auch null
-	 * sein
-	 */
-	public String nameComment;
+	private String nameComment;
 
 	/**
 	 * Die Position relativ zur Position der parent-Komponente
@@ -164,6 +160,20 @@ public abstract class CSMComponent extends Observable {
 	final void visitChildren(Visitor visitor) {
 		for (final CSMComponent s : this.children)
 			s.accept(visitor);
+	}
+
+	public final String getName() {
+		return nameComment;
+	}
+
+	/**
+	 * Name oder Kommentar, muﬂ nicht eindeutig sein, kann auch null
+	 * sein
+	 * 
+	 * @param name irgendein String oder null
+	 */
+	public final void setName(String name) {
+		this.nameComment = name;
 	}
 
 	public final Point getPosition() {
