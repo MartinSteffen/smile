@@ -7,10 +7,9 @@ import csm.exceptions.ErrAlreadyDefinedElement;
 import csm.exceptions.ErrUndefinedElement;
 
 /**
- * verwaltet die Liste aller Events und die Liste aller , die von
- * der CSM verwendet werden.
- *  die Hashtabelle kann nicht von auﬂerhalb des Packages 
- * beeinfluﬂt werden
+ * excute the list of the events and the list of the variable which
+ * will be used from the csm
+ * the hash map contents coulden't be managed from the outside of the package 
  * @param contents 
  */
 
@@ -19,7 +18,6 @@ public final class Dictionary<Elem extends NamedObject> extends
 
 	final private HashMap<String, Elem> contents = new HashMap<String, Elem>();
 
-	// TODO: rename / remove
 /**
  *   Returns true if the map contents contains a mapping for the specified key
  */

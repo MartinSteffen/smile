@@ -11,7 +11,7 @@ public final class VarAssignment {
 
 	// XXX vorerst nicht implementieren
 
-	Dictionary<Variable> variableList;
+	public Dictionary<Variable> variableList;
 
 	public VarAssignment(Dictionary<Variable> variableList) {
 		assert variableList != null;

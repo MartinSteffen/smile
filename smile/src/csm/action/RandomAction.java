@@ -1,6 +1,7 @@
 package csm.action;
 
 import java.util.List;
+import java.util.Random;
 
 import csm.VarAssignment;
 
@@ -25,9 +26,29 @@ public final class RandomAction extends Action {
 	}
 
 	@Override
+	/**
+	 * Wir nehmen an possiblevalue sei geordnet
+	 * @param pre variableassignment
+	 * Es wird eine zu der List possiblevalue gehörende Zufallszahl generiert
+	 * und varname zugeordnet
+	 * @returns eine neue Variableassignment
+	 */
 	public final VarAssignment doAction(VarAssignment pre) {
 		// TODO RandomAction
-		return null;
+		if(pre.variableList.contains(this.varname))
+		{
+		Random r = new Random();
+		int i,j;
+		j=this.possibleValues.size()-1;
+		do{
+		i = r.nextInt()%this.possibleValues.get(j);
+		}
+		while(this.possibleValues.contains(i));
+		pre.setVar(this.varname, i);
+		}
+		else 
+			System.out.println(" Die Variabel"+this.varname+ "existiert nicht in der Varialeliste "  );
+		return pre;
 	}
 
 	@Override
