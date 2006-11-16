@@ -26,7 +26,7 @@ public final class EntryState extends ConnectionPoint {
 	// Connections ********************************
 
 	@Override
-	public final CSMComponent transitionLocation(State target) {
+	final CSMComponent transitionLocation(State target) {
 		assert target != null;
 		if (stateOf() != target.regOf().getParent())
 			return null;

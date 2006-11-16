@@ -72,6 +72,16 @@ public final class Transition extends CSMComponent {
 		this.action = action;
 	}
 
+	/**
+	 * die Action parsen und eintragen
+	 * 
+	 * @see Transition#setAction(Action)
+	 */
+	public final void setAction(String action)
+			throws ErrUndefinedElement {
+		// TODO parsen
+	}
+
 	public final NamedObject getEvent() {
 		return this.event;
 	}
@@ -100,6 +110,15 @@ public final class Transition extends CSMComponent {
 	public final void setGuard(Guard guard) throws ErrUndefinedElement {
 		// TODO checken, ob Variablen existieren
 		this.guard = guard;
+	}
+
+	/**
+	 * den Guard parsen und eintragen
+	 * 
+	 * @see Transition#setGuard(Guard)
+	 */
+	public final void setGuard(String guard) throws ErrUndefinedElement {
+		// TODO parsen
 	}
 
 	@Override
