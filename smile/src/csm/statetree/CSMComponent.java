@@ -147,7 +147,7 @@ public abstract class CSMComponent extends Observable {
 	 *         possibleParent oder possibleParent selbst ist
 	 */
 	public final boolean isComponentOf(CSMComponent possibleParent) {
-		return possibleParent == this || isComponentOf(possibleParent);
+		return possibleParent == this || isSubComponentOf(possibleParent);
 	}
 
 	/** die Accept-Methode des Visitor-Patterns */

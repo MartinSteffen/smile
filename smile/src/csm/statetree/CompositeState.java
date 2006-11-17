@@ -6,8 +6,9 @@ package csm.statetree;
 import java.awt.Point;
 import java.util.LinkedList;
 
+import csm.CoreStateMachine;
 import csm.Event;
-import csm.action.Action;
+import csm.action.*;
 import csm.exceptions.ErrTreeNotChanged;
 import csm.exceptions.ErrUndefinedElement;
 
@@ -58,17 +59,41 @@ public final class CompositeState extends InternalState {
 		addAnyChild(child);
 	}
 
-	// TODO kommentieren
+	/**
+	 *  Jeder CompositeState enthält doAction,
+	 *  das ein Objekt vom Typ csm.action.Action enthält
+	 *  @return die doAktion oder null, wenn der 
+	 *  Zustand keine Do-Action hat
+	*/
 	final public Action getDoAction() {
 		return doAction;
 	}
 
-	// TODO kommentieren
+/**
+ * 
+ * @param action
+ * @throws ErrUndefinedElement
+ */
 	final public void setDoAction(Action action)
 			throws ErrUndefinedElement {
 		// TODO checken, ob Variablen existieren
+		assert action!= null;
+		if(action instanceof SkipAction)
+			this.doAction = action;
+		if(action instanceof AssignAction)
+		{
+		if (this.getCSM().variables.contains(((AssignAction) action).varname)))
+		this.doAction = action;
+		else throw new ErrUndefinedElement("variable is undefined");
+		}
+		if(action instanceof RandomAction)
+		{
+		if (this.getCSM().variables.contains(((RandomAction) action).varname)))
+		this.doAction = action;
+		else throw new ErrUndefinedElement("variable is undefined");
+		}
+		//TODO checken falls action vom type SendAction ob die variablen ihres termes vorhanden sind
 	}
-
 	/**
 	 * gibt die in diesem State als deferred markierten Events zurück
 	 * 

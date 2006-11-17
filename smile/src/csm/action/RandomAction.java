@@ -8,7 +8,8 @@ import csm.VarAssignment;
 
 public final class RandomAction extends Action {
 
-	final public String varname;
+	//final 
+	public String varname;
 
 	/**
 	 * Die Werte werden nicht auf Gültigkeit geprüft. Eine solche
@@ -62,5 +63,6 @@ public final class RandomAction extends Action {
 		b.append(')');
 		return b.toString();
 	}
+
 
 }

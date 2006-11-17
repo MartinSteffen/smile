@@ -6,7 +6,8 @@ import csm.term.Term;
 
 public final class AssignAction extends Action {
 
-	final public String varname;
+	//final 
+	public String varname;
 	final public Term term;
 
 	public AssignAction(String varname, Term term) {
@@ -41,4 +42,6 @@ public final class AssignAction extends Action {
 	public String prettyprint() {
 		return varname + " := " + term.prettyprint();  
 		}
+
+	
 }
