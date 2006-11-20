@@ -6,17 +6,17 @@ import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
 
-public final class WLAGuard extends Guard {
+public final class NABExpr extends Expression<Boolean> {
 
 	@Override
-	public boolean evalGuard(VarAssignment va) {
-		// TODO wla-guard implementieren
+	public Boolean evaluate(VarAssignment va) {
+		// TODO nab-guard implementieren
 		return false;
 	}
 
 	@Override
 	public String prettyprint() {
-		return "wla";
+		return "nab";
 	}
 
 	@Override

@@ -6,18 +6,18 @@ import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
 
-public final class NotGuard extends Guard {
+public final class NotExpr extends Expression<Boolean> {
 
-	Guard guard;
+	Expression<Boolean> guard;
 
-	public NotGuard(Guard guard) {
+	public NotExpr(Expression<Boolean> guard) {
 		this.guard = guard;
 
 	}
 
 	@Override
-	public boolean evalGuard(VarAssignment va) {
-		boolean g = this.guard.evalGuard(va);
+	public Boolean evaluate(VarAssignment va) {
+		Boolean g = this.guard.evaluate(va);
 		return !g;
 	}
 
@@ -29,6 +29,6 @@ public final class NotGuard extends Guard {
 	@Override
 	public void noUndefinedVars(Dictionary<Variable> variables)
 			throws ErrUndefinedElement {
-		noUndefinedVars(variables);
+		guard.noUndefinedVars(variables);
 	}
 }
