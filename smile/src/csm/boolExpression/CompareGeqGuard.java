@@ -1,6 +1,6 @@
-package csm.guards;
+package csm.boolExpression;
 
-import csm.term.Term;
+import csm.intExpression.Term;
 
 
 public class CompareGeqGuard extends CompareGuard {

@@ -5,9 +5,9 @@ import java.awt.Point;
 import csm.Event;
 import csm.NamedObject;
 import csm.action.Action;
+import csm.boolExpression.Guard;
 import csm.exceptions.ErrMayNotConnect;
 import csm.exceptions.ErrUndefinedElement;
-import csm.guards.Guard;
 
 
 public final class Transition extends CSMComponent {

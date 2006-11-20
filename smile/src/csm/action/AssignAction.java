@@ -4,7 +4,7 @@ import csm.Dictionary;
 import csm.VarAssignment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
-import csm.term.Term;
+import csm.intExpression.Term;
 
 
 public final class AssignAction extends Action {

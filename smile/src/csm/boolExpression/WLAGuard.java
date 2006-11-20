@@ -1,4 +1,4 @@
-package csm.guards;
+package csm.boolExpression;
 
 import csm.Dictionary;
 import csm.VarAssignment;
@@ -6,29 +6,22 @@ import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
 
-public final class NotGuard extends Guard {
-
-	Guard guard;
-
-	public NotGuard(Guard guard) {
-		this.guard = guard;
-
-	}
+public final class WLAGuard extends Guard {
 
 	@Override
 	public boolean evalGuard(VarAssignment va) {
-		boolean g = this.guard.evalGuard(va);
-		return !g;
+		// TODO wla-guard implementieren
+		return false;
 	}
 
 	@Override
 	public String prettyprint() {
-		return "(! " + this.guard.prettyprint() + ")";
+		return "wla";
 	}
 
 	@Override
 	public void noUndefinedVars(Dictionary<Variable> variables)
 			throws ErrUndefinedElement {
-		noUndefinedVars(variables);
 	}
+
 }

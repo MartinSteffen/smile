@@ -1,10 +1,10 @@
-package csm.guards;
+package csm.boolExpression;
 
 import csm.Dictionary;
 import csm.VarAssignment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
-import csm.term.Term;
+import csm.intExpression.Term;
 
 
 public abstract class CompareGuard extends Guard {

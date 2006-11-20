@@ -1,4 +1,4 @@
-package csm.guards;
+package csm.boolExpression;
 
 import csm.Dictionary;
 import csm.VarAssignment;
