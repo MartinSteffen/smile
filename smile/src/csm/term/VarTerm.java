@@ -22,11 +22,12 @@ public final class VarTerm extends Term {
 
 	@Override
 	public String prettyprint() {
-		return varname;
+		return this.varname;
 	}
 
 	@Override
-	public void noUndefinedVars(Dictionary<Variable> dict) throws ErrUndefinedElement {
-		dict.mustContain(varname); 
+	public void noUndefinedVars(Dictionary<Variable> dict)
+			throws ErrUndefinedElement {
+		dict.mustContain(this.varname);
 	}
 }

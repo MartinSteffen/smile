@@ -33,15 +33,15 @@ public final class OutermostRegion extends Region {
 
 	@Override
 	public CoreStateMachine getCSM() {
-		return containingCSM;
+		return this.containingCSM;
 	}
 
 	/**
 	 * @return der StartState der CoreStateMachine oder null, wenn kein
-	 * StartState definiert ist
+	 *         StartState definiert ist
 	 */
 	public CompositeState getStartState() {
-		return startState;
+		return this.startState;
 	}
 
 	/**
@@ -56,7 +56,7 @@ public final class OutermostRegion extends Region {
 			throws ErrTreeNotChanged {
 		if (state != null && state.getParent() != this)
 			throw new ErrTreeNotChanged("Could not set new start state");
-		startState = state;
+		this.startState = state;
 	}
 
 	/**

@@ -69,8 +69,8 @@ public abstract class CSMComponent extends Observable {
 	 */
 	// ist nur in OutermostRegion überschrieben
 	public CoreStateMachine getCSM() {
-		if (parent != null)
-			return parent.getCSM();
+		if (this.parent != null)
+			return this.parent.getCSM();
 		else
 			return null;
 	}
@@ -93,23 +93,23 @@ public abstract class CSMComponent extends Observable {
 	final void addAnyChild(CSMComponent child) throws ErrTreeNotChanged {
 		assert child != null;
 
-		/* Bisher wird die Child-Komponente auch dann eingetragen, wenn
-		 * sie Transitionen mit undefinierten Variablen enthält.
-		 * Dieser Fall kann erst dann eintreten, wenn die GUI eine 
+		/*
+		 * Bisher wird die Child-Komponente auch dann eingetragen, wenn
+		 * sie Transitionen mit undefinierten Variablen enthält. Dieser
+		 * Fall kann erst dann eintreten, wenn die GUI eine
 		 * Copy&Paste-Funktionalität bereitstellt und entweder
 		 * Variablen/Events aus der CSM gelöscht werden können oder
-		 * mehrere CSMs gleichzeitig bearbeitet werden.
-		 * Letzteres ist nicht absehbar, für ersteres wird die selbe
-		 * Funktionalität benötigt wie zur Behebung dieses Bugs.
-		 * Daraus folgt: Solange die Spezifikation nicht vorsieht, 
-		 * dass Variablen aus der Variablenliste der CSM gelöscht
-		 * werden, ist dieser Bug keiner und kann daher ignoriert
-		 * werden.
+		 * mehrere CSMs gleichzeitig bearbeitet werden. Letzteres ist
+		 * nicht absehbar, für ersteres wird die selbe Funktionalität
+		 * benötigt wie zur Behebung dieses Bugs. Daraus folgt: Solange
+		 * die Spezifikation nicht vorsieht, dass Variablen aus der
+		 * Variablenliste der CSM gelöscht werden, ist dieser Bug keiner
+		 * und kann daher ignoriert werden.
 		 */
 
 		if (child.parent != null)
 			throw new ErrTreeNotChanged("component is already in use");
-		if (this.isComponentOf(child))
+		if (isComponentOf(child))
 			throw new ErrTreeNotChanged(
 					"tried to create circular dependency");
 		addAnyUncheckedChild(child);
@@ -161,7 +161,8 @@ public abstract class CSMComponent extends Observable {
 	 *         possibleParent oder possibleParent selbst ist
 	 */
 	public final boolean isComponentOf(CSMComponent possibleParent) {
-		return possibleParent == this || isSubComponentOf(possibleParent);
+		return possibleParent == this
+				|| isSubComponentOf(possibleParent);
 	}
 
 	/** die Accept-Methode des Visitor-Patterns */
@@ -177,7 +178,7 @@ public abstract class CSMComponent extends Observable {
 	}
 
 	public final String getName() {
-		return nameComment;
+		return this.nameComment;
 	}
 
 	/**

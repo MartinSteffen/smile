@@ -26,7 +26,7 @@ public final class VarAssignment {
 	public VarAssignment(Dictionary<Variable> dictionary) {
 		assert dictionary != null;
 		this.dictionary = dictionary;
-		values = dictionary.getInitials();
+		this.values = dictionary.getInitials();
 	}
 
 	/**

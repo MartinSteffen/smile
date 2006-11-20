@@ -9,8 +9,8 @@ import csm.statetree.OutermostRegion;
 
 
 /**
- * die CoreStateMachine 
- *
+ * die CoreStateMachine
+ * 
  * @author hs
  */
 public final class CoreStateMachine extends Observable {
@@ -39,8 +39,8 @@ public final class CoreStateMachine extends Observable {
 	 * 
 	 * @throws IOException auftretende IO-Exceptions werden nicht
 	 *             behandelt, sondern an den Aufrufer weitergegeben
-	 * @throws csm.exceptions.CSMEditException wenn die Datei eine fehlerhafte Maschine
-	 *             beschreibt
+	 * @throws csm.exceptions.CSMEditException wenn die Datei eine
+	 *             fehlerhafte Maschine beschreibt
 	 */
 	public final CoreStateMachine loadCSM(Reader reader) {
 		// TODO zu CSMLoader delegieren

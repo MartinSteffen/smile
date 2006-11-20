@@ -20,6 +20,7 @@ public final class TrueGuard extends Guard {
 	}
 
 	@Override
-	public void noUndefinedVars(Dictionary<Variable> variables) throws ErrUndefinedElement {
+	public void noUndefinedVars(Dictionary<Variable> variables)
+			throws ErrUndefinedElement {
 	}
 }

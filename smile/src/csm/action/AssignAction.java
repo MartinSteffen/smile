@@ -38,13 +38,14 @@ public final class AssignAction extends Action {
 
 	@Override
 	public String prettyprint() {
-		return varname + " := " + term.prettyprint();
+		return this.varname + " := " + this.term.prettyprint();
 	}
 
 	@Override
-	public void noUndefinedVars(Dictionary<Variable> dict) throws ErrUndefinedElement {
-		dict.mustContain(varname);
-		term.noUndefinedVars(dict);
+	public void noUndefinedVars(Dictionary<Variable> dict)
+			throws ErrUndefinedElement {
+		dict.mustContain(this.varname);
+		this.term.noUndefinedVars(dict);
 	}
 
 }

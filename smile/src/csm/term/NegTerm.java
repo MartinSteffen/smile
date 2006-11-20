@@ -22,12 +22,13 @@ public final class NegTerm extends Term {
 
 	@Override
 	public String prettyprint() {
-		return "- " + term.prettyprint();
+		return "- " + this.term.prettyprint();
 	}
 
 	@Override
-	public void noUndefinedVars(Dictionary<Variable> dict) throws ErrUndefinedElement {
-		term.noUndefinedVars(dict);
+	public void noUndefinedVars(Dictionary<Variable> dict)
+			throws ErrUndefinedElement {
+		this.term.noUndefinedVars(dict);
 	}
 
 }

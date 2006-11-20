@@ -31,8 +31,9 @@ public final class AndGuard extends Guard {
 	}
 
 	@Override
-	public void noUndefinedVars(Dictionary<Variable> variables) throws ErrUndefinedElement {
-		left.noUndefinedVars(variables);
-		right.noUndefinedVars(variables);
+	public void noUndefinedVars(Dictionary<Variable> variables)
+			throws ErrUndefinedElement {
+		this.left.noUndefinedVars(variables);
+		this.right.noUndefinedVars(variables);
 	}
 }

@@ -19,8 +19,8 @@ public final class SkipAction extends Action {
 	}
 
 	@Override
-	public void noUndefinedVars(Dictionary<Variable> dict) throws ErrUndefinedElement {
+	public void noUndefinedVars(Dictionary<Variable> dict)
+			throws ErrUndefinedElement {
 	}
-	
-	
+
 }

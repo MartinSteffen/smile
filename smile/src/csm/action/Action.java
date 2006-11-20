@@ -30,10 +30,13 @@ public abstract class Action {
 	abstract public String prettyprint();
 
 	/**
-	 *  stellt sicher, dass alle in diesem Term erwähnten Variablen definiert sind.
-	 *  
-	 *  @param dict das Dictionary, in dem alle Variablen definiert sein sollen
-	 *  @throws ErrUndefinedElement wenn eine undefinierte Variable gefunden wurde
+	 * stellt sicher, dass alle in diesem Term erwähnten Variablen
+	 * definiert sind.
+	 * 
+	 * @param dict das Dictionary, in dem alle Variablen definiert sein
+	 *            sollen
+	 * @throws ErrUndefinedElement wenn eine undefinierte Variable
+	 *             gefunden wurde
 	 */
 	abstract public void noUndefinedVars(Dictionary<Variable> dict)
 			throws ErrUndefinedElement;

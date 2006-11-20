@@ -24,11 +24,12 @@ public abstract class CompareGuard extends Guard {
 	public boolean evalGuard(VarAssignment va) {
 		return binaryOp(this.left.evaluate(va), this.right.evaluate(va));
 	}
-	
+
 	@Override
-	public final void noUndefinedVars(Dictionary<Variable> variables) throws ErrUndefinedElement {
-		left.noUndefinedVars(variables);
-		right.noUndefinedVars(variables);
+	public final void noUndefinedVars(Dictionary<Variable> variables)
+			throws ErrUndefinedElement {
+		this.left.noUndefinedVars(variables);
+		this.right.noUndefinedVars(variables);
 	}
 
 }

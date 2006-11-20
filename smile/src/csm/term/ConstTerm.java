@@ -21,11 +21,12 @@ public final class ConstTerm extends Term {
 
 	@Override
 	public String prettyprint() {
-		return String.valueOf(value);
+		return String.valueOf(this.value);
 	}
 
 	@Override
-	public void noUndefinedVars(Dictionary<Variable> dict) throws ErrUndefinedElement {
+	public void noUndefinedVars(Dictionary<Variable> dict)
+			throws ErrUndefinedElement {
 	}
 
 }

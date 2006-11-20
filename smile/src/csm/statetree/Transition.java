@@ -20,11 +20,11 @@ public final class Transition extends CSMComponent {
 	private Action action;
 
 	/**
-	 * Erzeugt eine neue Transition und trägt sie im Komponentenbaum ein.
-	 * Wenn es nicht möglich ist, Source- und Target-State zu verbinden,
-	 * wird eine Exception geworfen, und der Komponentenbaum bleibt
-	 * unverändert.
-	 *
+	 * Erzeugt eine neue Transition und trägt sie im Komponentenbaum
+	 * ein. Wenn es nicht möglich ist, Source- und Target-State zu
+	 * verbinden, wird eine Exception geworfen, und der Komponentenbaum
+	 * bleibt unverändert.
+	 * 
 	 * @param source der Source-State dieser Transition
 	 * @param target der Target-State dieser Transition
 	 * @throws ErrMayNotConnect wenn Source- und Traget-State nicht
@@ -43,7 +43,7 @@ public final class Transition extends CSMComponent {
 		 * wird. In der Regel sollte die innerste gemeinsame Komponente
 		 * von Source und Traget sein.
 		 */
-		CSMComponent loc = source.transitionLocation(target);
+		final CSMComponent loc = source.transitionLocation(target);
 		if (loc == null)
 			throw new ErrMayNotConnect();
 
@@ -65,11 +65,11 @@ public final class Transition extends CSMComponent {
 	}
 
 	/**
-	 * Setzt die dieser Transition zugeordnete Aktion. Enthält die 
+	 * Setzt die dieser Transition zugeordnete Aktion. Enthält die
 	 * Aktion Verweise auf Variablen, die in der CSM, zu der diese
-	 * Transition gehört, nicht definiert sind, dann bleibt die Transition
-	 * unverändert, und es wird eine Exception geworfen.
-	 *
+	 * Transition gehört, nicht definiert sind, dann bleibt die
+	 * Transition unverändert, und es wird eine Exception geworfen.
+	 * 
 	 * @param action eine Aktion oder null, falls dieser Transition
 	 *            keine Aktion zugeordnet ist
 	 * @throws ErrUndefinedElement wenn in der Action undefinierte
@@ -77,7 +77,7 @@ public final class Transition extends CSMComponent {
 	 */
 	public final void setAction(Action action)
 			throws ErrUndefinedElement {
-		action.noUndefinedVars(this.getCSM().variables);
+		action.noUndefinedVars(getCSM().variables);
 		this.action = action;
 	}
 
@@ -101,7 +101,7 @@ public final class Transition extends CSMComponent {
 	 * @throws ErrUndefinedElement wenn der Event nicht definiert ist
 	 */
 	public final void setEvent(Event event) throws ErrUndefinedElement {
-		this.getCSM().events.mustContain(event);
+		getCSM().events.mustContain(event);
 		this.event = event;
 	}
 
@@ -117,7 +117,7 @@ public final class Transition extends CSMComponent {
 	 *             referenziert werden
 	 */
 	public final void setGuard(Guard guard) throws ErrUndefinedElement {
-		guard.noUndefinedVars(this.getCSM().variables);
+		guard.noUndefinedVars(getCSM().variables);
 		this.guard = guard;
 	}
 

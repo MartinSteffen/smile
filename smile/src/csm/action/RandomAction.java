@@ -24,10 +24,10 @@ public final class RandomAction extends Action {
 	final public List<Integer> possibleValues;
 
 	/**
-	 * Wir verwenden einen systemweiten Zufallsgenerator 
+	 * Wir verwenden einen systemweiten Zufallsgenerator
 	 */
 	final static Random randomGen = new Random();
-	
+
 	public RandomAction(String varname, List<Integer> pv) {
 		assert varname != null;
 		assert pv != null;
@@ -43,8 +43,9 @@ public final class RandomAction extends Action {
 	 * @returns eine neue Variableassignment
 	 */
 	public final VarAssignment doAction(VarAssignment pre) {
-		int randomIndex= randomGen.nextInt(this.possibleValues.size());
-		int randomValue = this.possibleValues.get(randomIndex);
+		final int randomIndex = RandomAction.randomGen
+				.nextInt(this.possibleValues.size());
+		final int randomValue = this.possibleValues.get(randomIndex);
 		pre.setVar(this.varname, randomValue);
 		return pre;
 	}
@@ -63,8 +64,9 @@ public final class RandomAction extends Action {
 	}
 
 	@Override
-	public void noUndefinedVars(Dictionary<Variable> dict) throws ErrUndefinedElement {
-		dict.mustContain(varname);
+	public void noUndefinedVars(Dictionary<Variable> dict)
+			throws ErrUndefinedElement {
+		dict.mustContain(this.varname);
 	}
 
 }

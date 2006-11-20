@@ -2,6 +2,7 @@ package csm;
 
 import java.util.Observable;
 
+
 /**
  * ein benanntes Objekt, das in einem {@link Dictionary} verwaltet
  * werden kann
@@ -17,7 +18,7 @@ public abstract class NamedObject extends Observable {
 	/**
 	 * @param name ungleich null
 	 */
-    // TODO mit Dictionary verketten
+	// TODO mit Dictionary verketten
 	NamedObject(String name) {
 		setName(name);
 	}

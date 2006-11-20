@@ -27,7 +27,8 @@ public final class NotGuard extends Guard {
 	}
 
 	@Override
-	public void noUndefinedVars(Dictionary<Variable> variables) throws ErrUndefinedElement {
+	public void noUndefinedVars(Dictionary<Variable> variables)
+			throws ErrUndefinedElement {
 		noUndefinedVars(variables);
 	}
 }

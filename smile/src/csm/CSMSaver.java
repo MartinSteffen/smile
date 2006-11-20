@@ -49,7 +49,7 @@ class CSMSaver extends Visitor implements FileTagNames {
 		outermostRegion.enumerateStates();
 		final CSMSaver saver = new CSMSaver(xmlstring);
 		saver.printComponent(outermostRegion,
-				CSMSaver.TAG_OUTERMOSTREGION);
+				FileTagNames.TAG_OUTERMOSTREGION);
 	}
 
 	// Hilfsfunktionen
@@ -82,9 +82,9 @@ class CSMSaver extends Visitor implements FileTagNames {
 
 	private void positionElement(CSMComponent component) {
 		final Point p = component.getPosition();
-		final String attrs = CSMSaver.attr(CSMSaver.ATTR_X, p.x)
-				+ CSMSaver.attr(CSMSaver.ATTR_Y, p.y);
-		singleTag(CSMSaver.TAG_POSITION, attrs);
+		final String attrs = CSMSaver.attr(FileTagNames.ATTR_X, p.x)
+				+ CSMSaver.attr(FileTagNames.ATTR_Y, p.y);
+		singleTag(FileTagNames.TAG_POSITION, attrs);
 	}
 
 	private void printComponent(CSMComponent component, String tag,
@@ -100,7 +100,7 @@ class CSMSaver extends Visitor implements FileTagNames {
 	}
 
 	private void printState(State state, String tag) {
-		final String attrs = CSMSaver.attr(CSMSaver.ATTR_UNIQUE_ID,
+		final String attrs = CSMSaver.attr(FileTagNames.ATTR_UNIQUE_ID,
 				state.getUniqueId());
 		printComponent(state, tag, attrs);
 	}
@@ -109,35 +109,35 @@ class CSMSaver extends Visitor implements FileTagNames {
 
 	@Override
 	final protected void visitRegion(Region region) {
-		printComponent(region, CSMSaver.TAG_REGION);
+		printComponent(region, FileTagNames.TAG_REGION);
 	}
 
 	@Override
 	final protected void visitEntryState(EntryState state) {
-		printState(state, CSMSaver.TAG_ENTRYSTATE);
+		printState(state, FileTagNames.TAG_ENTRYSTATE);
 	}
 
 	@Override
 	final protected void visitExitState(ExitState state) {
-		final String attrs = CSMSaver.attr(CSMSaver.ATTR_UNIQUE_ID,
+		final String attrs = CSMSaver.attr(FileTagNames.ATTR_UNIQUE_ID,
 				state.getUniqueId())
-				+ CSMSaver.attr(CSMSaver.ATTR_KIND, state
+				+ CSMSaver.attr(FileTagNames.ATTR_KIND, state
 						.getKindOfExitstate().toString());
-		printComponent(state, CSMSaver.TAG_EXITSTATE, attrs);
+		printComponent(state, FileTagNames.TAG_EXITSTATE, attrs);
 	}
 
 	@Override
 	final protected void visitCompositeState(CompositeState state) {
-		printState(state, CSMSaver.TAG_COMPOSITESTATE);
+		printState(state, FileTagNames.TAG_COMPOSITESTATE);
 	}
 
 	@Override
 	final protected void visitFinalState(FinalState state) {
-		printState(state, CSMSaver.TAG_FINALSTATE);
+		printState(state, FileTagNames.TAG_FINALSTATE);
 	}
 
 	@Override
 	final protected void visitChoiceState(ChoiceState state) {
-		printState(state, CSMSaver.TAG_CHOICESTATE);
+		printState(state, FileTagNames.TAG_CHOICESTATE);
 	}
 }

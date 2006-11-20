@@ -24,7 +24,7 @@ public final class ChoiceState extends InternalState {
 		assert target != null;
 		if (target instanceof CompositeState)
 			return null;
-		else if(this==target)
+		else if (this == target)
 			return this;
 		else if (regOf() == target.regOf())
 			return regOf();

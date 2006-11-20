@@ -106,7 +106,7 @@ public final class Dictionary<Elem extends NamedObject> extends
 	void add(Elem elem) throws ErrAlreadyDefinedElement {
 		assert elem != null;
 		this.mayNotContain(elem.getName());
-		contents.put(elem.getName(), elem);
+		this.contents.put(elem.getName(), elem);
 	}
 
 	/**
@@ -129,7 +129,7 @@ public final class Dictionary<Elem extends NamedObject> extends
 			throws ErrUndefinedElement, ErrAlreadyDefinedElement {
 		assert key != null;
 		this.mustContain(key);
-		Elem e = this.remove(key);
+		final Elem e = this.remove(key);
 		e.setName(newkey);
 		this.add(e);
 

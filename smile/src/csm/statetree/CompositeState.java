@@ -7,7 +7,7 @@ import java.awt.Point;
 import java.util.LinkedList;
 
 import csm.Event;
-import csm.action.*;
+import csm.action.Action;
 import csm.exceptions.ErrTreeNotChanged;
 import csm.exceptions.ErrUndefinedElement;
 
@@ -46,10 +46,10 @@ public final class CompositeState extends InternalState {
 	}
 
 	/**
-	 * Fügt den SubRegions dieser Komponente eine SubRegion hinzu. 
-	 * Die Stelle, an der sie zwischen den anderen SubRegions 
-	 * eingefügt wird, ist dabei nicht festgelegt. Es ist Sache der
-	 * einfügenden Methode, die Positionen der SubRegions zu setzen.
+	 * Fügt den SubRegions dieser Komponente eine SubRegion hinzu. Die
+	 * Stelle, an der sie zwischen den anderen SubRegions eingefügt
+	 * wird, ist dabei nicht festgelegt. Es ist Sache der einfügenden
+	 * Methode, die Positionen der SubRegions zu setzen.
 	 * 
 	 * @param child die hinzuzufügende SubRegion
 	 * @throws ErrTreeNotChanged wenn 1. die Region schon das Child
@@ -62,27 +62,27 @@ public final class CompositeState extends InternalState {
 	}
 
 	/**
-	 *  Jeder CompositeState enthält doAction,
-	 *  das ein Objekt vom Typ csm.action.Action enthält
-	 *
-	 *  @return die doAktion oder null, wenn der 
-	 *  Zustand keine Do-Action hat
-	*/
+	 * Jeder CompositeState enthält doAction, das ein Objekt vom Typ
+	 * csm.action.Action enthält
+	 * 
+	 * @return die doAktion oder null, wenn der Zustand keine Do-Action
+	 *         hat
+	 */
 	final public Action getDoAction() {
-		return doAction;
+		return this.doAction;
 	}
 
-    /**
-     * 
-     * @param action die dem State zugeordnete DoAction oder null,
-     *     wenn der State keine DoAction enthält.
-     * @throws ErrUndefinedElement wenn die Action auf Variablen verweist, die
-     *     in der zugeordneten CSM nicht definiert sind
-     */
+	/**
+	 * @param action die dem State zugeordnete DoAction oder null, wenn
+	 *            der State keine DoAction enthält.
+	 * @throws ErrUndefinedElement wenn die Action auf Variablen
+	 *             verweist, die in der zugeordneten CSM nicht definiert
+	 *             sind
+	 */
 	final public void setDoAction(Action action)
 			throws ErrUndefinedElement {
-		assert action!= null;
-		action.noUndefinedVars(this.getCSM().variables);
+		assert action != null;
+		action.noUndefinedVars(getCSM().variables);
 		this.doAction = action;
 	}
 
@@ -92,18 +92,20 @@ public final class CompositeState extends InternalState {
 	 * @return eine neue Kopie der Eventliste
 	 */
 	final public LinkedList<Event> getDeferredEvents() {
-		return new LinkedList<Event>(deferredEvents);
+		return new LinkedList<Event>(this.deferredEvents);
 	}
 
 	/**
-	 * setzt die Liste der in diesem State als deferred markierten Events
+	 * setzt die Liste der in diesem State als deferred markierten
+	 * Events
 	 * 
-	 * @param events eine Liste von Events 
-	 * @throws ErrUndefinedElement wenn auf der Liste ein Event ist, der noch nicht in der CSM definiert ist 
+	 * @param events eine Liste von Events
+	 * @throws ErrUndefinedElement wenn auf der Liste ein Event ist, der
+	 *             noch nicht in der CSM definiert ist
 	 */
 	final public void setDeferredEvents(LinkedList<Event> events)
 			throws ErrUndefinedElement {
-		for (Event i : deferredEvents)
+		for (final Event i : this.deferredEvents)
 			getCSM().events.mustContain(i);
 		this.deferredEvents = new LinkedList<Event>(events);
 	}

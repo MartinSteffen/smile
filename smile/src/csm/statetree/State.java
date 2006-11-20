@@ -77,7 +77,7 @@ public abstract class State extends CSMComponent {
 	 * 
 	 * @return die uniqueId dieses States
 	 */
-	
+
 	public int getUniqueId() {
 		return this.uniqueId;
 	}

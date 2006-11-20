@@ -26,15 +26,15 @@ abstract class BinaryTerm extends Term {
 	}
 
 	protected String pp_bin(String op) {
-		return '(' + left.prettyprint() + ' ' + op + ' '
-				+ right.prettyprint() + ')';
+		return '(' + this.left.prettyprint() + ' ' + op + ' '
+				+ this.right.prettyprint() + ')';
 	}
 
 	@Override
 	public final void noUndefinedVars(Dictionary<Variable> dict)
 			throws ErrUndefinedElement {
-		left.noUndefinedVars(dict);
-		right.noUndefinedVars(dict);
+		this.left.noUndefinedVars(dict);
+		this.right.noUndefinedVars(dict);
 	}
 
 }

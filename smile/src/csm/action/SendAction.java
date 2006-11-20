@@ -15,7 +15,7 @@ public final class SendAction extends Action {
 	public SendAction(String event, Term value) {
 		assert event != null;
 		assert value != null;
-		
+
 		this.event = event;
 		this.value = value;
 	}
@@ -33,14 +33,16 @@ public final class SendAction extends Action {
 
 	@Override
 	public String prettyprint() {
-		return "send(" + event + ", " + value.prettyprint() + ')';
+		return "send(" + this.event + ", " + this.value.prettyprint()
+				+ ')';
 	}
 
 	@Override
-	public void noUndefinedVars(Dictionary<Variable> dict) throws ErrUndefinedElement {
+	public void noUndefinedVars(Dictionary<Variable> dict)
+			throws ErrUndefinedElement {
 		// TODO Events checken
-		value.noUndefinedVars(dict);
-		
+		this.value.noUndefinedVars(dict);
+
 	}
 
 }
