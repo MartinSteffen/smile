@@ -1,6 +1,9 @@
 package csm.action;
 
+import csm.Dictionary;
 import csm.VarAssignment;
+import csm.Variable;
+import csm.exceptions.ErrUndefinedElement;
 import csm.term.Term;
 
 
@@ -31,6 +34,13 @@ public final class SendAction extends Action {
 	@Override
 	public String prettyprint() {
 		return "send(" + event + ", " + value.prettyprint() + ')';
+	}
+
+	@Override
+	public void noUndefinedVars(Dictionary<Variable> dict) throws ErrUndefinedElement {
+		// TODO Events checken
+		value.noUndefinedVars(dict);
+		
 	}
 
 }

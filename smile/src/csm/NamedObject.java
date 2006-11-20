@@ -1,5 +1,7 @@
 package csm;
 
+import java.util.Observable;
+
 /**
  * ein benanntes Objekt, das in einem {@link Dictionary} verwaltet
  * werden kann
@@ -8,13 +10,14 @@ package csm;
  * sonst nicht sicherzustellen ist, dass in einem {@link Dictionary}
  * jeder Name nur einmal vorkommt.
  */
-public abstract class NamedObject {
+public abstract class NamedObject extends Observable {
 
 	private String name;
 
 	/**
 	 * @param name ungleich null
 	 */
+    // TODO mit Dictionary verketten
 	NamedObject(String name) {
 		setName(name);
 	}

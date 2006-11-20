@@ -15,12 +15,16 @@ public final class Transition extends CSMComponent {
 	final State source;
 	final State target;
 
-	// TODO Getter und Setter mit Strings
 	private NamedObject event;
 	private Guard guard;
 	private Action action;
 
 	/**
+	 * Erzeugt eine neue Transition und trägt sie im Komponentenbaum ein.
+	 * Wenn es nicht möglich ist, Source- und Target-State zu verbinden,
+	 * wird eine Exception geworfen, und der Komponentenbaum bleibt
+	 * unverändert.
+	 *
 	 * @param source der Source-State dieser Transition
 	 * @param target der Target-State dieser Transition
 	 * @throws ErrMayNotConnect wenn Source- und Traget-State nicht
@@ -61,6 +65,11 @@ public final class Transition extends CSMComponent {
 	}
 
 	/**
+	 * Setzt die dieser Transition zugeordnete Aktion. Enthält die 
+	 * Aktion Verweise auf Variablen, die in der CSM, zu der diese
+	 * Transition gehört, nicht definiert sind, dann bleibt die Transition
+	 * unverändert, und es wird eine Exception geworfen.
+	 *
 	 * @param action eine Aktion oder null, falls dieser Transition
 	 *            keine Aktion zugeordnet ist
 	 * @throws ErrUndefinedElement wenn in der Action undefinierte
@@ -68,7 +77,7 @@ public final class Transition extends CSMComponent {
 	 */
 	public final void setAction(Action action)
 			throws ErrUndefinedElement {
-		// TODO checken, ob Variablen existieren
+		action.noUndefinedVars(this.getCSM().variables);
 		this.action = action;
 	}
 
@@ -108,7 +117,7 @@ public final class Transition extends CSMComponent {
 	 *             referenziert werden
 	 */
 	public final void setGuard(Guard guard) throws ErrUndefinedElement {
-		// TODO checken, ob Variablen existieren
+		guard.noUndefinedVars(this.getCSM().variables);
 		this.guard = guard;
 	}
 

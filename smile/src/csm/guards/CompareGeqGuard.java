@@ -13,4 +13,11 @@ public class CompareGeqGuard extends CompareGuard {
 	boolean binaryOp(int l, int r) {
 		return l >= r;
 	}
+
+	@Override
+	public String prettyprint() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

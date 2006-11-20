@@ -4,7 +4,7 @@
 package csm.exceptions;
 
 /**
- * zeigt an, dass der VErsuch, zwei States mit einer Transition zu
+ * zeigt an, dass der Versuch, zwei States mit einer Transition zu
  * verbinden, gescheitert ist
  * 
  * @author hsi

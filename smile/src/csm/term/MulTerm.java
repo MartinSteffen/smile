@@ -1,5 +1,6 @@
 package csm.term;
 
+
 public final class MulTerm extends BinaryTerm {
 
 	@Override
@@ -15,6 +16,7 @@ public final class MulTerm extends BinaryTerm {
 	public String prettyprint() {
 		return pp_bin("*");
 	}
+
 	
 	
 }

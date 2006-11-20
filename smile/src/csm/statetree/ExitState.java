@@ -22,6 +22,9 @@ public final class ExitState extends ConnectionPoint {
 
 	private KindOfExitstate kindOf = KindOfExitstate.PR;
 
+    /**
+     * erzeugt einen neuen ExitState mit kindOfExitstate=PR. 
+     */
 	public ExitState(Point position) {
 		super(position);
 	}

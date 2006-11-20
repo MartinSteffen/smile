@@ -25,11 +25,24 @@ public final class Variable extends NamedObject {
 	public Variable(String name, int i, int min, int max)
 			throws ErrValueOutOfBounds {
 		super(name);
-		if (this.initialValue < this.minValue)
+		setValues(i, min, max);
+	}
+
+	/**
+	 * setzt alle drei Werte auf einmal
+	 * 
+	 * @param i Initialwert
+	 * @param min Minimalwert
+	 * @param max Maximalwert
+	 * @throws ErrValueOutOfBounds
+	 */
+	public void setValues(int i, int min, int max)
+			throws ErrValueOutOfBounds {
+		if (i < min)
 			throw new ErrValueOutOfBounds("initial value "
 					+ this.initialValue
 					+ " is smaller than minimum value " + this.minValue);
-		if (this.initialValue > this.maxValue)
+		if (i > this.maxValue)
 			throw new ErrValueOutOfBounds("initial value "
 					+ this.initialValue
 					+ " is greater than maximum value " + this.maxValue);
@@ -45,6 +58,11 @@ public final class Variable extends NamedObject {
 	 */
 	public Variable(String name) {
 		super(name);
+		/*
+		 * hier werden die Werte direkt gesetzt, ohne setValues zu
+		 * verwenden, weil der Konstruktor sonst mit der faktisch nie
+		 * auftretenden Exception ErrValueOutOfBounds umgehen müßte
+		 */
 		this.initialValue = 0;
 		this.minValue = 0;
 		this.maxValue = 0;

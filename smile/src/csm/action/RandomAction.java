@@ -3,24 +3,35 @@ package csm.action;
 import java.util.List;
 import java.util.Random;
 
+import csm.Dictionary;
 import csm.VarAssignment;
+import csm.Variable;
+import csm.exceptions.ErrUndefinedElement;
 
 
 public final class RandomAction extends Action {
 
-	//final 
-	public String varname;
+	final public String varname;
 
 	/**
 	 * Die Werte werden nicht auf Gültigkeit geprüft. Eine solche
 	 * Prüfung findet erst in der semantischen Analyse statt.
+	 * 
+	 * @param varname der Variablenname
+	 * @param pv eine Liste der möglichen Werte. Die Liste muss
+	 *            mindestens ein Element enthalten.
 	 */
 	final public List<Integer> possibleValues;
 
+	/**
+	 * Wir verwenden einen systemweiten Zufallsgenerator 
+	 */
+	final static Random randomGen = new Random();
+	
 	public RandomAction(String varname, List<Integer> pv) {
 		assert varname != null;
 		assert pv != null;
-		assert pv.size()>0; // wir nehmen das einfach mal an...
+		assert pv.size() > 0; // wir nehmen das einfach mal an...
 
 		this.varname = varname;
 		this.possibleValues = pv;
@@ -28,41 +39,32 @@ public final class RandomAction extends Action {
 
 	@Override
 	/**
-	 * Wir nehmen an possiblevalue sei geordnet
-	 * @param pre variableassignment
-	 * Es wird eine zu der List possiblevalue gehörende Zufallszahl generiert
-	 * und varname zugeordnet
+	 * @param pre das zu ändernde VarAssignment
 	 * @returns eine neue Variableassignment
 	 */
 	public final VarAssignment doAction(VarAssignment pre) {
-		// TODO RandomAction
-		if(pre.variableList.contains(this.varname))
-		{
-		Random r = new Random();
-		int i,j;
-		j=this.possibleValues.size()-1;
-		do{
-		i = r.nextInt()%this.possibleValues.get(j);
-		}
-		while(this.possibleValues.contains(i));
-		pre.setVar(this.varname, i);
-		}
-		else 
-			System.out.println(" Die Variabel"+this.varname+ "existiert nicht in der Varialeliste "  );
+		int randomIndex= randomGen.nextInt(this.possibleValues.size());
+		int randomValue = this.possibleValues.get(randomIndex);
+		pre.setVar(this.varname, randomValue);
 		return pre;
 	}
 
 	@Override
-	public String prettyprint() {	
-		final StringBuilder b = new StringBuilder(this.varname+'(');
+	public String prettyprint() {
+		final StringBuilder b = new StringBuilder(this.varname + '(');
 		b.append(this.possibleValues.get(0));
-		for(int i=1;i<this.possibleValues.size();i++) {
+		for (int i = 1; i < this.possibleValues.size(); i++) {
 			b.append(", ");
 			b.append(this.possibleValues.get(i));
-		};
+		}
+		;
 		b.append(')');
 		return b.toString();
 	}
 
+	@Override
+	public void noUndefinedVars(Dictionary<Variable> dict) throws ErrUndefinedElement {
+		dict.mustContain(varname);
+	}
 
 }

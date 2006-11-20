@@ -1,6 +1,9 @@
 package csm.term;
 
+import csm.Dictionary;
 import csm.VarAssignment;
+import csm.Variable;
+import csm.exceptions.ErrUndefinedElement;
 
 
 public final class NegTerm extends Term {
@@ -20,6 +23,11 @@ public final class NegTerm extends Term {
 	@Override
 	public String prettyprint() {
 		return "- " + term.prettyprint();
+	}
+
+	@Override
+	public void noUndefinedVars(Dictionary<Variable> dict) throws ErrUndefinedElement {
+		term.noUndefinedVars(dict);
 	}
 
 }

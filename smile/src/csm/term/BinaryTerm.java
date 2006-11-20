@@ -1,6 +1,9 @@
 package csm.term;
 
+import csm.Dictionary;
 import csm.VarAssignment;
+import csm.Variable;
+import csm.exceptions.ErrUndefinedElement;
 
 
 abstract class BinaryTerm extends Term {
@@ -26,4 +29,12 @@ abstract class BinaryTerm extends Term {
 		return '(' + left.prettyprint() + ' ' + op + ' '
 				+ right.prettyprint() + ')';
 	}
+
+	@Override
+	public final void noUndefinedVars(Dictionary<Variable> dict)
+			throws ErrUndefinedElement {
+		left.noUndefinedVars(dict);
+		right.noUndefinedVars(dict);
+	}
+
 }

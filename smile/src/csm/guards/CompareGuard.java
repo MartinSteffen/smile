@@ -1,6 +1,9 @@
 package csm.guards;
 
+import csm.Dictionary;
 import csm.VarAssignment;
+import csm.Variable;
+import csm.exceptions.ErrUndefinedElement;
 import csm.term.Term;
 
 
@@ -21,4 +24,11 @@ public abstract class CompareGuard extends Guard {
 	public boolean evalGuard(VarAssignment va) {
 		return binaryOp(this.left.evaluate(va), this.right.evaluate(va));
 	}
+	
+	@Override
+	public final void noUndefinedVars(Dictionary<Variable> variables) throws ErrUndefinedElement {
+		left.noUndefinedVars(variables);
+		right.noUndefinedVars(variables);
+	}
+
 }

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package csm;
 
 import java.io.IOException;
@@ -12,6 +9,8 @@ import csm.statetree.OutermostRegion;
 
 
 /**
+ * die CoreStateMachine 
+ *
  * @author hs
  */
 public final class CoreStateMachine extends Observable {

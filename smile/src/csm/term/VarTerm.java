@@ -1,6 +1,9 @@
 package csm.term;
 
+import csm.Dictionary;
 import csm.VarAssignment;
+import csm.Variable;
+import csm.exceptions.ErrUndefinedElement;
 
 
 public final class VarTerm extends Term {
@@ -14,11 +17,16 @@ public final class VarTerm extends Term {
 
 	@Override
 	public int evaluate(VarAssignment va) {
-		return va.lookup(this.varname);
+		return va.lookupVar(this.varname);
 	}
 
 	@Override
 	public String prettyprint() {
 		return varname;
+	}
+
+	@Override
+	public void noUndefinedVars(Dictionary<Variable> dict) throws ErrUndefinedElement {
+		dict.mustContain(varname); 
 	}
 }

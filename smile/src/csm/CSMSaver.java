@@ -22,10 +22,12 @@ import csm.statetree.Visitor;
  * Worker-Klasse, die einen StringBuilder mit der XML-Darstellung eines
  * Komponenten-Baums füllt.
  * <p>
- * (und nebenbei ist sie ein Beispiel dafür, wie man die
+ * (Nur für package-internen Gebrauch.)
+ * <p>
+ * (nebenbei ist CSMSaver ein Beispiel dafür, wie man die
  * CSMVisitor-Klasse verwendet)
  * 
- * @author hs
+ * @author hsi
  */
 class CSMSaver extends Visitor implements FileTagNames {
 

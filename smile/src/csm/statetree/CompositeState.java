@@ -6,7 +6,6 @@ package csm.statetree;
 import java.awt.Point;
 import java.util.LinkedList;
 
-import csm.CoreStateMachine;
 import csm.Event;
 import csm.action.*;
 import csm.exceptions.ErrTreeNotChanged;
@@ -47,7 +46,10 @@ public final class CompositeState extends InternalState {
 	}
 
 	/**
-	 * Fügt den Child-States dieser Komponente eine SubRegion hinzu
+	 * Fügt den SubRegions dieser Komponente eine SubRegion hinzu. 
+	 * Die Stelle, an der sie zwischen den anderen SubRegions 
+	 * eingefügt wird, ist dabei nicht festgelegt. Es ist Sache der
+	 * einfügenden Methode, die Positionen der SubRegions zu setzen.
 	 * 
 	 * @param child die hinzuzufügende SubRegion
 	 * @throws ErrTreeNotChanged wenn 1. die Region schon das Child
@@ -62,6 +64,7 @@ public final class CompositeState extends InternalState {
 	/**
 	 *  Jeder CompositeState enthält doAction,
 	 *  das ein Objekt vom Typ csm.action.Action enthält
+	 *
 	 *  @return die doAktion oder null, wenn der 
 	 *  Zustand keine Do-Action hat
 	*/
@@ -69,31 +72,20 @@ public final class CompositeState extends InternalState {
 		return doAction;
 	}
 
-/**
- * 
- * @param action
- * @throws ErrUndefinedElement
- */
+    /**
+     * 
+     * @param action die dem State zugeordnete DoAction oder null,
+     *     wenn der State keine DoAction enthält.
+     * @throws ErrUndefinedElement wenn die Action auf Variablen verweist, die
+     *     in der zugeordneten CSM nicht definiert sind
+     */
 	final public void setDoAction(Action action)
 			throws ErrUndefinedElement {
-		// TODO checken, ob Variablen existieren
 		assert action!= null;
-		if(action instanceof SkipAction)
-			this.doAction = action;
-		if(action instanceof AssignAction)
-		{
-		if (this.getCSM().variables.contains(((AssignAction) action).varname)))
+		action.noUndefinedVars(this.getCSM().variables);
 		this.doAction = action;
-		else throw new ErrUndefinedElement("variable is undefined");
-		}
-		if(action instanceof RandomAction)
-		{
-		if (this.getCSM().variables.contains(((RandomAction) action).varname)))
-		this.doAction = action;
-		else throw new ErrUndefinedElement("variable is undefined");
-		}
-		//TODO checken falls action vom type SendAction ob die variablen ihres termes vorhanden sind
 	}
+
 	/**
 	 * gibt die in diesem State als deferred markierten Events zurück
 	 * 

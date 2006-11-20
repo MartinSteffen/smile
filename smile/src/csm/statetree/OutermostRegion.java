@@ -37,7 +37,8 @@ public final class OutermostRegion extends Region {
 	}
 
 	/**
-	 * @return der StartState der CoreStateMachine
+	 * @return der StartState der CoreStateMachine oder null, wenn kein
+	 * StartState definiert ist
 	 */
 	public CompositeState getStartState() {
 		return startState;
@@ -47,14 +48,13 @@ public final class OutermostRegion extends Region {
 	 * setzt den Start-State, wenn er 1. ein Composite-State und 2.
 	 * direkt in dieser ‰uﬂersten Region enthalten ist.
 	 * 
-	 * @param state der Start-State
+	 * @param state der Start-State oder null
 	 * @throws ErrTreeNotChanged wenn der neue Start-State nicht direkt
 	 *             in dieser ‰uﬂersten Region liegt.
 	 */
 	public void setStartState(CompositeState state)
 			throws ErrTreeNotChanged {
-		assert state != null;
-		if (state.getParent() != this)
+		if (state != null && state.getParent() != this)
 			throw new ErrTreeNotChanged("Could not set new start state");
 		startState = state;
 	}
