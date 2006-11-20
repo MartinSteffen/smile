@@ -4,7 +4,6 @@ import csm.Dictionary;
 import csm.VarAssignment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
-import csm.intExpression.Term;
 
 
 public abstract class CompareGuard extends Guard {

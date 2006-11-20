@@ -1,6 +1,5 @@
 package expression;
 
-import csm.intExpression.Term;
 
 
 public class CompareEqGuard extends CompareGuard {
