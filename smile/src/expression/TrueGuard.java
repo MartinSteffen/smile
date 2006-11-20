@@ -1,4 +1,4 @@
-package csm.boolExpression;
+package expression;
 
 import csm.Dictionary;
 import csm.VarAssignment;
@@ -6,22 +6,11 @@ import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
 
-public final class OrGuard extends Guard {
-
-	Guard left;
-	Guard right;
-
-	public OrGuard(Guard left, Guard right) {
-		this.left = left;
-		this.right = right;
-
-	}
+public final class TrueGuard extends Guard {
 
 	@Override
 	public boolean evalGuard(VarAssignment va) {
-		final boolean l = this.left.evalGuard(va);
-		// shortcut evaluation
-		return l || this.right.evalGuard(va);
+		return true;
 	}
 
 	@Override
@@ -33,7 +22,5 @@ public final class OrGuard extends Guard {
 	@Override
 	public void noUndefinedVars(Dictionary<Variable> variables)
 			throws ErrUndefinedElement {
-		this.left.noUndefinedVars(variables);
-		this.right.noUndefinedVars(variables);
 	}
 }

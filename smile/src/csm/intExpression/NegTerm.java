@@ -1,4 +1,4 @@
-package csm.term;
+package csm.intExpression;
 
 import csm.VarAssignment;
 

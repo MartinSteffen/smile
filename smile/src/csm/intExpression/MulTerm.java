@@ -1,4 +1,4 @@
-package csm.term;
+package csm.intExpression;
 
 public final class MulTerm extends BinaryTerm {
 

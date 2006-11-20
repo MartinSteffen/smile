@@ -1,4 +1,4 @@
-package csm.term;
+package csm.intExpression;
 
 import csm.VarAssignment;
 
@@ -14,7 +14,7 @@ public final class VarTerm extends Term {
 
 	@Override
 	public int evaluate(VarAssignment va) {
-		return va.lookup(this.varname);
+		return va.lookupVar(this.varname);
 	}
 
 	@Override
