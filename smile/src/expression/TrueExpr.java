@@ -6,17 +6,16 @@ import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
 
-public final class TrueGuard extends Guard {
+public final class TrueExpr extends Expression<Boolean> {
 
 	@Override
-	public boolean evalGuard(VarAssignment va) {
+	public Boolean evaluate(VarAssignment va) {
 		return true;
 	}
 
 	@Override
 	public String prettyprint() {
-		// TODO Auto-generated method stub
-		return null;
+		return "true";
 	}
 
 	@Override

@@ -4,15 +4,15 @@ import csm.Dictionary;
 import csm.VarAssignment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
-import expression.Term;
+import expression.Expression;
 
 
 public final class SendAction extends Action {
 
 	public final String event;
-	public final Term value;
+	public final Expression<Integer> value;
 
-	public SendAction(String event, Term value) {
+	public SendAction(String event, Expression<Integer> value) {
 		assert event != null;
 		assert value != null;
 

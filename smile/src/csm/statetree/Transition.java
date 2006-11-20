@@ -7,7 +7,7 @@ import csm.NamedObject;
 import csm.action.Action;
 import csm.exceptions.ErrMayNotConnect;
 import csm.exceptions.ErrUndefinedElement;
-import expression.Guard;
+import expression.Expression;
 
 
 public final class Transition extends CSMComponent {
@@ -16,7 +16,7 @@ public final class Transition extends CSMComponent {
 	final State target;
 
 	private NamedObject event;
-	private Guard guard;
+	private Expression<Boolean> guard;
 	private Action action;
 
 	/**
@@ -105,7 +105,7 @@ public final class Transition extends CSMComponent {
 		this.event = event;
 	}
 
-	public final Guard getGuard() {
+	public final Expression<Boolean> getGuard() {
 		return this.guard;
 	}
 
@@ -116,7 +116,7 @@ public final class Transition extends CSMComponent {
 	 * @throws ErrUndefinedElement wenn im Guard undefinierte Variablen
 	 *             referenziert werden
 	 */
-	public final void setGuard(Guard guard) throws ErrUndefinedElement {
+	public final void setGuard(Expression<Boolean> guard) throws ErrUndefinedElement {
 		guard.noUndefinedVars(getCSM().variables);
 		this.guard = guard;
 	}
