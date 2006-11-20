@@ -7,7 +7,7 @@ import csm.NamedObject;
 import csm.action.Action;
 import csm.exceptions.ErrMayNotConnect;
 import csm.exceptions.ErrUndefinedElement;
-import expression.Expression;
+import csm.expression.Expression;
 
 
 public final class Transition extends CSMComponent {

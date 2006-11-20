@@ -4,7 +4,7 @@ import csm.Dictionary;
 import csm.VarAssignment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
-import expression.Expression;
+import csm.expression.Expression;
 
 
 public final class SendAction extends Action {
