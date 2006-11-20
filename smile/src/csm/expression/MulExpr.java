@@ -1,4 +1,4 @@
-package expression;
+package csm.expression;
 
 public final class MulExpr extends BinaryExpression<Integer, Integer> {
 

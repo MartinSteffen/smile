@@ -1,4 +1,4 @@
-package expression;
+package csm.expression;
 
 import csm.Dictionary;
 import csm.VarAssignment;

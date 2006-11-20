@@ -1,4 +1,4 @@
-package expression;
+package csm.expression;
 
 public final class AndExpr extends BinaryExpression<Boolean, Boolean> {
 

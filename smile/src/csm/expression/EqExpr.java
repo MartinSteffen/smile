@@ -1,4 +1,4 @@
-package expression;
+package csm.expression;
 
 public class EqExpr extends CompareExpression {
 
