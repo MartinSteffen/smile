@@ -1,5 +1,7 @@
 package csm;
 
+import java.io.Reader;
+
 /**
  * Worker-Klasse, die eine CSM lädt
  * <p>
@@ -7,8 +9,8 @@ package csm;
  */
 class CSMLoader implements FileTagNames {
 
-	// TODO Reader-Parameter
-	static public CoreStateMachine loadCSM() {
+
+	static public CoreStateMachine loadCSM(Reader reader) {
 		// TODO implementieren
 		return null;
 	}

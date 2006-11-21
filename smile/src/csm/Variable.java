@@ -3,6 +3,7 @@
  */
 package csm;
 
+import csm.exceptions.ErrAlreadyDefinedElement;
 import csm.exceptions.ErrValueOutOfBounds;
 
 
@@ -21,10 +22,11 @@ public final class Variable extends NamedObject {
 	 * @param max Maximalwert
 	 * @throws ErrValueOutOfBounds wenn Minimal-, Maximal- und
 	 *             Initialwerte nicht konsistent sind
+	 * @throws ErrAlreadyDefinedElement 
 	 */
-	public Variable(String name, int i, int min, int max)
-			throws ErrValueOutOfBounds {
-		super(name);
+	public Variable(Dictionary<Variable> parent, String name, int i, int min, int max)
+			throws ErrValueOutOfBounds, ErrAlreadyDefinedElement {
+		super(parent, name);
 		setValues(i, min, max);
 	}
 
@@ -55,9 +57,10 @@ public final class Variable extends NamedObject {
 	 * setzt die Minimal-, Maximal- und Initialwerte auf 0
 	 * 
 	 * @param name ungleich <code>null</code>
+	 * @throws ErrAlreadyDefinedElement 
 	 */
-	public Variable(String name) {
-		super(name);
+	public Variable(Dictionary<Variable>parent, String name) throws ErrAlreadyDefinedElement {
+		super(parent, name);
 		/*
 		 * hier werden die Werte direkt gesetzt, ohne setValues zu
 		 * verwenden, weil der Konstruktor sonst mit der faktisch nie

@@ -1,7 +1,7 @@
 package csm.expression;
 
 import csm.Dictionary;
-import csm.VarAssignment;
+import csm.ExpressionEnvironment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
@@ -16,7 +16,7 @@ public final class LogicalNot extends Expression<Boolean> {
 	}
 
 	@Override
-	public Boolean evaluate(VarAssignment va) {
+	public Boolean evaluate(ExpressionEnvironment va) {
 		Boolean g = this.guard.evaluate(va);
 		return !g;
 	}

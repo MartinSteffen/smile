@@ -1,7 +1,7 @@
 package csm.expression;
 
 import csm.Dictionary;
-import csm.VarAssignment;
+import csm.ExpressionEnvironment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
@@ -20,7 +20,7 @@ public final class DoAssign extends Action {
 	}
 
 	@Override
-	final void doAction(VarAssignment pre) {
+	final void doAction(ExpressionEnvironment pre) {
 		int i = this.term.evaluate(pre);
 		pre.setVar(this.varname, i);
 	}

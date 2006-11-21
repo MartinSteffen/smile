@@ -1,7 +1,7 @@
 package csm.expression;
 
 import csm.Dictionary;
-import csm.VarAssignment;
+import csm.ExpressionEnvironment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
@@ -14,7 +14,7 @@ public abstract class Expression<Result> {
 	 * @param varAssignment eine Variablenbelegung
 	 * @return der Wert des Terms unter der gegebenen Variablenbelegung
 	 */
-	abstract public Result evaluate(VarAssignment varAssignment);
+	abstract public Result evaluate(ExpressionEnvironment varAssignment);
 
 	/**
 	 * das Gegenstück zum Parser
@@ -47,6 +47,7 @@ public abstract class Expression<Result> {
 	 * 3 unary ! <br>
 	 * 2 & <br>
 	 * 1 | <br>
+	 * 0 action
 	 */
 	abstract int precedence();
 }

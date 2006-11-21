@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import csm.Dictionary;
-import csm.VarAssignment;
+import csm.ExpressionEnvironment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
@@ -38,7 +38,7 @@ public final class DoRandom extends Action {
 	}
 
 	@Override
-	final void doAction(VarAssignment pre) {
+	final void doAction(ExpressionEnvironment pre) {
 		final int randomIndex = DoRandom.randomGen
 				.nextInt(this.possibleValues.size());
 		final int randomValue = this.possibleValues.get(randomIndex);

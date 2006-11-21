@@ -1,7 +1,7 @@
 package csm.expression;
 
 import csm.Dictionary;
-import csm.VarAssignment;
+import csm.ExpressionEnvironment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
@@ -34,7 +34,7 @@ abstract class BinaryExpression<Result, Arg> extends Expression<Result> {
 	}
 
 	@Override
-	public final Result evaluate(VarAssignment va) {
+	public final Result evaluate(ExpressionEnvironment va) {
 		final Arg l = this.left.evaluate(va);
 		final Arg r = this.right.evaluate(va);
 		return binaryOp(l, r);

@@ -1,7 +1,7 @@
 package csm.expression;
 
 import csm.Dictionary;
-import csm.VarAssignment;
+import csm.ExpressionEnvironment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
@@ -15,7 +15,7 @@ public final class IntConstant extends Expression<Integer> {
 	}
 
 	@Override
-	public Integer evaluate(VarAssignment varAssignment) {
+	public Integer evaluate(ExpressionEnvironment varAssignment) {
 		return this.value;
 	}
 

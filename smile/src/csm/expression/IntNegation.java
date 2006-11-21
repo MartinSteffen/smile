@@ -1,7 +1,7 @@
 package csm.expression;
 
 import csm.Dictionary;
-import csm.VarAssignment;
+import csm.ExpressionEnvironment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
@@ -16,7 +16,7 @@ public final class IntNegation extends Expression<Integer> {
 	}
 
 	@Override
-	public Integer evaluate(VarAssignment va) {
+	public Integer evaluate(ExpressionEnvironment va) {
 		return -this.term.evaluate(va);
 	}
 

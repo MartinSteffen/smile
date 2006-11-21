@@ -17,15 +17,14 @@ import csm.statetree.Region;
 import csm.statetree.State;
 import csm.statetree.Visitor;
 
-
 /**
  * Worker-Klasse, die einen StringBuilder mit der XML-Darstellung eines
  * Komponenten-Baums füllt.
  * <p>
  * (Nur für package-internen Gebrauch.)
  * <p>
- * (nebenbei ist CSMSaver ein Beispiel dafür, wie man die
- * CSMVisitor-Klasse verwendet)
+ * (nebenbei ist CSMSaver ein Beispiel dafür, wie man die CSMVisitor-Klasse
+ * verwendet)
  * 
  * @author hsi
  */
@@ -48,8 +47,7 @@ class CSMSaver extends Visitor implements FileTagNames {
 			OutermostRegion outermostRegion) {
 		outermostRegion.enumerateStates();
 		final CSMSaver saver = new CSMSaver(xmlstring);
-		saver.printComponent(outermostRegion,
-				FileTagNames.TAG_OUTERMOSTREGION);
+		saver.printComponent(outermostRegion, FileTagNames.TAG_OUTERMOSTREGION);
 	}
 
 	// Hilfsfunktionen
@@ -100,13 +98,13 @@ class CSMSaver extends Visitor implements FileTagNames {
 	}
 
 	private void printState(State state, String tag) {
-		final String attrs = CSMSaver.attr(FileTagNames.ATTR_UNIQUE_ID,
-				state.getUniqueId());
+		final String attrs = CSMSaver.attr(FileTagNames.ATTR_UNIQUE_ID, state
+				.getUniqueId());
 		printComponent(state, tag, attrs);
 	}
 
 	// visitor pattern ****************************
-
+	// TODO visitTransition
 	@Override
 	final protected void visitRegion(Region region) {
 		printComponent(region, FileTagNames.TAG_REGION);
@@ -119,8 +117,8 @@ class CSMSaver extends Visitor implements FileTagNames {
 
 	@Override
 	final protected void visitExitState(ExitState state) {
-		final String attrs = CSMSaver.attr(FileTagNames.ATTR_UNIQUE_ID,
-				state.getUniqueId())
+		final String attrs = CSMSaver.attr(FileTagNames.ATTR_UNIQUE_ID, state
+				.getUniqueId())
 				+ CSMSaver.attr(FileTagNames.ATTR_KIND, state
 						.getKindOfExitstate().toString());
 		printComponent(state, FileTagNames.TAG_EXITSTATE, attrs);

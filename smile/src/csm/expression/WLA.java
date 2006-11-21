@@ -1,7 +1,7 @@
 package csm.expression;
 
 import csm.Dictionary;
-import csm.VarAssignment;
+import csm.ExpressionEnvironment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
@@ -9,9 +9,8 @@ import csm.exceptions.ErrUndefinedElement;
 public final class WLA extends Expression<Boolean> {
 
 	@Override
-	public Boolean evaluate(VarAssignment va) {
-		// TODO wla-guard implementieren
-		return false;
+	public Boolean evaluate(ExpressionEnvironment va) {
+		return va.wla;
 	}
 
 	@Override

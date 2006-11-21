@@ -1,14 +1,14 @@
 package csm.expression;
 
 import csm.Dictionary;
-import csm.VarAssignment;
+import csm.ExpressionEnvironment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
 
 public final class IntVariable extends Expression<Integer> {
 
-	String varname;
+	final public String varname;
 
 	public IntVariable(String varname) {
 		assert varname != null;
@@ -16,7 +16,7 @@ public final class IntVariable extends Expression<Integer> {
 	}
 
 	@Override
-	public Integer evaluate(VarAssignment va) {
+	public Integer evaluate(ExpressionEnvironment va) {
 		return va.lookupVar(this.varname);
 	}
 

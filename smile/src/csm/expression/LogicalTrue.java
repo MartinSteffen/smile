@@ -1,7 +1,7 @@
 package csm.expression;
 
 import csm.Dictionary;
-import csm.VarAssignment;
+import csm.ExpressionEnvironment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
@@ -9,7 +9,7 @@ import csm.exceptions.ErrUndefinedElement;
 public final class LogicalTrue extends Expression<Boolean> {
 
 	@Override
-	public Boolean evaluate(VarAssignment va) {
+	public Boolean evaluate(ExpressionEnvironment va) {
 		return true;
 	}
 

@@ -1,7 +1,7 @@
 package csm.expression;
 
 import csm.Dictionary;
-import csm.VarAssignment;
+import csm.ExpressionEnvironment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
@@ -20,7 +20,7 @@ public final class DoSend extends Action {
 	}
 
 	@Override
-	void doAction(VarAssignment pre) {
+	void doAction(ExpressionEnvironment pre) {
 		pre.sendEventName = this.event;
 		pre.sendEventValue = this.value.evaluate(pre);
 
