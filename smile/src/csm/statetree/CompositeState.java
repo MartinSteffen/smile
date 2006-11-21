@@ -7,9 +7,9 @@ import java.awt.Point;
 import java.util.LinkedList;
 
 import csm.Event;
-import csm.action.Action;
 import csm.exceptions.ErrTreeNotChanged;
 import csm.exceptions.ErrUndefinedElement;
+import csm.expression.Action;
 
 
 /**

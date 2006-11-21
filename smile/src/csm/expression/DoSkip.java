@@ -1,4 +1,4 @@
-package csm.action;
+package csm.expression;
 
 import csm.Dictionary;
 import csm.VarAssignment;
@@ -6,12 +6,10 @@ import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
 
-public final class SkipAction extends Action {
+public final class DoSkip extends Action {
 
 	@Override
-	public VarAssignment doAction(VarAssignment pre) {
-		pre.sendEventName = null;
-		return pre;
+	public void doAction(VarAssignment pre) {
 	}
 
 	@Override

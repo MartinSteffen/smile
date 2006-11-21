@@ -1,18 +1,17 @@
-package csm.action;
+package csm.expression;
 
 import csm.Dictionary;
 import csm.VarAssignment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
-import csm.expression.Expression;
 
 
-public final class SendAction extends Action {
+public final class DoSend extends Action {
 
 	public final String event;
 	public final Expression<Integer> value;
 
-	public SendAction(String event, Expression<Integer> value) {
+	public DoSend(String event, Expression<Integer> value) {
 		assert event != null;
 		assert value != null;
 
@@ -21,7 +20,7 @@ public final class SendAction extends Action {
 	}
 
 	@Override
-	public VarAssignment doAction(VarAssignment pre) {
+	void doAction(VarAssignment pre) {
 		pre.sendEventName = this.event;
 		pre.sendEventValue = this.value.evaluate(pre);
 
@@ -29,12 +28,11 @@ public final class SendAction extends Action {
 		System.out.print(pre.sendEventName);
 		System.out.print(' ');
 		System.out.println(pre.sendEventValue);
-		return pre;
 	}
 
 	@Override
 	public String prettyprint() {
-		return "send(" + this.event + ", " + this.value.prettyprint()
+		return "send (" + this.event + ", " + this.value.prettyprint()
 				+ ')';
 	}
 

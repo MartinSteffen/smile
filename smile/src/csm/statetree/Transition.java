@@ -4,9 +4,9 @@ import java.awt.Point;
 
 import csm.Event;
 import csm.NamedObject;
-import csm.action.Action;
 import csm.exceptions.ErrMayNotConnect;
 import csm.exceptions.ErrUndefinedElement;
+import csm.expression.Action;
 import csm.expression.Expression;
 
 

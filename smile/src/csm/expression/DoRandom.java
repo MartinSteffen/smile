@@ -1,4 +1,4 @@
-package csm.action;
+package csm.expression;
 
 import java.util.List;
 import java.util.Random;
@@ -9,7 +9,7 @@ import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
 
-public final class RandomAction extends Action {
+public final class DoRandom extends Action {
 
 	final public String varname;
 
@@ -28,7 +28,7 @@ public final class RandomAction extends Action {
 	 */
 	final static Random randomGen = new Random();
 
-	public RandomAction(String varname, List<Integer> pv) {
+	public DoRandom(String varname, List<Integer> pv) {
 		assert varname != null;
 		assert pv != null;
 		assert pv.size() > 0; // wir nehmen das einfach mal an...
@@ -38,22 +38,18 @@ public final class RandomAction extends Action {
 	}
 
 	@Override
-	/**
-	 * @param pre das zu ändernde VarAssignment
-	 * @returns eine neue Variableassignment
-	 */
-	public final VarAssignment doAction(VarAssignment pre) {
-		final int randomIndex = RandomAction.randomGen
+	final void doAction(VarAssignment pre) {
+		final int randomIndex = DoRandom.randomGen
 				.nextInt(this.possibleValues.size());
 		final int randomValue = this.possibleValues.get(randomIndex);
 		pre.setVar(this.varname, randomValue);
-		pre.sendEventName = null;
-		return pre;
 	}
 
 	@Override
 	public String prettyprint() {
-		final StringBuilder b = new StringBuilder(this.varname + '(');
+		final StringBuilder b = new StringBuilder(this.varname
+				+ " := random (");
+		// siehe oben: wir haben angenommen, dass size>0
 		b.append(this.possibleValues.get(0));
 		for (int i = 1; i < this.possibleValues.size(); i++) {
 			b.append(", ");

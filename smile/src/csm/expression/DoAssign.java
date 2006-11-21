@@ -1,18 +1,17 @@
-package csm.action;
+package csm.expression;
 
 import csm.Dictionary;
 import csm.VarAssignment;
 import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
-import csm.expression.Expression;
 
 
-public final class AssignAction extends Action {
+public final class DoAssign extends Action {
 
 	final public String varname;
 	final public Expression<Integer> term;
 
-	public AssignAction(String varname, Expression<Integer> term) {
+	public DoAssign(String varname, Expression<Integer> term) {
 		assert varname != null;
 		assert term != null;
 
@@ -21,17 +20,9 @@ public final class AssignAction extends Action {
 	}
 
 	@Override
-	/**
-	 * @param Eine Variablenassignment ordnet der Variabel "varname" den
-	 *            Wert des Termes "term" zu,
-	 * @returns Eine neue Variablenassignment pre, in deren
-	 *          Variablenliste varname den neuen Wert besitzt.
-	 */
-	public VarAssignment doAction(VarAssignment pre) {
+	final void doAction(VarAssignment pre) {
 		int i = this.term.evaluate(pre);
 		pre.setVar(this.varname, i);
-		pre.sendEventName = null;
-		return pre;
 	}
 
 	@Override
@@ -45,5 +36,6 @@ public final class AssignAction extends Action {
 		dict.mustContain(this.varname);
 		this.term.noUndefinedVars(dict);
 	}
+
 
 }
