@@ -13,7 +13,7 @@ public abstract class Action extends Expression<VarAssignment> {
 	
 	@Override
 	public final VarAssignment evaluate(VarAssignment pre) {
-		pre.sendEventName=null;
+		pre.sendEventName = null; // Standard: keinen Event senden
 		doAction(pre);
 		return pre;
 	}

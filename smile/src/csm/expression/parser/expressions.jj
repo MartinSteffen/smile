@@ -1,0 +1,20 @@
+options {
+  JDK_VERSION = "1.5";
+}
+
+PARSER_BEGIN(ExpressionParser)
+package csm.expression.parser;
+
+public class ExpressionParser {}
+
+
+PARSER_END(ExpressionParser)
+
+
+SKIP :
+{
+ 	" "
+|	"\r"
+|	"\t"
+|	"\n"
+}
