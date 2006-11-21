@@ -6,29 +6,27 @@ import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
 
-public final class NotExpr extends Expression<Boolean> {
-
-	Expression<Boolean> guard;
-
-	public NotExpr(Expression<Boolean> guard) {
-		this.guard = guard;
-
-	}
+public final class WLA extends Expression<Boolean> {
 
 	@Override
 	public Boolean evaluate(VarAssignment va) {
-		Boolean g = this.guard.evaluate(va);
-		return !g;
+		// TODO wla-guard implementieren
+		return false;
 	}
 
 	@Override
 	public String prettyprint() {
-		return "(! " + this.guard.prettyprint() + ")";
+		return "wla";
 	}
 
 	@Override
 	public void noUndefinedVars(Dictionary<Variable> variables)
 			throws ErrUndefinedElement {
-		guard.noUndefinedVars(variables);
 	}
+
+	@Override
+	int precedence() {
+		return 10;
+	}
+
 }

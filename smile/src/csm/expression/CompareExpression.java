@@ -8,4 +8,9 @@ public abstract class CompareExpression extends
 		super(left, right);
 	}
 
+	@Override
+	int precedence() {
+		return 4;
+	}
+	
 }

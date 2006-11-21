@@ -6,11 +6,11 @@ import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
 
-public final class IntvarExpr extends Expression<Integer> {
+public final class IntVariable extends Expression<Integer> {
 
 	String varname;
 
-	public IntvarExpr(String varname) {
+	public IntVariable(String varname) {
 		assert varname != null;
 		this.varname = varname;
 	}
@@ -28,5 +28,10 @@ public final class IntvarExpr extends Expression<Integer> {
 	@Override
 	public void noUndefinedVars(Dictionary<Variable> variables) throws ErrUndefinedElement {
 		variables.mustContain(varname);
+	}
+
+	@Override
+	int precedence() {
+		return 10;
 	}
 }

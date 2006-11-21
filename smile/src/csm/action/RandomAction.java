@@ -47,6 +47,7 @@ public final class RandomAction extends Action {
 				.nextInt(this.possibleValues.size());
 		final int randomValue = this.possibleValues.get(randomIndex);
 		pre.setVar(this.varname, randomValue);
+		pre.sendEventName = null;
 		return pre;
 	}
 

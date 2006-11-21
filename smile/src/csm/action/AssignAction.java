@@ -28,11 +28,9 @@ public final class AssignAction extends Action {
 	 *          Variablenliste varname den neuen Wert besitzt.
 	 */
 	public VarAssignment doAction(VarAssignment pre) {
-		int i = 0;
-		// TODO assignment-action
-
-		i = this.term.evaluate(pre);
+		int i = this.term.evaluate(pre);
 		pre.setVar(this.varname, i);
+		pre.sendEventName = null;
 		return pre;
 	}
 

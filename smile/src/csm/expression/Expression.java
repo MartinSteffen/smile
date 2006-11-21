@@ -36,4 +36,17 @@ public abstract class Expression<Result> {
 	 */
 	abstract public void noUndefinedVars(Dictionary<Variable> variables)
 			throws ErrUndefinedElement;
+
+	/**
+	 * alle Operatoren sind linksassoziativ <br>
+	 * 10 0-ary var const true false<br>
+	 * 9 unary - <br>
+	 * 7 * / <br>
+	 * 6 + - <br>
+	 * 4 == != <= >= < > <br>
+	 * 3 unary ! <br>
+	 * 2 & <br>
+	 * 1 | <br>
+	 */
+	abstract int precedence();
 }

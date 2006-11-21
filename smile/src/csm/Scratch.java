@@ -1,5 +1,12 @@
 package csm;
 
+import csm.expression.LogicalAnd;
+import csm.expression.Expression;
+import csm.expression.LogicalFalse;
+import csm.expression.LogicalOr;
+import csm.expression.LogicalTrue;
+
+
 /**
  * Testklasse für unsere internen Zwecke, wird nicht in der endgültigen
  * Version enthalten sein
@@ -22,5 +29,8 @@ public class Scratch {
 		final StringBuilder xmlstring = new StringBuilder();
 		// StatetreeSaver.statetreeToXML(xmlstring, o);
 		System.out.print(xmlstring);
+		Expression<Boolean> e = new LogicalAnd(new LogicalFalse(),
+				new LogicalOr(new LogicalFalse(), new LogicalTrue()));
+		System.out.println(e.prettyprint());
 	}
 }

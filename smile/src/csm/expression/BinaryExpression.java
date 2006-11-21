@@ -42,8 +42,14 @@ abstract class BinaryExpression<Result, Arg> extends Expression<Result> {
 
 	@Override
 	public final String prettyprint() {
-		return '(' + left.prettyprint() + ' ' + opString() + ' '
-				+ right.prettyprint() + ')';
+		String ls = left.prettyprint();
+		if (precedence() > left.precedence())
+			ls = "(" + ls + ")";
+		String rs = right.prettyprint();
+		if (precedence() >= right.precedence())
+			rs = "(" + rs + ")";
+
+		return ls + ' ' + opString() + ' ' + rs;
 	}
 
 	@Override

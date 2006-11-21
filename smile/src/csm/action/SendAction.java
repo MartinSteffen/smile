@@ -20,14 +20,15 @@ public final class SendAction extends Action {
 		this.value = value;
 	}
 
-	// XXX Event wird nur auf System.out ausgegeben
 	@Override
 	public VarAssignment doAction(VarAssignment pre) {
-		final int y = this.value.evaluate(pre);
-		System.out.println("event ");
-		System.out.print(this.event);
+		pre.sendEventName = this.event;
+		pre.sendEventValue = this.value.evaluate(pre);
+
+		System.out.print("event ");
+		System.out.print(pre.sendEventName);
 		System.out.print(' ');
-		System.out.println(y);
+		System.out.println(pre.sendEventValue);
 		return pre;
 	}
 
@@ -40,7 +41,6 @@ public final class SendAction extends Action {
 	@Override
 	public void noUndefinedVars(Dictionary<Variable> dict)
 			throws ErrUndefinedElement {
-		// TODO Events checken
 		this.value.noUndefinedVars(dict);
 
 	}

@@ -9,12 +9,25 @@ import java.util.HashMap;
  * Variablenbelegungen werden nur in der semantischen Analyse verwendet.
  * Die initiale Variablenbelegung wird in den Variablen-Objekten
  * gesetzt.
+ * <p>
+ * neben den aktuellen Werten enthält ein VarAssignment den Namen und
+ * den Wert des im letzten Schritt gesendeten Events: Wenn eine Aktion
+ * keinen Event sendet, muss sie den Namen sendEventName auf null
+ * setzen. wenn sie einen Event senden will, muss sie sendEventName und
+ * sendEventValue setzen.     
  */
 public final class VarAssignment {
 
 	private final Dictionary<Variable> dictionary;
 
 	private final HashMap<String, Integer> values;
+
+	/**
+	 * der Name des in der letzten Aktion gesendeten Events ode null,
+	 * wenn kein Event gesendet wurde
+	 */
+	public String sendEventName;
+	public int sendEventValue;
 
 	/**
 	 * erzeugt ein initiales Variablen-Assignment aus der Variablenliste

@@ -6,11 +6,11 @@ import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
 
-public final class ConstExpr extends Expression<Integer> {
+public final class IntConstant extends Expression<Integer> {
 
 	public final int value;
 
-	public ConstExpr(int value) {
+	public IntConstant(int value) {
 		this.value = value;
 	}
 
@@ -27,6 +27,11 @@ public final class ConstExpr extends Expression<Integer> {
 	@Override
 	public void noUndefinedVars(Dictionary<Variable> variables)
 			throws ErrUndefinedElement {
+	}
+
+	@Override
+	int precedence() {
+		return 10;
 	}
 
 }

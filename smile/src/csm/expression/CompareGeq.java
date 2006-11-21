@@ -1,8 +1,8 @@
 package csm.expression;
 
-public class GeqExpr extends CompareExpression {
+public class CompareGeq extends CompareExpression {
 
-	public GeqExpr(Expression<Integer> left, Expression<Integer> right) {
+	public CompareGeq(Expression<Integer> left, Expression<Integer> right) {
 		super(left, right);
 	}
 

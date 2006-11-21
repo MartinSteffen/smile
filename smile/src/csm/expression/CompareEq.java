@@ -1,19 +1,20 @@
 package csm.expression;
 
-public class EqExpr extends CompareExpression {
+public class CompareEq extends CompareExpression {
 
-	public EqExpr(Expression<Integer> left, Expression<Integer> right) {
+	public CompareEq(Expression<Integer> left, Expression<Integer> right) {
 		super(left, right);
 	}
 
 	@Override
 	Boolean binaryOp(Integer l, Integer r) {
-		return l == r;
+		return l.intValue() == r.intValue();
 	}
 
 	@Override
 	String opString() {
 		return "==";
 	}
+
 
 }

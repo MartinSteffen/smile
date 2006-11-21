@@ -6,17 +6,16 @@ import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
 
-public final class NABExpr extends Expression<Boolean> {
+public final class LogicalTrue extends Expression<Boolean> {
 
 	@Override
 	public Boolean evaluate(VarAssignment va) {
-		// TODO nab-guard implementieren
-		return false;
+		return true;
 	}
 
 	@Override
 	public String prettyprint() {
-		return "nab";
+		return "true";
 	}
 
 	@Override
@@ -24,4 +23,8 @@ public final class NABExpr extends Expression<Boolean> {
 			throws ErrUndefinedElement {
 	}
 
+	@Override
+	int precedence() {
+		return 10;
+	}
 }

@@ -6,20 +6,25 @@ import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
 
-public final class TrueExpr extends Expression<Boolean> {
+public final class LogicalFalse extends Expression<Boolean> {
 
 	@Override
 	public Boolean evaluate(VarAssignment va) {
-		return true;
+		return false;
 	}
 
 	@Override
 	public String prettyprint() {
-		return "true";
+		return "false";
 	}
 
 	@Override
 	public void noUndefinedVars(Dictionary<Variable> variables)
 			throws ErrUndefinedElement {
+	}
+
+	@Override
+	int precedence() {
+		return 10;
 	}
 }

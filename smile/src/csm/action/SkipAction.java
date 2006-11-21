@@ -10,6 +10,7 @@ public final class SkipAction extends Action {
 
 	@Override
 	public VarAssignment doAction(VarAssignment pre) {
+		pre.sendEventName = null;
 		return pre;
 	}
 
