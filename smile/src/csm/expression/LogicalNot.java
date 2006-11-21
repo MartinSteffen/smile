@@ -24,7 +24,7 @@ public final class LogicalNot extends Expression<Boolean> {
 	@Override
 	public String prettyprint() {
 		if (precedence() > guard.precedence())
-			return "! (" + guard.prettyprint() + ")";
+			return "! (" + guard.prettyprint() + ')';
 		else
 			return "! "+guard.prettyprint();
 	}

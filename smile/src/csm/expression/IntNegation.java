@@ -23,7 +23,7 @@ public final class IntNegation extends Expression<Integer> {
 	@Override
 	public String prettyprint() {
 		if (precedence() > term.precedence())
-			return "- (" + term.prettyprint() + ")";
+			return "- (" + term.prettyprint() + ')';
 		else
 			return "- " + term.prettyprint();
 	}

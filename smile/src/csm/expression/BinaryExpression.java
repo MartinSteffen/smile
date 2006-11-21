@@ -44,11 +44,10 @@ abstract class BinaryExpression<Result, Arg> extends Expression<Result> {
 	public final String prettyprint() {
 		String ls = left.prettyprint();
 		if (precedence() > left.precedence())
-			ls = "(" + ls + ")";
+			ls = '(' + ls + ')';
 		String rs = right.prettyprint();
 		if (precedence() >= right.precedence())
-			rs = "(" + rs + ")";
-
+			rs = '(' + rs + ')';
 		return ls + ' ' + opString() + ' ' + rs;
 	}
 
