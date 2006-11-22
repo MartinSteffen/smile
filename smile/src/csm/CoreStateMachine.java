@@ -3,6 +3,7 @@ package csm;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.HashMap;
 import java.util.Observable;
 
 import csm.statetree.OutermostRegion;
@@ -31,6 +32,11 @@ public final class CoreStateMachine extends Observable {
 	 */
 	public final Dictionary<Variable> variables = new Dictionary<Variable>();
 
+	/**
+	 * die Metadaten für die verschiedenen GUIs
+	 */
+	private HashMap<String, GuiMetadata> guiMetadata;
+
 	public CoreStateMachine() {
 	}
 
@@ -56,4 +62,22 @@ public final class CoreStateMachine extends Observable {
 	public void saveCSM(Writer writer) {
 		// TODO zu CSMSaver delegieren
 	}
+
+	/**
+	 * gibt die Metadaten einer gegeben GUI zurück (oder null, wenn für
+	 * diese GUI-Id keine Metadaten existieren)
+	 */
+	public final GuiMetadata getGuiMetadata(String guiId) {
+		assert guiId != null;
+		return guiMetadata.get(guiId);
+	}
+
+	/**
+	 * setzt die Metadaten für eine GUI
+	 */
+	public final void setGuiMetadata(GuiMetadata guiData) {
+		assert guiData != null;
+		guiMetadata.put(guiData.guiId, guiData);
+	}
+
 }

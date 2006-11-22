@@ -1,15 +1,27 @@
 package nua;
 
-import java.util.LinkedList;
+import java.util.HashSet;
+import java.util.Set;
 
+
+/**
+ * Der \nu-Automat gem‰ﬂ Definition 1 der Aufgabenbeschreibung
+ */
 public class NuAutomaton {
-	final public LinkedList<NuState> states;
 
-	final public LinkedList<NuState> rootStates;
+	final public Set<NuState> states;
 
-	final public LinkedList<NuTransition> transitions;
+	final public Set<NuState> rootStates;
+
+	final public Set<NuTransition> transitions;
 
 	boolean isConcrete() {
 		return rootStates.size() == 1;
+	}
+
+	public NuAutomaton() {
+		this.states = new HashSet<NuState>();
+		this.rootStates = new HashSet<NuState>();
+		this.transitions = new HashSet<NuTransition>();
 	}
 }

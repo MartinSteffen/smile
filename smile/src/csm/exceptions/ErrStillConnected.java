@@ -13,6 +13,8 @@ import csm.statetree.Transition;
  */
 public class ErrStillConnected extends CSMEditException {
 
+	private static final long serialVersionUID = 1L;
+
 	public final Transition transition;
 
 	/**
