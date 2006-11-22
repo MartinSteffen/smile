@@ -60,7 +60,7 @@ public final class ExitState extends ConnectionPoint {
 				&& regOf().getParent() == target.stateOf())
 			return target.stateOf();
 		// entry, final, choice:
-		// TODO Bedingung checken: Exitstate ausschlieﬂen?
+		// TODO Bedingung checken: Exitstate ausschliessen?
 		if (stateOf() instanceof FinalState)
 			return null;
 		if (regOf() == target.regOf())

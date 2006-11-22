@@ -1,6 +1,7 @@
 package csm.expression;
 
-public final class IntDifference extends BinaryExpression<Integer, Integer> {
+public final class IntDifference extends
+		BinaryExpression<Integer, Integer> {
 
 	@Override
 	final Integer binaryOp(Integer l, Integer r) {

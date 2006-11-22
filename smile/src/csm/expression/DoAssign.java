@@ -21,7 +21,7 @@ public final class DoAssign extends Action {
 
 	@Override
 	final void doAction(ExpressionEnvironment pre) {
-		int i = this.term.evaluate(pre);
+		final int i = this.term.evaluate(pre);
 		pre.setVar(this.varname, i);
 	}
 
@@ -36,6 +36,5 @@ public final class DoAssign extends Action {
 		dict.mustContain(this.varname);
 		this.term.noUndefinedVars(dict);
 	}
-
 
 }

@@ -19,7 +19,7 @@ public class NuTransition {
 	public final Set<NuState> targets;
 
 	/**
-	 * erzeugt eine neue Transition und trägt sie im \nu-Automaten ein
+	 * erzeugt eine neue Transition und traegt sie im \nu-Automaten ein
 	 */
 	NuTransition(NuAutomaton nua, NuState source, Event action,
 			Set<NuState> targets) {
@@ -39,7 +39,7 @@ public class NuTransition {
 	 * Elemente des \nu-Automaten nua sind
 	 */
 	boolean allMembersArePartOf(Set<NuState> list, NuAutomaton nua) {
-		for (NuState member : list)
+		for (final NuState member : list)
 			if (member.nua != nua)
 				return false;
 		return true;

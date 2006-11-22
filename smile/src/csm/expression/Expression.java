@@ -17,22 +17,22 @@ public abstract class Expression<Result> {
 	abstract public Result evaluate(ExpressionEnvironment varAssignment);
 
 	/**
-	 * das Gegenstück zum Parser
+	 * das Gegenstueck zum Parser
 	 * 
-	 * @return eine textuelle Repräsentation des Terms
+	 * @return eine textuelle Repraesentation des Terms
 	 */
 	abstract public String prettyprint();
 
 	/**
 	 * stellt sicher, dass alle in dieser Expression verwendeten
-	 * Variablen im übergebenen Dictionary enthalten sind. Andernfalls
+	 * Variablen im uebergebenen Dictionary enthalten sind. Andernfalls
 	 * wird eine Exception geworfen, die auf eine nicht enthaltene
 	 * Variable hinweist.
 	 * 
 	 * @param variables das Dictionary, in dem alle verwendeten
-	 *            Variablen vorkommen müssen
+	 *            Variablen vorkommen muessen
 	 * @throws ErrUndefinedElement wenn der Term eine undefinierte
-	 *             Variable enthält
+	 *             Variable enthaelt
 	 */
 	abstract public void noUndefinedVars(Dictionary<Variable> variables)
 			throws ErrUndefinedElement;

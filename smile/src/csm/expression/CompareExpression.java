@@ -12,5 +12,5 @@ public abstract class CompareExpression extends
 	int precedence() {
 		return 4;
 	}
-	
+
 }

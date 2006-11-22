@@ -2,7 +2,8 @@ package csm.expression;
 
 public class CompareLeq extends CompareExpression {
 
-	public CompareLeq(Expression<Integer> left, Expression<Integer> right) {
+	public CompareLeq(Expression<Integer> left,
+			Expression<Integer> right) {
 		super(left, right);
 	}
 

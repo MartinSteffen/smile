@@ -5,7 +5,7 @@ import java.util.Set;
 
 
 /**
- * Der \nu-Automat gem‰ﬂ Definition 1 der Aufgabenbeschreibung
+ * Der \nu-Automat gemaess Definition 1 der Aufgabenbeschreibung
  */
 public class NuAutomaton {
 
@@ -16,7 +16,7 @@ public class NuAutomaton {
 	final public Set<NuTransition> transitions;
 
 	boolean isConcrete() {
-		return rootStates.size() == 1;
+		return this.rootStates.size() == 1;
 	}
 
 	public NuAutomaton() {

@@ -19,7 +19,7 @@ abstract class BinaryExpression<Result, Arg> extends Expression<Result> {
 	public final Expression<Arg> right;
 
 	/**
-	 * die Operation, die die beiden Argumente verknüpft
+	 * die Operation, die die beiden Argumente verknuepft
 	 */
 	abstract Result binaryOp(Arg l, Arg r);
 
@@ -42,11 +42,11 @@ abstract class BinaryExpression<Result, Arg> extends Expression<Result> {
 
 	@Override
 	public final String prettyprint() {
-		String ls = left.prettyprint();
-		if (precedence() > left.precedence())
+		String ls = this.left.prettyprint();
+		if (precedence() > this.left.precedence())
 			ls = '(' + ls + ')';
-		String rs = right.prettyprint();
-		if (precedence() >= right.precedence())
+		String rs = this.right.prettyprint();
+		if (precedence() >= this.right.precedence())
 			rs = '(' + rs + ')';
 		return ls + ' ' + opString() + ' ' + rs;
 	}

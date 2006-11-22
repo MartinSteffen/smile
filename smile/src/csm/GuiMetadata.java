@@ -9,8 +9,8 @@ import csm.statetree.CSMComponent;
 
 
 /**
- * Mithilfe dieses Objektes können Metadaten für eine graphische
- * Oberfläche gespeichert werden.
+ * Mithilfe dieses Objektes koennen Metadaten fuer eine graphische
+ * Oberflaeche gespeichert werden.
  * 
  * @author hs
  */
@@ -22,6 +22,6 @@ public class GuiMetadata {
 	GuiMetadata(String guiId) {
 		assert guiId != null;
 		this.guiId = guiId;
-		data = new HashMap<CSMComponent, String>();
+		this.data = new HashMap<CSMComponent, String>();
 	}
 }

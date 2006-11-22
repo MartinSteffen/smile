@@ -22,9 +22,9 @@ public final class FinalState extends InternalState {
 	}
 
 	/**
-	 * Fügt den Child-States dieser Komponente einen ExitState hinzu
+	 * Fuegt den Child-States dieser Komponente einen ExitState hinzu
 	 * 
-	 * @param child der hinzuzufügende ExitState
+	 * @param child der hinzuzufuegende ExitState
 	 * @throws ErrTreeNotChanged wenn der ExitState schon das Child
 	 *             irgendeiner Komponente ist
 	 */

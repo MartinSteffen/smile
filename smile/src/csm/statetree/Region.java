@@ -22,12 +22,12 @@ public abstract class Region extends CSMComponent {
 	}
 
 	/**
-	 * Fügt den Child-States dieser Region einen InternalState hinzu
+	 * Fuegt den Child-States dieser Region einen InternalState hinzu
 	 * 
-	 * @param child der hinzuzufügende InternalState
+	 * @param child der hinzuzufuegende InternalState
 	 * @throws ErrTreeNotChanged wenn der InternalState schon das Child
 	 *             irgendeiner Komponente ist, oder wenn er durch das
-	 *             Hinzufügen ein Substate seiner selbst würde
+	 *             Hinzufuegen ein Substate seiner selbst wuerde
 	 */
 	final public void add(InternalState child) throws ErrTreeNotChanged {
 		addAnyChild(child);

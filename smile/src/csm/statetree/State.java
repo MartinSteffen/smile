@@ -20,8 +20,8 @@ public abstract class State extends CSMComponent {
 	 * Connections
 	 * <p>
 	 * Definition 4 des Papers gibt an, welche States durch Transitionen
-	 * verbunden werden dürfen. Daraus ergibt sich folgende Tabelle, die
-	 * in der Methode mayConnectTo implementiert ist:
+	 * verbunden werden duerfen. Daraus ergibt sich folgende Tabelle,
+	 * die in der Methode mayConnectTo implementiert ist:
 	 * <p>
 	 * source, target, Bedingung
 	 * <p>
@@ -42,21 +42,22 @@ public abstract class State extends CSMComponent {
 	 * <p>
 	 * {Sentry, Schoice}, {Sentry, Sfinal, Schoice}, true
 	 * <p>
-	 * <i>transitionLocation()</i> gibt gemäß Def. 4 des Papers an, ob
-	 * von diesem State eine Transition zum Target-State ausgehen darf.
+	 * <i>transitionLocation()</i> gibt gemaess Def. 4 des Papers an,
+	 * ob von diesem State eine Transition zum Target-State ausgehen
+	 * darf.
 	 * <p>
 	 * Wenn eine solche Transition erlaubt ist, dann ermittelt die
 	 * Methode die innerste Komponente, innerhalb derer die Transition
-	 * verläuft. Also der Scom selbst bei inneren Transitionen, der
+	 * verlaeuft. Also der Scom selbst bei inneren Transitionen, der
 	 * stateOf eines EntryStates bei Transitionen hin zu inneren States,
 	 * die umgebende Region bei Transitionen zwischen InternalStates.
 	 * <p>
-	 * <i> Aufgrund der Komplexität der Bedingungen ist diese Funktion
+	 * <i> Aufgrund der Komplexitaet der Bedingungen ist diese Funktion
 	 * in Methoden der potentiellen Source-States aufgeteilt worden.
 	 * <p>
-	 * Diese Funktion ist das Herzstück des
+	 * Diese Funktion ist das Herzstueck des
 	 * Connect-/Disconnect-Mechanismus. Wenn sich irgendwann mal die
-	 * Bedingungen ändern, unter denen eine Transition zwei States
+	 * Bedingungen aendern, unter denen eine Transition zwei States
 	 * verbinden darf, muss nur diese Funktion angepasst werden. </i>
 	 * 
 	 * @return die Komponente, innerhalb derer verbunden wird, wenn von
@@ -67,12 +68,12 @@ public abstract class State extends CSMComponent {
 
 	/**
 	 * Damit beim Laden der CSM die Zuordnung der Connections zu ihren
-	 * Source- und Target-States erhalten bleibt, erhält jeder State
+	 * Source- und Target-States erhalten bleibt, erhaelt jeder State
 	 * eine eindeutige ID. Diese ID wird beim Modifizieren von States
 	 * nicht geupdated. Deshalb wird der Statetree bei jedem Speichern
 	 * neu durchnummeriert.
 	 * <p>
-	 * <i>Wer die uniqueId außerhalb des csm-Pakets verwendet, ist
+	 * <i>Wer die uniqueId ausserhalb des csm-Pakets verwendet, ist
 	 * selbst schuld.</i>
 	 * 
 	 * @return die uniqueId dieses States
@@ -83,7 +84,7 @@ public abstract class State extends CSMComponent {
 	}
 
 	/**
-	 * gemäß Paper, Definition 1: stateOf(parent(this))
+	 * gemaess Paper, Definition 1: stateOf(parent(this))
 	 * 
 	 * @return die umgebende SubRegion dieses States
 	 */
@@ -92,10 +93,10 @@ public abstract class State extends CSMComponent {
 	}
 
 	/**
-	 * gemäß Paper, Definition 1
+	 * gemaess Paper, Definition 1
 	 * 
-	 * @return für einen ConnectionPoint der enthaltende InternalState,
-	 *         für einen InternalState diesen selbst
+	 * @return fuer einen ConnectionPoint der enthaltende InternalState,
+	 *         fuer einen InternalState diesen selbst
 	 */
 	public abstract InternalState stateOf();
 

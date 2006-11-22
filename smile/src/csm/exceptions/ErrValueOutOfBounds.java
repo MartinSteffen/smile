@@ -5,7 +5,7 @@ package csm.exceptions;
 
 /**
  * Zeigt an, dass versucht wurde, einen Zahlenwert zu setzen, der
- * außerhalb der erlaubten Grenzen liegt. Wird zum Beispiel von der
+ * ausserhalb der erlaubten Grenzen liegt. Wird zum Beispiel von der
  * Klasse Variable verwendet, damit Minimal-, Maximal- und Initialwert
  * konsistent sind.
  * 

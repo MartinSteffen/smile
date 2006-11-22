@@ -1,8 +1,10 @@
 package csm.expression;
 
-public final class LogicalAnd extends BinaryExpression<Boolean, Boolean> {
+public final class LogicalAnd extends
+		BinaryExpression<Boolean, Boolean> {
 
-	public LogicalAnd(Expression<Boolean> left, Expression<Boolean> right) {
+	public LogicalAnd(Expression<Boolean> left,
+			Expression<Boolean> right) {
 		super(left, right);
 	}
 

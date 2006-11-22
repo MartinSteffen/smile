@@ -22,16 +22,16 @@ public final class IntNegation extends Expression<Integer> {
 
 	@Override
 	public String prettyprint() {
-		if (precedence() > term.precedence())
-			return "- (" + term.prettyprint() + ')';
+		if (precedence() > this.term.precedence())
+			return "- (" + this.term.prettyprint() + ')';
 		else
-			return "- " + term.prettyprint();
+			return "- " + this.term.prettyprint();
 	}
 
 	@Override
 	public void noUndefinedVars(Dictionary<Variable> variables)
 			throws ErrUndefinedElement {
-		term.noUndefinedVars(variables);
+		this.term.noUndefinedVars(variables);
 	}
 
 	@Override

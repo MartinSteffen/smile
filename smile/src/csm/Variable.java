@@ -22,10 +22,11 @@ public final class Variable extends NamedObject {
 	 * @param max Maximalwert
 	 * @throws ErrValueOutOfBounds wenn Minimal-, Maximal- und
 	 *             Initialwerte nicht konsistent sind
-	 * @throws ErrAlreadyDefinedElement 
+	 * @throws ErrAlreadyDefinedElement
 	 */
-	public Variable(Dictionary<Variable> parent, String name, int i, int min, int max)
-			throws ErrValueOutOfBounds, ErrAlreadyDefinedElement {
+	public Variable(Dictionary<Variable> parent, String name, int i,
+			int min, int max) throws ErrValueOutOfBounds,
+			ErrAlreadyDefinedElement {
 		super(parent, name);
 		setValues(i, min, max);
 	}
@@ -57,14 +58,15 @@ public final class Variable extends NamedObject {
 	 * setzt die Minimal-, Maximal- und Initialwerte auf 0
 	 * 
 	 * @param name ungleich <code>null</code>
-	 * @throws ErrAlreadyDefinedElement 
+	 * @throws ErrAlreadyDefinedElement
 	 */
-	public Variable(Dictionary<Variable>parent, String name) throws ErrAlreadyDefinedElement {
+	public Variable(Dictionary<Variable> parent, String name)
+			throws ErrAlreadyDefinedElement {
 		super(parent, name);
 		/*
 		 * hier werden die Werte direkt gesetzt, ohne setValues zu
 		 * verwenden, weil der Konstruktor sonst mit der faktisch nie
-		 * auftretenden Exception ErrValueOutOfBounds umgehen m¸ﬂte
+		 * auftretenden Exception ErrValueOutOfBounds umgehen muesste
 		 */
 		this.initialValue = 0;
 		this.minValue = 0;
@@ -76,7 +78,7 @@ public final class Variable extends NamedObject {
 	}
 
 	/**
-	 * @throws ErrValueOutOfBounds wenn der Initialwert auﬂerhalb der
+	 * @throws ErrValueOutOfBounds wenn der Initialwert ausserhalb der
 	 *             Grenzen liegt
 	 */
 	public void setInitialValue(int initialValue)
@@ -97,7 +99,7 @@ public final class Variable extends NamedObject {
 	}
 
 	/**
-	 * @throws ErrValueOutOfBounds wenn der Minimalwert auﬂerhalb der
+	 * @throws ErrValueOutOfBounds wenn der Minimalwert ausserhalb der
 	 *             Grenzen liegt
 	 */
 	public void setMinValue(int minValue) throws ErrValueOutOfBounds {
@@ -113,7 +115,7 @@ public final class Variable extends NamedObject {
 	}
 
 	/**
-	 * @throws ErrValueOutOfBounds wenn der Maximalwert auﬂerhalb der
+	 * @throws ErrValueOutOfBounds wenn der Maximalwert ausserhalb der
 	 *             Grenzen liegt
 	 */
 	public void setMaxValue(int maxValue) throws ErrValueOutOfBounds {

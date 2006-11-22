@@ -20,15 +20,15 @@ public final class Transition extends CSMComponent {
 	private Action action;
 
 	/**
-	 * Erzeugt eine neue Transition und trägt sie im Komponentenbaum
-	 * ein. Wenn es nicht möglich ist, Source- und Target-State zu
+	 * Erzeugt eine neue Transition und traegt sie im Komponentenbaum
+	 * ein. Wenn es nicht moeglich ist, Source- und Target-State zu
 	 * verbinden, wird eine Exception geworfen, und der Komponentenbaum
-	 * bleibt unverändert.
+	 * bleibt unveraendert.
 	 * 
 	 * @param source der Source-State dieser Transition
 	 * @param target der Target-State dieser Transition
 	 * @throws ErrMayNotConnect wenn Source- und Traget-State nicht
-	 *             durch eine Transition verbunden werden dürfen.
+	 *             durch eine Transition verbunden werden duerfen.
 	 */
 	public Transition(Point location, State source, State target)
 			throws ErrMayNotConnect {
@@ -48,12 +48,12 @@ public final class Transition extends CSMComponent {
 			throw new ErrMayNotConnect();
 
 		/*
-		 * in transitionLocation eintragen. -- dafür verwenden wir keine
-		 * explizite add-Methode, da das Eintragen von Transitionen nur
-		 * im Konstruktor der jeweiligen Transition geschieht. Wir
-		 * wissen, dass this eine unbenutzte Komponente ist, und dass
-		 * loc kein Substate von this ist. Daher können wir hier
-		 * addUncheckedChild verwenden.
+		 * in transitionLocation eintragen. -- dafuer verwenden wir
+		 * keine explizite add-Methode, da das Eintragen von
+		 * Transitionen nur im Konstruktor der jeweiligen Transition
+		 * geschieht. Wir wissen, dass this eine unbenutzte Komponente
+		 * ist, und dass loc kein Substate von this ist. Daher koennen
+		 * wir hier addUncheckedChild verwenden.
 		 */
 		loc.addAnyUncheckedChild(this);
 		this.source = source;
@@ -65,10 +65,10 @@ public final class Transition extends CSMComponent {
 	}
 
 	/**
-	 * Setzt die dieser Transition zugeordnete Aktion. Enthält die
+	 * Setzt die dieser Transition zugeordnete Aktion. Enthaelt die
 	 * Aktion Verweise auf Variablen, die in der CSM, zu der diese
-	 * Transition gehört, nicht definiert sind, dann bleibt die
-	 * Transition unverändert, und es wird eine Exception geworfen.
+	 * Transition gehoert, nicht definiert sind, dann bleibt die
+	 * Transition unveraendert, und es wird eine Exception geworfen.
 	 * 
 	 * @param action eine Aktion oder null, falls dieser Transition
 	 *            keine Aktion zugeordnet ist
@@ -116,7 +116,8 @@ public final class Transition extends CSMComponent {
 	 * @throws ErrUndefinedElement wenn im Guard undefinierte Variablen
 	 *             referenziert werden
 	 */
-	public final void setGuard(Expression<Boolean> guard) throws ErrUndefinedElement {
+	public final void setGuard(Expression<Boolean> guard)
+			throws ErrUndefinedElement {
 		guard.noUndefinedVars(getCSM().variables);
 		this.guard = guard;
 	}
@@ -124,7 +125,9 @@ public final class Transition extends CSMComponent {
 	/**
 	 * den Guard parsen und eintragen
 	 * 
-	 * @see Transition#setGuard(Guard)
+	 * @param guard the guard to set
+	 * @throws ErrUndefinedElement wenn im Guard undefinierte Variablen
+	 *             referenziert werden
 	 */
 	public final void setGuard(String guard) throws ErrUndefinedElement {
 		// TODO parsen

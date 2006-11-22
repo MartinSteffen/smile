@@ -1,11 +1,11 @@
 package csm.statetree;
 
 /**
- * ein Visitor-Pattern für CSM-Komponentenbäume.
+ * ein Visitor-Pattern fuer CSM-Komponentenbaeume.
  * <p>
  * Die Methode visitChildren(CSMComponent) besucht alle Children der
  * Komponente. Das sollte ausreichen, um die meisten Operationen auf
- * Komponentenbäumen zu implementieren. Ein Beispiel findet sich unter
+ * Komponentenbaeumen zu implementieren. Ein Beispiel findet sich unter
  * {@link OutermostRegion#enumerateStates()}, ein anderes unter
  * {@link csm.CSMSaver}
  * 
@@ -15,7 +15,7 @@ public class Visitor {
 
 	protected void visitCSMComponent(CSMComponent component) {
 		// die visitXXX-Methoden werden bei Bedarf in den Child-Klassen
-		// überschrieben
+		// ueberschrieben
 	}
 
 	// ** Regionen
@@ -71,11 +71,11 @@ public class Visitor {
 	/**
 	 * alle Child-Komponenten besuchen
 	 * <p>
-	 * Mit dieser Methode können Visitors gebaut werden, die den
-	 * CSM-Komponentenbaum rekursiv besuchen. Sie gehört strenggenommen
+	 * Mit dieser Methode koennen Visitors gebaut werden, die den
+	 * CSM-Komponentenbaum rekursiv besuchen. Sie gehoert strenggenommen
 	 * nicht zum Visitor-Pattern. Sie ist trotzdem an dieser Stelle
 	 * implementiert, weil wir dadurch den Zugriff auf die
-	 * Child-Komponenten ermöglichen, ohne die Kapselung der
+	 * Child-Komponenten ermoeglichen, ohne die Kapselung der
 	 * Children-Listen aufzugeben.
 	 */
 	protected final void visitChildren(CSMComponent component) {

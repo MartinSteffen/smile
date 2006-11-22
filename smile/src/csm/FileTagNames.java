@@ -1,19 +1,19 @@
 package csm;
 
 /**
- * definiert alle Tag-Namen für das XML-Dateiformat
+ * definiert alle Tag-Namen fuer das XML-Dateiformat
  */
 interface FileTagNames {
 
-	// für das Positions-Attribut aller Komponenten
+	// fuer das Positions-Attribut aller Komponenten
 	String TAG_POSITION = "position";
 	String ATTR_X = "x";
 	String ATTR_Y = "y";
 
-	// für den Typ der ExitStates
+	// fuer den Typ der ExitStates
 	String ATTR_KIND = "kind";
 
-	// für die eindeutige Nummer jedes States
+	// fuer die eindeutige Nummer jedes States
 	String ATTR_UNIQUE_ID = "uniqueId";
 
 	// die konkreten States und Komponenten

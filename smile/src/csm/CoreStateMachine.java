@@ -33,11 +33,12 @@ public final class CoreStateMachine extends Observable {
 	public final Dictionary<Variable> variables = new Dictionary<Variable>();
 
 	/**
-	 * die Metadaten für die verschiedenen GUIs
+	 * die Metadaten fuer die verschiedenen GUIs
 	 */
-	private HashMap<String, GuiMetadata> guiMetadata;
+	private final HashMap<String, GuiMetadata> guiMetadata;
 
 	public CoreStateMachine() {
+		guiMetadata = new HashMap<String, GuiMetadata>();
 	}
 
 	/**
@@ -64,20 +65,20 @@ public final class CoreStateMachine extends Observable {
 	}
 
 	/**
-	 * gibt die Metadaten einer gegeben GUI zurück (oder null, wenn für
-	 * diese GUI-Id keine Metadaten existieren)
+	 * gibt die Metadaten einer gegeben GUI zurueck (oder null, wenn
+	 * fuer diese GUI-Id keine Metadaten existieren)
 	 */
 	public final GuiMetadata getGuiMetadata(String guiId) {
 		assert guiId != null;
-		return guiMetadata.get(guiId);
+		return this.guiMetadata.get(guiId);
 	}
 
 	/**
-	 * setzt die Metadaten für eine GUI
+	 * setzt die Metadaten fuer eine GUI
 	 */
 	public final void setGuiMetadata(GuiMetadata guiData) {
 		assert guiData != null;
-		guiMetadata.put(guiData.guiId, guiData);
+		this.guiMetadata.put(guiData.guiId, guiData);
 	}
 
 }

@@ -33,10 +33,10 @@ public final class CompositeState extends InternalState {
 	}
 
 	/**
-	 * Fügt den Child-States dieser Komponente einen ConnectionPoint
+	 * Fuegt den Child-States dieser Komponente einen ConnectionPoint
 	 * hinzu
 	 * 
-	 * @param child der hinzuzufügende State
+	 * @param child der hinzuzufuegende State
 	 * @throws ErrTreeNotChanged wenn der ConnectionPoint schon das
 	 *             Child irgendeiner Komponente ist
 	 */
@@ -46,12 +46,12 @@ public final class CompositeState extends InternalState {
 	}
 
 	/**
-	 * Fügt den SubRegions dieser Komponente eine SubRegion hinzu. Die
-	 * Stelle, an der sie zwischen den anderen SubRegions eingefügt
-	 * wird, ist dabei nicht festgelegt. Es ist Sache der einfügenden
+	 * Fuegt den SubRegions dieser Komponente eine SubRegion hinzu. Die
+	 * Stelle, an der sie zwischen den anderen SubRegions eingefuegt
+	 * wird, ist dabei nicht festgelegt. Es ist Sache der einfuegenden
 	 * Methode, die Positionen der SubRegions zu setzen.
 	 * 
-	 * @param child die hinzuzufügende SubRegion
+	 * @param child die hinzuzufuegende SubRegion
 	 * @throws ErrTreeNotChanged wenn 1. die Region schon das Child
 	 *             irgendeiner Komponente ist, oder wenn 2. versucht
 	 *             wurde, eine Komponente zu ihrer eigenen
@@ -62,8 +62,8 @@ public final class CompositeState extends InternalState {
 	}
 
 	/**
-	 * Jeder CompositeState enthält doAction, das ein Objekt vom Typ
-	 * csm.action.Action enthält
+	 * Jeder CompositeState enthaelt doAction, das ein Objekt vom Typ
+	 * csm.action.Action enthaelt
 	 * 
 	 * @return die doAktion oder null, wenn der Zustand keine Do-Action
 	 *         hat
@@ -74,7 +74,7 @@ public final class CompositeState extends InternalState {
 
 	/**
 	 * @param action die dem State zugeordnete DoAction oder null, wenn
-	 *            der State keine DoAction enthält.
+	 *            der State keine DoAction enthaelt.
 	 * @throws ErrUndefinedElement wenn die Action auf Variablen
 	 *             verweist, die in der zugeordneten CSM nicht definiert
 	 *             sind
@@ -87,7 +87,7 @@ public final class CompositeState extends InternalState {
 	}
 
 	/**
-	 * gibt die in diesem State als deferred markierten Events zurück
+	 * gibt die in diesem State als deferred markierten Events zurueck
 	 * 
 	 * @return eine neue Kopie der Eventliste
 	 */

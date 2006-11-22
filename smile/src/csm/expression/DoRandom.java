@@ -14,11 +14,11 @@ public final class DoRandom extends Action {
 	final public String varname;
 
 	/**
-	 * Die Werte werden nicht auf Gültigkeit geprüft. Eine solche
-	 * Prüfung findet erst in der semantischen Analyse statt.
+	 * Die Werte werden nicht auf Gueltigkeit geprueft. Eine solche
+	 * Pruefung findet erst in der semantischen Analyse statt.
 	 * 
 	 * @param varname der Variablenname
-	 * @param pv eine Liste der möglichen Werte. Die Liste muss
+	 * @param pv eine Liste der moeglichen Werte. Die Liste muss
 	 *            mindestens ein Element enthalten.
 	 */
 	final public List<Integer> possibleValues;

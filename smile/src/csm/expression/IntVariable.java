@@ -22,12 +22,13 @@ public final class IntVariable extends Expression<Integer> {
 
 	@Override
 	public String prettyprint() {
-		return varname;
+		return this.varname;
 	}
 
 	@Override
-	public void noUndefinedVars(Dictionary<Variable> variables) throws ErrUndefinedElement {
-		variables.mustContain(varname);
+	public void noUndefinedVars(Dictionary<Variable> variables)
+			throws ErrUndefinedElement {
+		variables.mustContain(this.varname);
 	}
 
 	@Override

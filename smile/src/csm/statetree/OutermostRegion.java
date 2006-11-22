@@ -8,8 +8,8 @@ import csm.exceptions.ErrTreeNotChanged;
 
 /**
  * eine spezielle Region, die keine Parent-Komponente hat. Sie hat
- * zusätzlich einen Start-State und einen (unveränderlichen) Verweis auf
- * die CoreStateMachine, deren Teil sie ist.
+ * zusaetzlich einen Start-State und einen (unveraenderlichen) Verweis
+ * auf die CoreStateMachine, deren Teil sie ist.
  * <p>
  * im Paper als SubRegion \epsilon bekannt
  * 
@@ -23,7 +23,7 @@ public final class OutermostRegion extends Region {
 
 	/**
 	 * @param containingCSM die CoreStateMachine, zu der diese Region
-	 *            gehört; muss ungleich null sein
+	 *            gehoert; muss ungleich null sein
 	 */
 	public OutermostRegion(CoreStateMachine containingCSM) {
 		super(new Point(0, 0));
@@ -46,11 +46,11 @@ public final class OutermostRegion extends Region {
 
 	/**
 	 * setzt den Start-State, wenn er 1. ein Composite-State und 2.
-	 * direkt in dieser äußersten Region enthalten ist.
+	 * direkt in dieser aeussersten Region enthalten ist.
 	 * 
 	 * @param state der Start-State oder null
 	 * @throws ErrTreeNotChanged wenn der neue Start-State nicht direkt
-	 *             in dieser äußersten Region liegt.
+	 *             in dieser aeussersten Region liegt.
 	 */
 	public void setStartState(CompositeState state)
 			throws ErrTreeNotChanged {
@@ -64,7 +64,7 @@ public final class OutermostRegion extends Region {
 	 */
 	public void enumerateStates() {
 		/*
-		 * Verwende einen Visitor, um über alle Komponenten zu
+		 * Verwende einen Visitor, um ueber alle Komponenten zu
 		 * iterieren.
 		 */
 		new Visitor() {
@@ -72,7 +72,7 @@ public final class OutermostRegion extends Region {
 			int count;
 
 			/*
-			 * der State erhält eine neue Nummer, danach werden seine
+			 * der State erhaelt eine neue Nummer, danach werden seine
 			 * Child-Komponenten besucht
 			 */
 			@Override

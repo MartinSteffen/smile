@@ -2,7 +2,8 @@ package csm.expression;
 
 public class CompareNeq extends CompareExpression {
 
-	public CompareNeq(Expression<Integer> left, Expression<Integer> right) {
+	public CompareNeq(Expression<Integer> left,
+			Expression<Integer> right) {
 		super(left, right);
 	}
 

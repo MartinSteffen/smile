@@ -8,12 +8,12 @@ import csm.expression.LogicalTrue;
 
 
 /**
- * Testklasse für unsere internen Zwecke, wird nicht in der endgültigen
- * Version enthalten sein
+ * Testklasse fuer unsere internen Zwecke, wird nicht in der
+ * endgueltigen Version enthalten sein
  * 
  * @author hsi
  */
-public class Scratch {
+class Scratch {
 
 	/**
 	 * @param args
@@ -29,8 +29,9 @@ public class Scratch {
 		final StringBuilder xmlstring = new StringBuilder();
 		// StatetreeSaver.statetreeToXML(xmlstring, o);
 		System.out.print(xmlstring);
-		Expression<Boolean> e = new LogicalAnd(new LogicalFalse(),
-				new LogicalOr(new LogicalFalse(), new LogicalTrue()));
+		final Expression<Boolean> e = new LogicalAnd(
+				new LogicalFalse(), new LogicalOr(new LogicalFalse(),
+						new LogicalTrue()));
 		System.out.println(e.prettyprint());
 	}
 }

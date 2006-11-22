@@ -20,7 +20,7 @@ public final class ErrUndefinedElement extends CSMEditException {
 
 	/**
 	 * Erzeugt eine Exception mit dem Text "$name is not defined", wobei
-	 * für $name der übergebene Name eingesetzt wird.
+	 * fuer $name der uebergebene Name eingesetzt wird.
 	 * 
 	 * @param name der Name, der nicht gefunden wurde
 	 */

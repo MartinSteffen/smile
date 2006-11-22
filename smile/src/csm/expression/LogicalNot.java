@@ -23,16 +23,16 @@ public final class LogicalNot extends Expression<Boolean> {
 
 	@Override
 	public String prettyprint() {
-		if (precedence() > guard.precedence())
-			return "! (" + guard.prettyprint() + ')';
+		if (precedence() > this.guard.precedence())
+			return "! (" + this.guard.prettyprint() + ')';
 		else
-			return "! "+guard.prettyprint();
+			return "! " + this.guard.prettyprint();
 	}
 
 	@Override
 	public void noUndefinedVars(Dictionary<Variable> variables)
 			throws ErrUndefinedElement {
-		guard.noUndefinedVars(variables);
+		this.guard.noUndefinedVars(variables);
 	}
 
 	@Override

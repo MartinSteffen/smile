@@ -16,5 +16,4 @@ public class CompareEq extends CompareExpression {
 		return "==";
 	}
 
-
 }
