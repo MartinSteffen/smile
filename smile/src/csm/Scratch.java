@@ -1,7 +1,7 @@
 package csm;
 
-import csm.expression.LogicalAnd;
 import csm.expression.Expression;
+import csm.expression.LogicalAnd;
 import csm.expression.LogicalFalse;
 import csm.expression.LogicalOr;
 import csm.expression.LogicalTrue;

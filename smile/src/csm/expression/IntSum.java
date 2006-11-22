@@ -1,5 +1,6 @@
 package csm.expression;
 
+
 public final class IntSum extends BinaryExpression<Integer, Integer> {
 
 	@Override
@@ -17,7 +18,7 @@ public final class IntSum extends BinaryExpression<Integer, Integer> {
 	}
 
 	@Override
-	int precedence() {
+	protected int precedence() {
 		return 6;
 	}
 

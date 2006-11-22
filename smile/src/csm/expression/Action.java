@@ -5,7 +5,7 @@ import csm.ExpressionEnvironment;
 
 /**
  * eine Aktion ist ein Ausdruck, der einen Systemzustand (ein
- * VarAssignment) auf einen neuen Systemzustand abbildet
+ * ExpressionEnvironment) auf einen neuen Systemzustand abbildet
  */
 public abstract class Action extends Expression<ExpressionEnvironment> {
 
@@ -21,7 +21,7 @@ public abstract class Action extends Expression<ExpressionEnvironment> {
 	}
 
 	@Override
-	final int precedence() {
+	protected final int precedence() {
 		return 0;
 	}
 

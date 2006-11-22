@@ -6,7 +6,7 @@ import csm.Variable;
 import csm.exceptions.ErrUndefinedElement;
 
 
-abstract class BinaryExpression<Result, Arg> extends Expression<Result> {
+abstract public class BinaryExpression<Result, Arg> extends Expression<Result> {
 
 	/**
 	 * der linke Subterm

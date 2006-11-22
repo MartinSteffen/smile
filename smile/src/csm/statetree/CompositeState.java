@@ -87,6 +87,18 @@ public final class CompositeState extends InternalState {
 	}
 
 	/**
+	 * @param action die dem State zugeordnete DoAction oder null, wenn
+	 *            der State keine DoAction enthaelt.
+	 * @throws ErrUndefinedElement wenn die Action auf Variablen
+	 *             verweist, die in der zugeordneten CSM nicht definiert
+	 *             sind
+	 */
+	final public void setDoAction(String action)
+			throws ErrUndefinedElement {
+		assert action != null;
+		// TODO parsen
+	}
+	/**
 	 * gibt die in diesem State als deferred markierten Events zurueck
 	 * 
 	 * @return eine neue Kopie der Eventliste

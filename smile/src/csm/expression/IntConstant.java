@@ -30,7 +30,7 @@ public final class IntConstant extends Expression<Integer> {
 	}
 
 	@Override
-	int precedence() {
+	protected int precedence() {
 		return 10;
 	}
 

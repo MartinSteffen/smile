@@ -1,5 +1,6 @@
 package csm.expression;
 
+
 public final class LogicalOr extends BinaryExpression<Boolean, Boolean> {
 
 	public LogicalOr(Expression<Boolean> left, Expression<Boolean> right) {
@@ -17,7 +18,7 @@ public final class LogicalOr extends BinaryExpression<Boolean, Boolean> {
 	}
 
 	@Override
-	int precedence() {
+	protected int precedence() {
 		return 1;
 	}
 

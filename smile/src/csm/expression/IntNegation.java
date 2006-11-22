@@ -35,7 +35,7 @@ public final class IntNegation extends Expression<Integer> {
 	}
 
 	@Override
-	int precedence() {
+	protected int precedence() {
 		return 9;
 	}
 }

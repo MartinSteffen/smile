@@ -49,5 +49,5 @@ public abstract class Expression<Result> {
 	 * 1 | <br>
 	 * 0 action
 	 */
-	abstract int precedence();
+	abstract protected int precedence();
 }

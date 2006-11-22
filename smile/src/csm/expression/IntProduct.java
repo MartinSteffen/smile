@@ -1,5 +1,6 @@
 package csm.expression;
 
+
 public final class IntProduct extends
 		BinaryExpression<Integer, Integer> {
 
@@ -18,7 +19,7 @@ public final class IntProduct extends
 	}
 
 	@Override
-	int precedence() {
+	protected int precedence() {
 		return 7;
 	}
 

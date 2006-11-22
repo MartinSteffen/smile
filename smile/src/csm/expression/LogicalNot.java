@@ -36,7 +36,7 @@ public final class LogicalNot extends Expression<Boolean> {
 	}
 
 	@Override
-	int precedence() {
+	protected int precedence() {
 		return 3;
 	}
 }

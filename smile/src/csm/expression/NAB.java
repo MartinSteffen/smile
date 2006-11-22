@@ -24,7 +24,7 @@ public final class NAB extends Expression<Boolean> {
 	}
 
 	@Override
-	int precedence() {
+	protected int precedence() {
 		return 10;
 	}
 

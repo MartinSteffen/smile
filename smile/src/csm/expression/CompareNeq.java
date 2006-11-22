@@ -1,5 +1,6 @@
 package csm.expression;
 
+
 public class CompareNeq extends CompareExpression {
 
 	public CompareNeq(Expression<Integer> left,
