@@ -10,7 +10,7 @@ public class NuState {
 	/**
 	 * Erzeugt einen neuen State und traegt ihn im \nu-Automaten ein.
 	 */
-	NuState(NuAutomaton nua) {
+	public NuState(NuAutomaton nua) {
 		this.nua = nua;
 	}
 
@@ -23,8 +23,9 @@ public class NuState {
 	 * @param isRootState gibt an, ob der State als Root-State im
 	 *            \nu-Automaten eingetragen werden soll.
 	 */
-	NuState(NuAutomaton nua, boolean isRootState) {
+	public NuState(NuAutomaton nua, boolean isRootState) {
 		this(nua);
-		nua.rootStates.add(this);
+		if (isRootState)
+			nua.rootStates.add(this);
 	}
 }

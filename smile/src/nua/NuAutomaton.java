@@ -15,7 +15,7 @@ public class NuAutomaton {
 
 	final public Set<NuTransition> transitions;
 
-	boolean isConcrete() {
+	public boolean isConcrete() {
 		return this.rootStates.size() == 1;
 	}
 

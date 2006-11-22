@@ -21,7 +21,7 @@ public class NuTransition {
 	/**
 	 * erzeugt eine neue Transition und traegt sie im \nu-Automaten ein
 	 */
-	NuTransition(NuAutomaton nua, NuState source, Event action,
+	public NuTransition(NuAutomaton nua, NuState source, Event action,
 			Set<NuState> targets) {
 		assert source.nua == nua;
 		assert allMembersArePartOf(targets, nua);

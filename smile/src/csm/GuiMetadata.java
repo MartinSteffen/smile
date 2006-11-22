@@ -19,7 +19,7 @@ public class GuiMetadata {
 	public final String guiId;
 	public final HashMap<CSMComponent, String> data;
 
-	GuiMetadata(String guiId) {
+	public GuiMetadata(String guiId) {
 		assert guiId != null;
 		this.guiId = guiId;
 		this.data = new HashMap<CSMComponent, String>();
