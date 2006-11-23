@@ -1,9 +1,11 @@
 options {
   JDK_VERSION = "1.5";
+  STATIC= false;
 }
 
 PARSER_BEGIN(ExpressionParser)
 package csm.expression.parser;
+import csm.expression.*;
 
 public class ExpressionParser {}
 
@@ -17,4 +19,61 @@ SKIP :
 |	"\r"
 |	"\t"
 |	"\n"
+}
+
+TOKEN :
+{
+	<LPAREN : "(">
+|	<RPAREN : ")">
+|	<SEND	: "send">
+|	<RANDOM	: "random">
+|	<ASSIGN	: ":=">
+|	<OR		: "|">
+|	<AND	: "&">
+|	<NOT	: "!">
+|	<EQ		: "==">
+|	<NEQ	: "!=">
+|	<GEQ	: ">=">
+|	<LEQ	: "<=">
+|	<GT		: ">">
+|	<LT		: "<">
+|	<PLUS	: "+">
+|	<MINUS	: "-">
+|   <MUL	: "*">
+|	<INTNUM : (["0"-"9"])+ >
+|	<IDENT	: (["a"-"z"] | ["A"-"Z"] | "_")
+			  (["a"-"z"] | ["A"-"Z"] | "_" | ["0"-"9"])* >
+}
+
+// Precedence level 0
+
+
+// Precedence level 1
+
+
+// Precedence level 2
+
+
+// Precedence level 3
+
+
+// Precedence level 4
+
+
+// Precedence level 6
+
+
+// Precedence level 7
+
+
+// Precedence level 9
+
+
+// Precedence level 10
+
+Expression<Integer> intConst() : {
+	Token t;
+}{
+	t = <INTNUM>
+	{ return new IntConstant(Integer.valueOf(t.image));}
 }
