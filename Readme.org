@@ -1,0 +1,32 @@
+** Abstract
+
+
+The repository collects the /sources/ of the ``Smile'' project, in the
+software programming lab course, winter 2006 at the University Kiel.
+
+For the webpages of the course, see [[http://heim.ifi.uio.no/msteffen/teaching/softtech/ws0607/pitm-uml][here]].
+
+
+** Structure
+
+
+    - [[,/Readme.org]]:        this file
+    - [[./org]]:               course related information, including a file  [[./org/Readme-course.txt]] 
+                           describing the (initial) structure of the code.
+                           development steps
+    - [[./dokumentation/]]     information and documentation
+    - [[./src/]]               the sources
+
+
+** Historical notes
+
+The repository has been resurrected by migrating from ~cvs~ via svn (using
+~cvs2svn~) and from there to ~git~. Caveats concerning missing branches
+apply. Also the /Snapshots/ or baselines (original svn revision tags) seem
+not to be preserved as git labels in the final repository (see the
+[[./Baselines]]-file).  Also, original /authors/ have not been preserved, as
+the original development was done all via a common login ~swprakt~; in
+general, the contributors were the different students in the course plus
+the course teachers.
+
+
