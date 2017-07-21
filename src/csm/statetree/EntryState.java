@@ -28,13 +28,13 @@ public final class EntryState extends ConnectionPoint {
 	@Override
 	final CSMComponent transitionLocation(State target) {
 		assert target != null;
-		if (stateOf() != target.regOf().getParent())
+		if (target instanceof ExitState)
 			return null;
-		if (target instanceof EntryState
-				|| target instanceof ChoiceState
-				|| target instanceof FinalState)
+		else if (stateOf() != target.regOf().getParent())
+			return null;
+		if (target instanceof EntryState || target instanceof ChoiceState
+			|| target instanceof FinalState)
 			return stateOf();
-		else
-			return null;
+		return null;
 	}
 }

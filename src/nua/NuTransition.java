@@ -2,8 +2,6 @@ package nua;
 
 import java.util.Set;
 
-import csm.Event;
-
 
 /**
  * eine Transition des \nu-Automaten
@@ -14,32 +12,57 @@ public class NuTransition {
 
 	public final NuState source;
 
-	public final Event action;
+	public final String action;
 
 	public final Set<NuState> targets;
 
 	/**
-	 * erzeugt eine neue Transition und traegt sie im \nu-Automaten ein
+	 * kann bei der Erzeugung des Nu-Automaten gesetzt werden
 	 */
-	public NuTransition(NuAutomaton nua, NuState source, Event action,
+	public final String debugInfo;
+
+	int uniqueId;
+
+	/**
+	 * erzeugt eine neue Transition und traegt sie im \nu-Automaten ein
+	 * 
+	 * @param targets ein Set, das die Targets dieser Transition
+	 *            enthält. Damit NuAutomaton#reduceToIllegalPaths
+	 *            funktioniert, darf dieses Set nur beir jeweils einer
+	 *            Transition eingetragen werden.
+	 */
+	public NuTransition(NuAutomaton nua, NuState source, String action,
 			Set<NuState> targets) {
+		this(nua, source, action, targets, null);
+	}
+
+	/**
+	 * erzeugt eine neue Transition und traegt sie im \nu-Automaten ein
+	 * 
+	 * @param targets ein Set, das die Targets dieser Transition
+	 *            enthält. Damit NuAutomaton#reduceToIllegalPaths
+	 *            funktioniert, darf dieses Set nur beir jeweils einer
+	 *            Transition eingetragen werden.
+	 */
+	public NuTransition(NuAutomaton nua, NuState source, String action,
+			Set<NuState> targets, String debugInfo) {
 		assert source.nua == nua;
-		assert allMembersArePartOf(targets, nua);
+		assert NuTransition.allMembersArePartOf(targets, nua);
 
 		this.nua = nua;
 		this.source = source;
 		this.action = action;
 		this.targets = targets;
-
-		this.nua.transitions.add(this);
+		this.debugInfo = debugInfo;
+		this.nua.registerTransition(this);
 	}
 
 	/**
-	 * testet, ob alle States, die in der Liste list enthalten sind,
+	 * testet, ob alle States, die in der Menge members enthalten sind,
 	 * Elemente des \nu-Automaten nua sind
 	 */
-	boolean allMembersArePartOf(Set<NuState> list, NuAutomaton nua) {
-		for (final NuState member : list)
+	static boolean allMembersArePartOf(Set<NuState> members, NuAutomaton nua) {
+		for (final NuState member : members)
 			if (member.nua != nua)
 				return false;
 		return true;

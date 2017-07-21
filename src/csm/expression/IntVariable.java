@@ -1,9 +1,8 @@
 package csm.expression;
 
-import csm.Dictionary;
+import java.util.Set;
+
 import csm.ExpressionEnvironment;
-import csm.Variable;
-import csm.exceptions.ErrUndefinedElement;
 
 
 public final class IntVariable extends Expression<Integer> {
@@ -25,14 +24,20 @@ public final class IntVariable extends Expression<Integer> {
 		return this.varname;
 	}
 
-	@Override
-	public void noUndefinedVars(Dictionary<Variable> variables)
-			throws ErrUndefinedElement {
-		variables.mustContain(this.varname);
+	public String firstUndefinedVar(Set<String> variables) {
+		if (!variables.contains(this.varname))
+			return this.varname;
+		return null;
 	}
 
 	@Override
 	protected int precedence() {
 		return 10;
 	}
+
+	@Override
+	csm.expression.Expression.ASSOCIATIVITY assoc() {
+		return ASSOCIATIVITY.NONASSOC;
+	}
+
 }

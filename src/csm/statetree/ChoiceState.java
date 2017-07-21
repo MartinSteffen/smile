@@ -2,6 +2,8 @@ package csm.statetree;
 
 import java.awt.Point;
 
+import csm.exceptions.ErrTreeNotChanged;
+
 
 /**
  * im Paper als S_choice bekannt
@@ -22,7 +24,9 @@ public final class ChoiceState extends InternalState {
 	@Override
 	CSMComponent transitionLocation(State target) {
 		assert target != null;
-		if (target instanceof CompositeState)
+		if (target instanceof ExitState)
+			return null;
+		else if (target instanceof CompositeState)
 			return null;
 		else if (this == target)
 			return this;
@@ -30,6 +34,11 @@ public final class ChoiceState extends InternalState {
 			return regOf();
 		else
 			return null;
-
 	}
+
+	@Override
+	public void dropHere(CSMComponent child) throws ErrTreeNotChanged {
+		dropToParent(child);
+	}
+
 }

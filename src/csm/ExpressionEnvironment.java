@@ -1,6 +1,9 @@
 package csm;
 
+import java.io.StringWriter;
 import java.util.HashMap;
+
+import csm.exceptions.ErrUndefinedElement;
 
 
 /**
@@ -22,14 +25,37 @@ public final class ExpressionEnvironment {
 
 	private final HashMap<String, Integer> values;
 
+	/*
+	 * Falls diese Variablenbelegiung einen Wertebereich überschreitet,
+	 * gibt varOutOfBounds an, welche Variable außerhalb ihres Bereichs
+	 * liegt
+	 */
+	String varOutOfBounds;
+
 	/**
-	 * der Name des in der letzten Aktion gesendeten Events ode null,
+	 * der Name des in der letzten Aktion gesendeten Events oder null,
 	 * wenn kein Event gesendet wurde
+	 */
+	// XXX Ergebnis von Action#evaluate als Tupel(Environment, Event)?
+	/*
+	 * Ein unschöner Hack: Nachdem eine Action ausgewertet wurde, muss
+	 * dieser Wert getestet werden, um festzustellen, ob die Action
+	 * einen Event ausgegeben hat.
 	 */
 	public String sendEventName;
 
 	public int sendEventValue;
 
+	// XXX History als Argument?
+	/*
+	 * Ebenfalls ein unschöner Hack: Bevor in einem Environment ein
+	 * Guard-Ausdruck ausgewertet werden kann. müssen diese beiden Werte
+	 * gesetzt werden. Die Alternative wäre, an Expression#evaluate
+	 * entweder den aktiven State und die History oder die aktuellen
+	 * Werte als Parameter zu übergeben. In jedem Fall wäre es ein
+	 * Fortschritt, wenn Transitionen über Methoden 'evalGuard(..)' und
+	 * 'calcAction(..)' verfügen würden.
+	 */
 	public Boolean nab;
 
 	public Boolean wla;
@@ -44,7 +70,9 @@ public final class ExpressionEnvironment {
 	public ExpressionEnvironment(Dictionary<Variable> dictionary) {
 		assert dictionary != null;
 		this.dictionary = dictionary;
-		this.values = dictionary.getInitials();
+		this.values = new HashMap<String, Integer>();
+		for (final Variable v : dictionary.getContents())
+			this.values.put(v.getName(), v.getInitialValue());
 	}
 
 	/**
@@ -61,15 +89,27 @@ public final class ExpressionEnvironment {
 	}
 
 	/**
-	 * Setzt den einem Variablennamen zugeordneten Integer-Wert. Dabei
-	 * werden keinerlei Ueberpruefungen des Gueltigkeitsbereichs
-	 * vorgenommen. Ist an den uebergebenen Variablennamen bei der
-	 * Erzeugung des VarAssignment-Objektes kein Wert gebunden worden,
-	 * dann ist das Verhalten der Funktion undefiniert.
+	 * Setzt den einem Variablennamen zugeordneten Integer-Wert. Ist an
+	 * den uebergebenen Variablennamen bei der Erzeugung des
+	 * VarAssignment-Objektes kein Wert gebunden worden, dann ist das
+	 * Verhalten der Funktion undefiniert.
+	 * <p>
+	 * Wird der Gültigkeitsbereich der Variablen über- oder
+	 * unterschritten, dann wird im ExpressionEnvironment gespeichert,
+	 * welche Variable den Gültigkeitsbereich verletzt. Der Verwender
+	 * des ExpressionEnvironments kann dann auf diese Situation
+	 * reagieren.
 	 */
 	public void setVar(String n, int value) {
 		assert n != null;
 		this.values.put(n, value);
+		try {
+			Variable v = this.dictionary.get(n);
+			if (value > v.getMaxValue() || value < v.getMinValue())
+				this.varOutOfBounds = n;
+		} catch (ErrUndefinedElement e) {
+			assert false : "Zugriff auf undefinierte Variable";
+		}
 	}
 
 	/**
@@ -83,4 +123,49 @@ public final class ExpressionEnvironment {
 		this.wla = e.wla;
 		this.sendEventName = null;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof ExpressionEnvironment) {
+			final ExpressionEnvironment other = (ExpressionEnvironment) obj;
+			return this.values.equals(other.values);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.values.hashCode();
+	}
+
+	/**
+	 * Gibt an, ob (mindestens) eine Variable ihren Gültigkeitsbereich
+	 * über- oder unterschreitet
+	 */
+	public boolean isOutOfBounds() {
+		return this.varOutOfBounds != null;
+	}
+
+	/**
+	 * Gibt den zuletzt illegal an eine Variable zugewiesenen Wert als
+	 * String der Form "var := 42" aus.
+	 */
+	public String getOutOfBoundsDescription() {
+		return this.varOutOfBounds + " := "
+			+ lookupVar(this.varOutOfBounds);
+	}
+
+	@Override
+	public String toString() {
+		StringWriter s = new StringWriter();
+		s.append("{ ");
+		for (String v : this.dictionary.getKeys()) {
+			s.append(v + ":=" + this.values.get(v) + "; ");
+		}
+		if (varOutOfBounds != null)
+			s.append(" -->" + varOutOfBounds + " !");
+		s.append('}');
+		return s.toString();
+	}
+
 }

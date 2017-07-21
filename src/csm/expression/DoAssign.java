@@ -1,9 +1,8 @@
 package csm.expression;
 
-import csm.Dictionary;
+import java.util.Set;
+
 import csm.ExpressionEnvironment;
-import csm.Variable;
-import csm.exceptions.ErrUndefinedElement;
 
 
 public final class DoAssign extends Action {
@@ -20,21 +19,22 @@ public final class DoAssign extends Action {
 	}
 
 	@Override
-	final void doAction(ExpressionEnvironment pre) {
-		final int i = this.term.evaluate(pre);
-		pre.setVar(this.varname, i);
-	}
-
-	@Override
 	public String prettyprint() {
 		return this.varname + " := " + this.term.prettyprint();
 	}
 
+	public String firstUndefinedVar(Set<String> dict) {
+		if (dict.contains(this.varname))
+			return this.term.firstUndefinedVar(dict);
+		return this.varname;
+	}
+
 	@Override
-	public void noUndefinedVars(Dictionary<Variable> dict)
-			throws ErrUndefinedElement {
-		dict.mustContain(this.varname);
-		this.term.noUndefinedVars(dict);
+	public final ExpressionEnvironment[] evaluate(ExpressionEnvironment pre) {
+		ExpressionEnvironment[] result = new ExpressionEnvironment[1];
+		result[0] = new ExpressionEnvironment(pre);
+		result[0].setVar(this.varname, this.term.evaluate(pre));
+		return result;
 	}
 
 }

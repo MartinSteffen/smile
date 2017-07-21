@@ -1,9 +1,8 @@
 package csm.expression;
 
-import csm.Dictionary;
+import java.util.Set;
+
 import csm.ExpressionEnvironment;
-import csm.Variable;
-import csm.exceptions.ErrUndefinedElement;
 
 
 public final class DoSend extends Action {
@@ -20,27 +19,24 @@ public final class DoSend extends Action {
 	}
 
 	@Override
-	void doAction(ExpressionEnvironment pre) {
-		pre.sendEventName = this.event;
-		pre.sendEventValue = this.value.evaluate(pre);
-
-		System.out.print("event ");
-		System.out.print(pre.sendEventName);
-		System.out.print(' ');
-		System.out.println(pre.sendEventValue);
-	}
-
-	@Override
 	public String prettyprint() {
 		return "send (" + this.event + ", " + this.value.prettyprint()
-				+ ')';
+			+ ')';
+	}
+
+	public String firstUndefinedVar(Set<String> dict) {
+		return this.value.firstUndefinedVar(dict);
+
 	}
 
 	@Override
-	public void noUndefinedVars(Dictionary<Variable> dict)
-			throws ErrUndefinedElement {
-		this.value.noUndefinedVars(dict);
-
+	public final ExpressionEnvironment[] evaluate(ExpressionEnvironment pre) {
+		final ExpressionEnvironment post = new ExpressionEnvironment(pre);
+		post.sendEventName = this.event;
+		post.sendEventValue = this.value.evaluate(post);
+		ExpressionEnvironment[] result = new ExpressionEnvironment[1];
+		result[0] = post;
+		return result;
 	}
 
 }

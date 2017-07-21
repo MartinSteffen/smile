@@ -4,94 +4,99 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.Dimension;
+
 import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 
 /**
- * <p>Title: </p>
- *
- * <p>Description: </p>
- *
- * <p>Copyright: Copyright (c) 2006</p>
- *
- * <p>Company: </p>
- *
- * @author not attributable
+ * <p>
+ * Title: GUI
+ * </p>
+ * 
+ * <p>
+ * Description: Die Klasse erzeugt das Hauptfenster und die visuellen Elemente in diesem.
+ * </p>
+ * 
+ * <p>
+ * Copyright: Copyright (c) 2006
+ * </p>
+ * 
+ * <p>
+ * Company:
+ * </p>
+ * 
+ * @author Oliver
  * @version 1.0
  */
-public class Gui extends JFrame
-{
-    /**
+public class Gui extends JFrame {
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1279008285203177345L;
-	private ProgramController pc = new ProgramController();
-    public Gui()
-    {
-        // Do frame stuff.
-        super("Project Name");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        // init all dialog
-        // initAllDialog(this);
+	private Controller pc = new Controller();
 
-        //create menu
-        MyMenuBar menubar = new MyMenuBar(pc);
-        menubar.initMyMenuBar();
-        setJMenuBar(menubar);
-        menubar.setVisible(true);
+	public Gui() {
+		// Do frame stuff.
+		super("Project Name");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        //create toolbar
-        MyToolBar myToolBar = new MyToolBar(pc);
+		// create menu
+		SMILEMenuBar menubar = new SMILEMenuBar(pc);
+		pc.setMenuBar(menubar);
+		setJMenuBar(menubar);
+		menubar.setVisible(true);
 
-        //create ElementList
-        ElementList el = new ElementList();
-        pc.setElementList(el);
+		// create toolbar
+		SMILEToolBar myToolBar = new SMILEToolBar(pc);
 
-        //create workpanel
-        WorkPanel wp = new WorkPanel();
-        pc.setWorkPanel(wp);
+		// create ElementList
+		ElementList el = new ElementList();
+		pc.setElementList(el);
 
-        //layout ElementList and workpanel together in a splitpane
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-                           el, wp);
-        splitPane.setOneTouchExpandable(true);
-        splitPane.setDividerLocation(150);
+		// create TabbedPane for WorkPanels
+		SMILETabbedPane wp = new SMILETabbedPane(pc);
+		pc.setTabbedPane(wp);
 
-        //Provide minimum sizes for the two components in the split pane
-        Dimension minimumSize = new Dimension(100, 50);
-        el.setMinimumSize(minimumSize);
-        wp.setMinimumSize(minimumSize);
+		// layout ElementList and workpanel together in a splitpane
+		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, el,
+				wp);
+		splitPane.setOneTouchExpandable(true);
+		splitPane.setDividerLocation(200);
 
-        //create messagepanel
-        MessagesPanel mp = new MessagesPanel();
-        pc.setMessagePanel(mp);
+		// Provide minimum sizes for the two components in the split pane
+		Dimension minimumSize = new Dimension(100, 50);
+		el.setMinimumSize(minimumSize);
+		wp.setMinimumSize(minimumSize);
 
-        //layout them together in a splitpane
-        JSplitPane jsp = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
-                           splitPane, mp);
-        jsp.setOneTouchExpandable(true);
+		// create messagepanel
+		MessagePanel mp = new MessagePanel(pc);
+		//pc.setMessagePanel(mp);
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        jsp.setDividerLocation(screenSize.height*7/10);
+		// layout them together in a splitpane
+		JSplitPane jsp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, splitPane,
+				mp);
+		jsp.setOneTouchExpandable(true);
+		jsp.setDividerLocation(screenSize.height * 7 / 10);
 
-        //set up main panel
-        JPanel mainJP = new JPanel(new BorderLayout());
+		// set up main panel
+		JPanel mainJP = new JPanel(new BorderLayout());
 
-        //Lay out the main panel.
-        mainJP.add(myToolBar, BorderLayout.PAGE_START);
-        mainJP.add(jsp, BorderLayout.CENTER);
+		// Lay out the main panel.
+		mainJP.add(myToolBar, BorderLayout.PAGE_START);
+		mainJP.add(jsp, BorderLayout.CENTER);
 
-        setContentPane(mainJP);
+		setContentPane(mainJP);
 
-        super.setSize(screenSize.width*3/4,screenSize.height*3/4);
-        super.setLocationRelativeTo(null);
+		super.setSize(screenSize.width * 7 / 8, screenSize.height * 7 / 8);
+		super.setLocationRelativeTo(null);
 
-    }
-    public static void main(String [] args)
-    {
-        Gui gui = new Gui();
-        gui.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        gui.setVisible(true);
-    }
+	}
+
+	public static void main(String[] args) {
+		Gui gui = new Gui();
+		gui.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		gui.setVisible(true);
+	}
 }

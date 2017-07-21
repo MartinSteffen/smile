@@ -1,9 +1,8 @@
 package csm.expression;
 
-import csm.Dictionary;
+import java.util.Set;
+
 import csm.ExpressionEnvironment;
-import csm.Variable;
-import csm.exceptions.ErrUndefinedElement;
 
 
 public final class LogicalFalse extends Expression<Boolean> {
@@ -18,13 +17,18 @@ public final class LogicalFalse extends Expression<Boolean> {
 		return "false";
 	}
 
-	@Override
-	public void noUndefinedVars(Dictionary<Variable> variables)
-			throws ErrUndefinedElement {
+	public String firstUndefinedVar(Set<String> variables) {
+		return null;
 	}
 
 	@Override
 	protected int precedence() {
-		return 10;
+		return 4;
 	}
+
+	@Override
+	csm.expression.Expression.ASSOCIATIVITY assoc() {
+		return ASSOCIATIVITY.NONASSOC;
+	}
+
 }

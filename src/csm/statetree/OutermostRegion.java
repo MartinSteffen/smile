@@ -57,6 +57,7 @@ public final class OutermostRegion extends Region {
 		if (state != null && state.getParent() != this)
 			throw new ErrTreeNotChanged("Could not set new start state");
 		this.startState = state;
+		announceChanges();
 	}
 
 	/**
@@ -72,22 +73,13 @@ public final class OutermostRegion extends Region {
 			int count;
 
 			/*
-			 * der State erhaelt eine neue Nummer, danach werden seine
-			 * Child-Komponenten besucht
-			 */
-			@Override
-			final public void visitState(State s) {
-				s.setUniqueId(this.count);
-				this.count++;
-				visitChildren(s);
-			}
-
-			/*
-			 * bei anderen Komponenten werden nur deren
-			 * Child-Komponenten besucht
+			 * die Komponente erhaelt eine neue Nummer, danach werden
+			 * seine Child-Komponenten besucht
 			 */
 			@Override
 			final public void visitCSMComponent(CSMComponent c) {
+				c.setUniqueId(this.count);
+				this.count++;
 				visitChildren(c);
 			}
 		}.visitRegion(this);

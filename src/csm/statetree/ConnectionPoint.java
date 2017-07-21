@@ -5,6 +5,8 @@ package csm.statetree;
 
 import java.awt.Point;
 
+import csm.exceptions.ErrTreeNotChanged;
+
 
 /**
  * Abstrakte Oberklasse der Entry- und ExitStates
@@ -21,4 +23,10 @@ public abstract class ConnectionPoint extends State {
 	ConnectionPoint(Point position) {
 		super(position);
 	}
+
+	@Override
+	public final void dropHere(CSMComponent child) throws ErrTreeNotChanged {
+		dropToParent(child);
+	}
+
 }

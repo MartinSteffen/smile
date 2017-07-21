@@ -1,9 +1,8 @@
 package csm.expression;
 
-import csm.Dictionary;
+import java.util.Set;
+
 import csm.ExpressionEnvironment;
-import csm.Variable;
-import csm.exceptions.ErrUndefinedElement;
 
 
 public final class LogicalNot extends Expression<Boolean> {
@@ -25,18 +24,21 @@ public final class LogicalNot extends Expression<Boolean> {
 	public String prettyprint() {
 		if (precedence() > this.guard.precedence())
 			return "! (" + this.guard.prettyprint() + ')';
-		else
-			return "! " + this.guard.prettyprint();
+		return "! " + this.guard.prettyprint();
 	}
 
-	@Override
-	public void noUndefinedVars(Dictionary<Variable> variables)
-			throws ErrUndefinedElement {
-		this.guard.noUndefinedVars(variables);
+	public String firstUndefinedVar(Set<String> variables) {
+		return this.guard.firstUndefinedVar(variables);
 	}
 
 	@Override
 	protected int precedence() {
 		return 3;
 	}
+
+	@Override
+	csm.expression.Expression.ASSOCIATIVITY assoc() {
+		return ASSOCIATIVITY.ASSOC;
+	}
+
 }

@@ -1,12 +1,12 @@
 package csm.expression;
 
-import csm.Dictionary;
+import java.util.Set;
+
 import csm.ExpressionEnvironment;
-import csm.Variable;
-import csm.exceptions.ErrUndefinedElement;
 
 
-abstract public class BinaryExpression<Result, Arg> extends Expression<Result> {
+abstract public class BinaryExpression<Result, Arg> extends
+		Expression<Result> {
 
 	/**
 	 * der linke Subterm
@@ -45,17 +45,25 @@ abstract public class BinaryExpression<Result, Arg> extends Expression<Result> {
 		String ls = this.left.prettyprint();
 		if (precedence() > this.left.precedence())
 			ls = '(' + ls + ')';
+		if (assoc() == ASSOCIATIVITY.RIGHTASSOC
+			|| assoc() == ASSOCIATIVITY.NONASSOC)
+			if (precedence() == this.left.precedence())
+				ls = '(' + ls + ')';
 		String rs = this.right.prettyprint();
-		if (precedence() >= this.right.precedence())
+		if (precedence() > this.right.precedence())
 			rs = '(' + rs + ')';
+		if (assoc() == ASSOCIATIVITY.LEFTASSOC
+			|| assoc() == ASSOCIATIVITY.NONASSOC)
+			if (precedence() == this.right.precedence())
+				rs = '(' + rs + ')';
 		return ls + ' ' + opString() + ' ' + rs;
 	}
 
-	@Override
-	public final void noUndefinedVars(Dictionary<Variable> variables)
-			throws ErrUndefinedElement {
-		this.left.noUndefinedVars(variables);
-		this.right.noUndefinedVars(variables);
+	public final String firstUndefinedVar(Set<String> definedVars) {
+		String l = this.left.firstUndefinedVar(definedVars);
+		if (l == null)
+			l = this.right.firstUndefinedVar(definedVars);
+		return l;
 	}
 
 }

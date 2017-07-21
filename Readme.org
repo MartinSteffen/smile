@@ -2,7 +2,8 @@
 
 
 The repository collects the /sources/ of the ``Smile'' project, in the
-software programming lab course, winter 2006 at the University Kiel.
+software programming lab course ``programming-in-the-many'', winter 2006/07
+at the University Kiel.
 
 For the webpages of the course, see [[http://heim.ifi.uio.no/msteffen/teaching/softtech/ws0607/pitm-uml][here]].
 

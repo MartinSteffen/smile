@@ -1,13 +1,53 @@
 options {
   JDK_VERSION = "1.5";
-  STATIC= false;
+  STATIC = false;
 }
-
+ 
 PARSER_BEGIN(ExpressionParser)
 package csm.expression.parser;
+import java.io.StringReader;
+import java.util.LinkedList;
+import csm.exceptions.ErrSyntaxError;
 import csm.expression.*;
 
-public class ExpressionParser {}
+public class ExpressionParser {
+	static public Expression<Boolean> parseGuard(String gs) 
+		throws ErrSyntaxError {
+		if(gs==null)
+			return new LogicalTrue();
+		ExpressionParser p = new ExpressionParser(new StringReader(gs));
+		try {
+        	return p.boolExpr1();
+		} catch (ParseException pe) {
+        	throw new ErrSyntaxError(pe.getMessage());
+		}
+	}
+	
+	static public Action parseAction(String gs) 
+		throws ErrSyntaxError {
+		if(gs==null)
+			return DoSkip.skipAction;
+		ExpressionParser p = new ExpressionParser(new StringReader(gs));
+		try { 
+        	return p.actionExpr();
+		} catch (ParseException pe) {
+        	throw new ErrSyntaxError(pe.getMessage());
+		}
+	}	
+	
+	static public String parseIdent(String gs) 
+		throws ErrSyntaxError {
+		if(gs==null)
+			return null;
+		ExpressionParser p = new ExpressionParser(new StringReader(gs));
+		try { 
+        	return p.identString();
+		} catch (ParseException pe) {
+        	throw new ErrSyntaxError(pe.getMessage());
+		}
+	}	
+	
+}
 
 
 PARSER_END(ExpressionParser)
@@ -24,7 +64,9 @@ SKIP :
 TOKEN :
 {
 	<LPAREN : "(">
+|	<COMMA	: ",">
 |	<RPAREN : ")">
+|	<SKIP_	: "skip">
 |	<SEND	: "send">
 |	<RANDOM	: "random">
 |	<ASSIGN	: ":=">
@@ -40,40 +82,189 @@ TOKEN :
 |	<PLUS	: "+">
 |	<MINUS	: "-">
 |   <MUL	: "*">
+|	<TRUE	: "true">
+|	<FALSE	: "false">
+|	<WLA	: "wla">
+|	<NAB	: "nab">
 |	<INTNUM : (["0"-"9"])+ >
 |	<IDENT	: (["a"-"z"] | ["A"-"Z"] | "_")
 			  (["a"-"z"] | ["A"-"Z"] | "_" | ["0"-"9"])* >
 }
-
+ 
 // Precedence level 0
-
+ 
+Action actionExpr() : {
+	Token t;
+	LinkedList<Expression<Integer>> rv
+		= new LinkedList<Expression<Integer>>();
+	Expression<Integer> e;
+}{
+	(	<SKIP_>
+		{ return DoSkip.skipAction;}
+	|	<SEND> <LPAREN>
+		t = <IDENT>
+		<COMMA>
+		e = intExpr6()
+		<RPAREN>
+		{ return new DoSend(t.image, e);}
+	|	t = <IDENT>
+		<ASSIGN>
+		(	<RANDOM> <LPAREN>
+			e = intExpr6()
+			{ rv.add(e); }
+			(	<COMMA> e = intExpr6()
+				{ rv.add(e); }
+			)*
+			<RPAREN>
+			{ return new DoRandom(t.image, (LinkedList<Expression<Integer>>)rv); }
+		|	e = intExpr6()
+			{ return new DoAssign(t.image, e);}
+		)
+	)
+}
 
 // Precedence level 1
 
+Expression<Boolean> boolExpr1() : {
+	Expression<Boolean> e1;
+	Expression<Boolean> e2;
+}{
+	e1 = boolExpr2()
+	(	<OR>
+		e2 = boolExpr2()
+		{ e1 = new LogicalOr(e1, e2);}
+	)*
+	{ return e1;}
+}
 
 // Precedence level 2
+
+Expression<Boolean> boolExpr2() : {
+	Expression<Boolean> e1;
+	Expression<Boolean> e2;
+}{
+	e1 = boolExpr3()
+	(	<AND>
+		e2 = boolExpr3()
+		{ e1 = new LogicalAnd(e1, e2);}
+	)*
+	{ return e1;}
+}
 
 
 // Precedence level 3
 
+Expression<Boolean> boolExpr3() : {
+	Expression<Boolean> e;
+}{	(	<NOT>
+		e = boolExpr3() 
+		{ e = new LogicalNot(e);}
+	|	e = boolExpr4()
+	)
+	{ return e; }
+} 
+
 
 // Precedence level 4
 
-
+Expression<Boolean> boolExpr4() : {
+	Expression<Integer> e1;
+	Expression<Integer> e2;
+	Expression<Boolean> be;
+}{	(	<TRUE>
+		{ return new LogicalTrue();}
+	|	<FALSE>
+		{ return new LogicalFalse();}
+	|	LOOKAHEAD(intExpr6())
+		e1 = intExpr6()
+		(	<EQ>
+			e2 = intExpr6()
+			{ return new CompareEq(e1, e2);}
+		|	<NEQ>
+			e2 = intExpr6()
+			{ return new CompareNeq(e1, e2);}
+		|	<LEQ>
+			e2 = intExpr6()
+			{ return new CompareLeq(e1, e2);}
+		|	<GEQ>
+			e2 = intExpr6()
+			{ return new CompareGeq(e1, e2);}
+		|	<LT>
+			e2 = intExpr6()
+			{ return new CompareLt(e1, e2);}
+		|	<GT>
+			e2 = intExpr6()
+			{ return new CompareGt(e1, e2);}
+		)
+	|	<LPAREN>
+		be = boolExpr1()
+		<RPAREN>
+		{ return be; }
+	)
+}
+ 
 // Precedence level 6
 
+Expression<Integer> intExpr6() : {
+	Expression<Integer> e1;
+	Expression<Integer> e2;
+}{
+	e1 = intExpr7()
+	(	<PLUS>
+		e2 = intExpr7()
+		{ e1 = new IntSum(e1, e2);}
+	|	<MINUS>
+		e2 = intExpr7()
+		{ e1 = new IntDifference(e1, e2);}
+	)*
+	{ return e1;}
+}
 
 // Precedence level 7
 
+Expression<Integer> intExpr7() : {
+	Expression<Integer> e1;
+	Expression<Integer> e2;
+}{
+	e1 = intExpr9()
+	(	<MUL>
+		e2 = intExpr9()
+		{ e1 = new IntProduct(e1, e2);}
+	)*
+	{ return e1;}
+}
 
 // Precedence level 9
 
+Expression<Integer> intExpr9() : {
+	Expression<Integer> e;
+}{	(	<MINUS>
+		e = intExpr9() 
+		{ return new IntNegation(e);}
+	|	e = intExpr10()
+		{ return e;}
+	) 
+}
 
 // Precedence level 10
 
-Expression<Integer> intConst() : {
+Expression<Integer> intExpr10() : {
+	Token t;
+	Expression<Integer> ie;
+}{	(	t = <INTNUM>
+		{ return new IntConstant(Integer.valueOf(t.image));}
+	|	t = <IDENT>
+		{ return new IntVariable(t.image);}
+	|	<LPAREN>
+		ie = intExpr6()
+		<RPAREN>
+		{ return ie; }
+	)
+}
+
+String identString() : {
 	Token t;
 }{
-	t = <INTNUM>
-	{ return new IntConstant(Integer.valueOf(t.image));}
+	t = <IDENT>
+	{ return t.image; }
 }

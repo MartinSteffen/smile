@@ -1,6 +1,5 @@
 package csm.expression;
 
-
 public class CompareLeq extends CompareExpression {
 
 	public CompareLeq(Expression<Integer> left,
@@ -17,5 +16,6 @@ public class CompareLeq extends CompareExpression {
 	String opString() {
 		return "<=";
 	}
+
 
 }

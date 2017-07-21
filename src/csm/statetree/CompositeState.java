@@ -5,11 +5,15 @@ package csm.statetree;
 
 import java.awt.Point;
 import java.util.LinkedList;
+import java.util.Set;
 
 import csm.Event;
+import csm.exceptions.ErrSyntaxError;
 import csm.exceptions.ErrTreeNotChanged;
 import csm.exceptions.ErrUndefinedElement;
 import csm.expression.Action;
+import csm.expression.DoSkip;
+import csm.expression.parser.ExpressionParser;
 
 
 /**
@@ -19,9 +23,9 @@ import csm.expression.Action;
  */
 public final class CompositeState extends InternalState {
 
-	private Action doAction;
+	private Action doAction = DoSkip.skipAction;
 
-	private LinkedList<Event> deferredEvents;
+	private LinkedList<String> deferredEvents = new LinkedList<String>();
 
 	public CompositeState(Point position) {
 		super(position);
@@ -40,9 +44,9 @@ public final class CompositeState extends InternalState {
 	 * @throws ErrTreeNotChanged wenn der ConnectionPoint schon das
 	 *             Child irgendeiner Komponente ist
 	 */
-	final public void add(ConnectionPoint child)
-			throws ErrTreeNotChanged {
+	final public void add(ConnectionPoint child) throws ErrTreeNotChanged {
 		addAnyChild(child);
+		announceChanges();
 	}
 
 	/**
@@ -59,6 +63,7 @@ public final class CompositeState extends InternalState {
 	 */
 	final public void add(SubRegion child) throws ErrTreeNotChanged {
 		addAnyChild(child);
+		announceChanges();
 	}
 
 	/**
@@ -73,53 +78,107 @@ public final class CompositeState extends InternalState {
 	}
 
 	/**
-	 * @param action die dem State zugeordnete DoAction oder null, wenn
-	 *            der State keine DoAction enthaelt.
+	 * Setzt die DoAction. Ist dieser State Teil einer CSM, dann wird
+	 * sichergestellt, dass alle in der doAction verwendeten Variablen
+	 * in der CSM definiert sind.
+	 * 
+	 * @param action die dem State zugeordnete DoAction. Muss ungleich
+	 *            null sein.
 	 * @throws ErrUndefinedElement wenn die Action auf Variablen
 	 *             verweist, die in der zugeordneten CSM nicht definiert
 	 *             sind
 	 */
-	final public void setDoAction(Action action)
-			throws ErrUndefinedElement {
-		assert action != null;
-		action.noUndefinedVars(getCSM().variables);
+	final public void setDoAction(Action action) throws ErrUndefinedElement {
+		assert action != null : "use DoSkip";
+
+		if (isRooted()) {
+			String undefName = action.firstUndefinedVar(getCSM().variables
+					.getKeys());
+			if (undefName != null)
+				throw new ErrUndefinedElement(undefName);
+		}
 		this.doAction = action;
+		announceChanges();
 	}
 
 	/**
 	 * @param action die dem State zugeordnete DoAction oder null, wenn
-	 *            der State keine DoAction enthaelt.
+	 *            der State keine DoAction enthaelt ("skip").
 	 * @throws ErrUndefinedElement wenn die Action auf Variablen
 	 *             verweist, die in der zugeordneten CSM nicht definiert
 	 *             sind
 	 */
 	final public void setDoAction(String action)
-			throws ErrUndefinedElement {
-		assert action != null;
-		// TODO parsen
+			throws ErrUndefinedElement, ErrSyntaxError {
+		setDoAction(ExpressionParser.parseAction(action));
 	}
+
 	/**
 	 * gibt die in diesem State als deferred markierten Events zurueck
 	 * 
 	 * @return eine neue Kopie der Eventliste
 	 */
+	@Deprecated
 	final public LinkedList<Event> getDeferredEvents() {
-		return new LinkedList<Event>(this.deferredEvents);
+		assert isRooted();
+		LinkedList<Event> el = new LinkedList<Event>();
+		for (String es : this.deferredEvents)
+			try {
+				el.add(getCSM().events.get(es));
+			} catch (ErrUndefinedElement e) {
+				assert false : "oops, there are unknown events!";
+			}
+		return el;
 	}
 
 	/**
-	 * setzt die Liste der in diesem State als deferred markierten
-	 * Events
+	 * gibt die in diesem State als deferred markierten Events zurueck
+	 * 
+	 * @return eine neue Kopie der Eventliste
+	 */
+	final public LinkedList<String> getDeferredEventNames() {
+		return new LinkedList<String>(this.deferredEvents);
+	}
+
+	/**
+	 * Setzt die Liste der in diesem State als deferred markierten
+	 * Events. Wenn dieser State Teil einer CSM ist, dann wird
+	 * sichergestellt, dass alle Events in dieser definiert sind.
 	 * 
 	 * @param events eine Liste von Events
 	 * @throws ErrUndefinedElement wenn auf der Liste ein Event ist, der
 	 *             noch nicht in der CSM definiert ist
 	 */
+	final public void setDeferredEventNames(LinkedList<String> events)
+			throws ErrUndefinedElement {
+		if (isRooted())
+			for (final String i : events)
+				getCSM().events.mustContain(i);
+
+		this.deferredEvents = new LinkedList<String>(events);
+		announceChanges();
+	}
+
+	/**
+	 * Setzt die Liste der in diesem State als deferred markierten
+	 * Events. Wenn dieser State Teil einer CSM ist, dann wird
+	 * sichergestellt, dass alle Events in dieser definiert sind.
+	 * 
+	 * @param events eine Liste von Events
+	 * @throws ErrUndefinedElement wenn auf der Liste ein Event ist, der
+	 *             noch nicht in der CSM definiert ist
+	 */
+	@Deprecated
 	final public void setDeferredEvents(LinkedList<Event> events)
 			throws ErrUndefinedElement {
-		for (final Event i : this.deferredEvents)
-			getCSM().events.mustContain(i);
-		this.deferredEvents = new LinkedList<Event>(events);
+		if (isRooted())
+			for (final Event i : events)
+				getCSM().events.mustContain(i);
+
+		this.deferredEvents = new LinkedList<String>();
+		for (Event e : events)
+			this.deferredEvents.add(e.getName());
+		announceChanges();
 	}
 
 	@Override
@@ -127,8 +186,36 @@ public final class CompositeState extends InternalState {
 		assert target != null;
 		if (this == target)
 			return this;
+		return null;
+	}
+
+	@Override
+	public void dropHere(CSMComponent child) throws ErrTreeNotChanged {
+		if (child instanceof ConnectionPoint)
+			add((ConnectionPoint) child);
+		else if (child instanceof SubRegion)
+			add((SubRegion) child);
 		else
-			return null;
+			dropToParent(child);
+	}
+
+	@Override
+	final public String firstUndefinedVar(Set<String> definedVars) {
+		String av = this.doAction.firstUndefinedVar(definedVars);
+		if (av != null)
+			return av;
+		return firstUndefinedChildVar(definedVars);
+	}
+
+	@Override
+	final public String firstUndefinedEvent(Set<String> definedEvents) {
+		String av = this.doAction.firstUndefinedEvent(definedEvents);
+		if (av != null)
+			return av;
+		for (String e : this.deferredEvents)
+			if (!definedEvents.contains(e))
+				return e;
+		return firstUndefinedChildEvent(definedEvents);
 	}
 
 }

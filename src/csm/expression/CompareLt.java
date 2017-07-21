@@ -1,6 +1,5 @@
 package csm.expression;
 
-
 public class CompareLt extends CompareExpression {
 
 	public CompareLt(Expression<Integer> left, Expression<Integer> right) {

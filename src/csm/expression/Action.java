@@ -7,22 +7,20 @@ import csm.ExpressionEnvironment;
  * eine Aktion ist ein Ausdruck, der einen Systemzustand (ein
  * ExpressionEnvironment) auf einen neuen Systemzustand abbildet
  */
-public abstract class Action extends Expression<ExpressionEnvironment> {
-
-	abstract void doAction(ExpressionEnvironment pre);
+public abstract class Action extends Expression<ExpressionEnvironment[]> {
 
 	@Override
-	public final ExpressionEnvironment evaluate(
-			ExpressionEnvironment pre) {
-		final ExpressionEnvironment post = new ExpressionEnvironment(
-				pre);
-		doAction(post);
-		return post;
-	}
+	public abstract ExpressionEnvironment[] evaluate(
+			ExpressionEnvironment pre);
 
 	@Override
 	protected final int precedence() {
 		return 0;
+	}
+
+	@Override
+	csm.expression.Expression.ASSOCIATIVITY assoc() {
+		return ASSOCIATIVITY.NONASSOC;
 	}
 
 }

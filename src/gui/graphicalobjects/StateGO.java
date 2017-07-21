@@ -3,10 +3,7 @@
  */
 package gui.graphicalobjects;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
-import csm.statetree.CSMComponent;
+import gui.Controller;
 
 /**
  * StateGO ist die Oberklasse für die Objekte, die die States darstellen
@@ -14,26 +11,9 @@ import csm.statetree.CSMComponent;
  * @author omi
  *
  */
-public abstract class StateGO {
+public abstract class StateGO extends GraphicalObject {
 	
-	protected CSMComponent component;
-	protected Color color;
-	
-	public StateGO() {
-		
+	public StateGO(Controller pc) {
+		super(pc);
 	}
-	
-	public abstract void paint(Graphics g);
-
-	public String getName() {
-		return component.getName();
 	}
-	
-	public void setName(String name) {
-		component.setName(name);
-	}
-	
-	public void setColor(Color c) {
-		this.color = c;
-	}
-}

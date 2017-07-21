@@ -1,15 +1,17 @@
 package csm.expression;
 
-import csm.Dictionary;
+import java.util.Set;
+
 import csm.ExpressionEnvironment;
-import csm.Variable;
-import csm.exceptions.ErrUndefinedElement;
 
 
 public final class DoSkip extends Action {
 
-	@Override
-	public void doAction(ExpressionEnvironment pre) {
+	public final static DoSkip skipAction = new DoSkip();
+
+	private DoSkip() {
+		// Singleton-Pattern: der private Konstruktor soll verhindern,
+		// dass eine zweite Instanz von DoSkip erzeugt wird
 	}
 
 	@Override
@@ -17,9 +19,15 @@ public final class DoSkip extends Action {
 		return "skip";
 	}
 
+	public String firstUndefinedVar(Set<String> dict) {
+		return null;
+	}
+
 	@Override
-	public void noUndefinedVars(Dictionary<Variable> dict)
-			throws ErrUndefinedElement {
+	public final ExpressionEnvironment[] evaluate(ExpressionEnvironment pre) {
+		ExpressionEnvironment[] result = new ExpressionEnvironment[1];
+		result[0] = pre;
+		return result;
 	}
 
 }

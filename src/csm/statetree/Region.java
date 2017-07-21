@@ -4,7 +4,6 @@ import java.awt.Point;
 
 import csm.exceptions.ErrTreeNotChanged;
 
-
 /**
  * Abstrakte Oberklasse aller Regionen
  * 
@@ -24,13 +23,24 @@ public abstract class Region extends CSMComponent {
 	/**
 	 * Fuegt den Child-States dieser Region einen InternalState hinzu
 	 * 
-	 * @param child der hinzuzufuegende InternalState
-	 * @throws ErrTreeNotChanged wenn der InternalState schon das Child
-	 *             irgendeiner Komponente ist, oder wenn er durch das
-	 *             Hinzufuegen ein Substate seiner selbst wuerde
+	 * @param child
+	 *            der hinzuzufuegende InternalState
+	 * @throws ErrTreeNotChanged
+	 *             wenn der InternalState schon das Child irgendeiner Komponente
+	 *             ist, oder wenn er durch das Hinzufuegen ein Substate seiner
+	 *             selbst wuerde
 	 */
 	final public void add(InternalState child) throws ErrTreeNotChanged {
 		addAnyChild(child);
+		announceChanges();
+	}
+
+	@Override
+	public final void dropHere(CSMComponent child) throws ErrTreeNotChanged {
+		if (child instanceof InternalState)
+			add((InternalState) child);
+		else
+			dropToParent(child);
 	}
 
 }

@@ -18,7 +18,7 @@ public final class ExitState extends ConnectionPoint {
 	 */
 	public static enum KindOfExitstate {
 		PR, NPR, CP
-	};
+	}
 
 	private KindOfExitstate kindOf = KindOfExitstate.PR;
 
@@ -44,6 +44,7 @@ public final class ExitState extends ConnectionPoint {
 	public void setKindOfExitstate(KindOfExitstate kindOf) {
 		assert kindOf != null;
 		this.kindOf = kindOf;
+		announceChanges();
 	}
 
 	@Override
@@ -56,12 +57,13 @@ public final class ExitState extends ConnectionPoint {
 		assert target != null;
 		if (target instanceof CompositeState)
 			return null;
-		if (target instanceof ExitState
-				&& regOf().getParent() == target.stateOf())
-			return target.stateOf();
+		else if (target instanceof ExitState) {
+			if (regOf().getParent() == target.stateOf())
+				return target.stateOf();
+			return null;
+		}
 		// entry, final, choice:
-		// TODO Bedingung checken: Exitstate ausschliessen?
-		if (stateOf() instanceof FinalState)
+		else if (stateOf() instanceof FinalState)
 			return null;
 		if (regOf() == target.regOf())
 			return regOf();

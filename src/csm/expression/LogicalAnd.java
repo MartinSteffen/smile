@@ -1,6 +1,7 @@
 package csm.expression;
 
 
+
 public final class LogicalAnd extends
 		BinaryExpression<Boolean, Boolean> {
 
@@ -23,4 +24,10 @@ public final class LogicalAnd extends
 	protected int precedence() {
 		return 2;
 	}
+
+	@Override
+	csm.expression.Expression.ASSOCIATIVITY assoc() {
+		return ASSOCIATIVITY.ASSOC;
+	}
+
 }

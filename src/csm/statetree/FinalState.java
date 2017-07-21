@@ -30,6 +30,7 @@ public final class FinalState extends InternalState {
 	 */
 	final public void add(ExitState child) throws ErrTreeNotChanged {
 		addAnyChild(child);
+		announceChanges();
 	}
 
 	@Override
@@ -38,4 +39,11 @@ public final class FinalState extends InternalState {
 		return null;
 	}
 
+	@Override
+	public void dropHere(CSMComponent child) throws ErrTreeNotChanged {
+		if (child instanceof ExitState)
+			add((ExitState) child);
+		else
+			dropToParent(child);
+	}
 }

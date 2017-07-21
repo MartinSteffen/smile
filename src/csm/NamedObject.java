@@ -1,9 +1,7 @@
 package csm;
 
-import java.util.Observable;
-
-import csm.exceptions.ErrAlreadyDefinedElement;
-
+import csm.exceptions.ErrSyntaxError;
+import csm.expression.parser.ExpressionParser;
 
 /**
  * ein benanntes Objekt, das in einem {@link Dictionary} verwaltet
@@ -13,30 +11,18 @@ import csm.exceptions.ErrAlreadyDefinedElement;
  * sonst nicht sicherzustellen ist, dass in einem {@link Dictionary}
  * jeder Name nur einmal vorkommt.
  */
-public abstract class NamedObject extends Observable {
-
-	final public Dictionary parent;
+public abstract class NamedObject extends ModelNode<Dictionary<? extends NamedObject>> {
 
 	private String name;
 
 	/**
-	 * @param name ungleich null
-	 * @throws ErrAlreadyDefinedElement
+	 * @param name der Name des Elements; ein String ohne Leerzeichen
+	 *            oder Anfuehrungszeichen. Muss ungleich null sein.
+	 * @throws ErrSyntaxError 
 	 */
-	NamedObject(Dictionary parent, String name)
-			throws ErrAlreadyDefinedElement {
-		assert parent != null;
-		this.parent = parent;
-		parent.add(this);
-		setName(name);
-	}
-
-	/**
-	 * @param name ungleich null
-	 */
-	final void setName(String name) {
+	NamedObject(String name) throws ErrSyntaxError {
 		assert name != null;
-		this.name = name;
+		this.name =ExpressionParser.parseIdent(name);
 	}
 
 	final public String getName() {
