@@ -1,0 +1,40 @@
+<html>
+
+<body>
+<p>
+Bei der Eingabe sollte die Grammatik des µ-Kalk&uuml;ls beachtet werden.
+</p>
+<p>
+Regeln f&uuml;r die Eingabe der Formel:<br>
+- Es d&uuml;rfen keine freien Variablen vorkommen<br>
+- Jede Variable darf nur einmal gebunden sein <br>
+- Alle Subformel m&uuml;ssen unbedingt geklammert werden<br>
+- In Modalit&auml;ten m&uuml;ssen Zahlen, Formeln und Sonderzeichen<br> 
+  in Anf&uuml;hrungszeichen genommen werden<br>
+- Andere Zeichenfolgen d&uuml;rfen in Modalit&auml;ten<br> 
+  ohne Anf&uuml;hrungszeichen vorkommen<br>
+- Der Fixpunktoperatoren sollten wie folgt geschrieben werden: µ und v<br>
+- Es d&uuml;rfen Tabulatoren, Umbr&uuml;che und Leerzeichen in die Formel<br> an jeder Stelle angegeben werden
+</p>
+<p>
+Hier ist ein Beispiel f&uuml;r die Eingabe:<br>
+((µX.(vY.(([Hallo "1"](X))&(&lt;Hallo "2">(Y)))))|(µZ.(Z)))
+</p>
+<p>
+Es erscheint folgende Ausgabe:<br>
+---> Formel syntaktisch korrekt<br>
+---> ((µX.(vY.(([Hallo"1"]X)&(&lt;Hallo"2"&gt;Y))))|(µZ.Z)) tetta = 1<br>
+---> (µX.(vY.(([Hallo"1"]X)&(&lt;Hallo"2"&gt;Y)))) tetta = 1<br>
+---> (µZ.Z) tetta = 1<br>
+---> (vY.(([Hallo"1"]X)&(&lt;Hallo"2"&gt;Y))) tetta = 0<br>
+---> Z [ µ -binding to (µZ.Z) ] tetta = 0<br>
+---> (([Hallo"1"]X)&(&lt;Hallo"2"&gt;Y)) tetta = 0<br>
+---> ([Hallo"1"]X) tetta = 0<br>
+---> (&lt;Hallo"2"&gt;Y) tetta = 0<br>
+---> X [ µ -binding to (µX.(vY.(([Hallo"1"]X)&(&lt;Hallo"2"&gt;Y)))) ] tetta = 0<br>
+---> Y [ v -binding to (vY.(([Hallo"1"]X)&(&lt;Hallo"2"&gt;Y))) ] tetta = 0<br>
+
+</p>
+</body>
+
+</html>
