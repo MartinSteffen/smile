@@ -1,0 +1,55 @@
+Die Grammatik für Actions, Guards, Events und Variablen
+-------------------------------------------------------
+
+Action ::= "skip"
+         | "send" "(" <Event> "," <IntExpr> ")"
+	 | <Variable> ":=" "random" "(" <IntExpr> { "," <IntExpr> }* ")"
+         | <Variable> ":=" <IntExpr>
+
+Guard ::= "true" | "false" | "wla" | "nab"
+        | <Guard> "|" <Guard>
+	| <Guard> "&" <Guard>
+	| "!" <Guard>
+        | <IntExpr> "<" <IntExpr>
+        | <IntExpr> ">" <IntExpr>
+        | <IntExpr> "<=" <IntExpr>
+        | <IntExpr> ">=" <IntExpr>
+        | <IntExpr> "==" <IntExpr>
+        | <IntExpr> "!=" <IntExpr>
+	| "(" <Guard> ")"
+
+Event ::= <IDENT>
+
+Variable ::= <IDENT>
+
+IntExpr ::= <INTNUM>
+          | <Variable>
+          | <IntExpr> "+" <IntExpr>
+          | <IntExpr> "-" <IntExpr>
+          | <IntExpr> "*" <IntExpr>
+          | "-" <IntExpr>
+          | "(" <IntExpr> ")"
+
+INTNUM ::= [0-9]+
+IDENT  ::= [a-zA-Z_] [a-zA-Z0-9_]*
+
+
+
+Operator Precedence
+-------------------
+
+Level (Bindungsstärke)
+ |
+ |  Assoziativität ([l]inks, [b]eidseitig, [k]eine, [e]instellig)
+ |   |
+ |   |  Operator
+-+---+---+--------
+ 9   e   -
+ 7   b   *
+ 6   l   -
+ 6   b   +
+ 4   k   == != <= >= < >
+ 3   e   !
+ 2   b   &
+ 1   b   |
+

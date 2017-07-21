@@ -1,0 +1,521 @@
+#LyX 1.4.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 245
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{bbm}
+
+\newcommand{\TT}{\mathbbm{T}}
+\newcommand{\PP}{\mathbbm{P}}
+\end_preamble
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize 10
+\spacing single
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\end_header
+
+\begin_body
+
+\begin_layout Section*
+Algorithmus zur Erstellung der Funktion 
+\begin_inset Formula $\Upsilon$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Gegeben sind die Definitionen 1 und 4 des Papers.
+\end_layout
+
+\begin_layout Standard
+Die Funktion 
+\begin_inset Formula $\Upsilon:\, S_{exit}\rightarrow\PP(\PP(\TT))$
+\end_inset
+
+ ist gemäß Paper für alle 
+\begin_inset Formula $s\in S_{exit}$
+\end_inset
+
+ definiert durch
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\Upsilon(s) & = & \{\bigcup_{r\in dsr(s)}(\{ f(r)\}\cup F(r))\,|\: f:\, dsr(s)\rightarrow\TT\wedge F:\, dsr(s)\rightarrow\PP(\TT)\wedge\\
+ &  & \forall r\in dsr(s):\,\pi_{tar}(f(r))=s\wedge regOf(\pi_{sor}(f(r)))=r\wedge F(r)\in\Upsilon(\pi_{sor}(f(r)))\}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da 
+\begin_inset Formula $dsr$
+\end_inset
+
+ nicht für Exitstates, sondern nur für CompositeStates definiert ist, ersetzen
+ wir 
+\begin_inset Formula $dsr(s)$
+\end_inset
+
+ durch 
+\begin_inset Formula $dsr(parent(s))$
+\end_inset
+
+, erweitern den Definitionsbereich von 
+\begin_inset Formula $dsr$
+\end_inset
+
+ und setzen 
+\begin_inset Formula $dsr(s)=\emptyset$
+\end_inset
+
+ für alle 
+\begin_inset Formula $s\in S_{final}$
+\end_inset
+
+.
+ Als korrigierte Definition ergibt sich für alle 
+\begin_inset Formula $s\in S_{exit}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\Upsilon(s) & = & \{\bigcup_{r\in dsr(s)}(\{ f(r)\}\cup F(r))\,|\: f:\, dsr(stateOf(s))\rightarrow\TT\wedge F:\, dsr(stateOf(s))\rightarrow\PP(\TT)\wedge\\
+ &  & \forall r\in dsr(stateOf(s)):\,\pi_{tar}(f(r))=s\wedge regOf(\pi_{sor}(f(r)))=r\wedge F(r)\in\Upsilon(\pi_{sor}(f(r)))\}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Definition ist so nicht verwendbar, da weder die Funktion 
+\begin_inset Formula $dsr$
+\end_inset
+
+ noch die Menge 
+\begin_inset Formula $\TT$
+\end_inset
+
+ aller Transitionen direkt implementiert ist.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Schritt 1: konkrete Mengen verwenden
+\end_layout
+
+\begin_layout Standard
+Sei 
+\begin_inset Formula $s_{com}\in S_{com}\cup S_{final}$
+\end_inset
+
+.
+ Seien 
+\begin_inset Formula $s_{exit}:=\{ s\in S_{exit}\,|\: parent(s)=s_{com}\}$
+\end_inset
+
+, 
+\begin_inset Formula $R:=dsr(s_{com})$
+\end_inset
+
+.
+ Diese Mengen können durch rekursives Durchlaufen des Komponentenbaumes
+ leicht ermittelt werden.
+\end_layout
+
+\begin_layout Standard
+Sei 
+\begin_inset Formula $T:\, s_{exit}\rightarrow\PP(\TT)$
+\end_inset
+
+ mit 
+\begin_inset Formula $T(s)=\{ t\in\TT\,|\:\pi_{tar}(t)=s\}$
+\end_inset
+
+ die im Sourcecode 
+\noun on
+transitionsPerExitstate
+\noun default
+ genannte Funktion.
+ Dann ist für alle 
+\begin_inset Formula $s\in s_{exit}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\Upsilon(s) & = & \{\bigcup_{r\in R}(\{ f(r)\}\cup F(r))\,|\: f:\, R\rightarrow T(s)\wedge F:\, R\rightarrow\PP(\TT)\wedge\\
+ &  & \forall r\in R:\, regOf(\pi_{sor}(f(r)))=r\wedge F(r)\in\Upsilon(\pi_{sor}(f(r)))\}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Definition ist noch nicht verwendbar, weil die Mengen aller Funktionen
+ 
+\begin_inset Formula $f:\, R\rightarrow T(s)$
+\end_inset
+
+ und 
+\begin_inset Formula $F:\, R\rightarrow\PP(\TT)$
+\end_inset
+
+ aus Effizienzgründen nicht kostruiert werden sollen.
+\end_layout
+
+\begin_layout Paragraph
+Schritt 2: f und F aus der Definition herausziehen
+\end_layout
+
+\begin_layout Standard
+Seien für alle 
+\begin_inset Formula $s\in s_{exit}$
+\end_inset
+
+, 
+\begin_inset Formula $f:\, R\rightarrow\TT$
+\end_inset
+
+: 
+\begin_inset Formula \[
+\Phi(s):=\{ f:\, R\rightarrow T(s)\,|\:\forall r\in R:\, regOf(\pi_{sor}(f(r)))=r\}\]
+
+\end_inset
+
+ 
+\begin_inset Formula \[
+\Psi(f):=\{ F:\, R\rightarrow\PP(\TT)\,|\:\forall r\in R:\, F(r)\in\Upsilon(\pi_{sor}(f(r)))\}\]
+
+\end_inset
+
+Dann ergibt sich für alle 
+\begin_inset Formula $s\in s_{exit}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\Upsilon(s)=\{\bigcup_{r\in R}(\{ f(r)\}\cup F(r))\,|\: f\in\Phi(s)\wedge F\in\Psi(f)\}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Schritt 3: Rekursion über 
+\begin_inset Formula $R$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wir wählen ein festes 
+\begin_inset Formula $s\in s_{exit}$
+\end_inset
+
+ und parametrisieren 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ und 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ mit 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ Das heißt, wir setzen 
+\begin_inset Formula $\Phi(s)=\Phi(s,\, R)$
+\end_inset
+
+ und 
+\begin_inset Formula $\Psi(s)=\Psi(s,\, R)$
+\end_inset
+
+.
+ Jetzt können wir 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ und 
+\begin_inset Formula $\Psi$
+\end_inset
+
+ rekursiv formulieren:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\Phi(s,\,\emptyset) & = & \{\emptyset\}\\
+\Phi(s,\, R\uplus\{ r\}) & = & \{\phi\uplus(r,\, t)\,|\:\phi\in\Phi(s,\, R)\wedge t\in T(s)\wedge regOf(\pi_{sor}(t))=r\}\\
+\Psi(f,\,\emptyset) & = & \{\emptyset\}\\
+\Psi(f,\, R\uplus\{ r\}) & = & \{\psi\uplus(r,\, t)\,|\:\psi\in\Psi(f,\, R)\wedge t\in\Upsilon(\pi_{sor}(f(r)))\}\end{eqnarray*}
+
+\end_inset
+
+Diese Rekursionen können durch Iterationen über 
+\begin_inset Formula $R$
+\end_inset
+
+ implementiert werden.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Beobachtung:
+\end_layout
+
+\begin_layout Standard
+Für alle 
+\begin_inset Formula $s\in S_{exit}$
+\end_inset
+
+ mit 
+\begin_inset Formula $parent(s)\in S_{final}$
+\end_inset
+
+ ist 
+\begin_inset Formula $\Phi(s)=\{\emptyset\}$
+\end_inset
+
+, 
+\begin_inset Formula $\Psi(\Phi(s))=\{\emptyset\}$
+\end_inset
+
+ und damit 
+\begin_inset Formula $\Upsilon(s)=\{\emptyset\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Schritt 4: Algorithmus
+\end_layout
+
+\begin_layout Standard
+Setze zunächst 
+\begin_inset Formula $\Upsilon:=\emptyset$
+\end_inset
+
+.
+ Traversiere dann den Komponentenbaum in post-order.
+ Setze dabei für alle 
+\begin_inset Formula $s\in S_{exit}$
+\end_inset
+
+ mit 
+\begin_inset Formula $parent(s)\in S_{final}$
+\end_inset
+
+ 
+\begin_inset Formula $\Upsilon(s)=\{\emptyset\}$
+\end_inset
+
+ und verwende für alle 
+\begin_inset Formula $s_{com}\in S_{com}$
+\end_inset
+
+ den folgenden Algorithmus:
+\end_layout
+
+\begin_layout LyX-Code
+Eingabe: 
+\begin_inset Formula $s_{com}\in S_{com}$
+\end_inset
+
+, partielle Funktion 
+\begin_inset Formula $\Upsilon:\, S_{exit}\rightarrow\PP(\PP(\TT))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+\begin_inset Formula $s_{exit}$
+\end_inset
+
+:=
+\begin_inset Formula $\{ s\in S_{exit}\,|\: parent(s)=s_{com}\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+\begin_inset Formula $R$
+\end_inset
+
+:=
+\begin_inset Formula $dsr(s_{com})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout LyX-Code
+forall 
+\begin_inset Formula $s\in s_{exit}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $\Upsilon(s)$
+\end_inset
+
+:=
+\begin_inset Formula $\emptyset$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    
+\begin_inset Formula $\Phi$
+\end_inset
+
+:=
+\begin_inset Formula $\{\emptyset\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    forall 
+\begin_inset Formula $r\in R$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+        
+\begin_inset Formula $\Phi$
+\end_inset
+
+:=
+\begin_inset Formula $\{\phi\uplus(r,\, t)\,|\:\phi\in\Phi\wedge t\in T(s)\wedge regOf(\pi_{sor}(t))=r\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+    forall 
+\begin_inset Formula $f\in\Phi$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+        
+\begin_inset Formula $\Psi$
+\end_inset
+
+:=
+\begin_inset Formula $\{\emptyset\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+        forall 
+\begin_inset Formula $r\in R$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+            
+\begin_inset Formula $\Psi$
+\end_inset
+
+:=
+\begin_inset Formula $\{\psi\uplus(r,\, t)\,|\:\psi\in\Psi\wedge t\in\Upsilon(\pi_{sor}(f(r)))\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+        forall 
+\begin_inset Formula $F\in\Psi$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout LyX-Code
+            
+\begin_inset Formula $\upsilon$
+\end_inset
+
+:=
+\begin_inset Formula $\bigcup_{r\in R}(\{ f(r)\}\cup F(r))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+            
+\begin_inset Formula $\Upsilon(s)=\Upsilon(s)\cup\{\upsilon\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+Ausgabe: 
+\begin_inset Formula $\Upsilon$
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
