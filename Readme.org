@@ -23,11 +23,14 @@ For the webpages of the course, see [[http://heim.ifi.uio.no/msteffen/teaching/s
 
 The repository has been resurrected by migrating from ~cvs~ via svn (using
 ~cvs2svn~) and from there to ~git~. Caveats concerning missing branches
-apply. Also the /Snapshots/ or baselines (original svn revision tags) seem
-not to be preserved as git labels in the final repository (see the
-[[./Baselines]]-file).  Also, original /authors/ have not been preserved, as
-the original development was done all via a common login ~swprakt~; in
-general, the contributors were the different students in the course plus
-the course teachers.
+apply. 
+
+In this particular repos, it indeed seems that the transfer *missed* later
+revisions. The reasons is unclear, probably, the svn-dump was not done at
+the end of the project, but only at an intermediate state (and I did not
+find the CVS). Anyway, I updated then the files with the /latest/ version I
+found, meaning that there is a ``gap'' in the respository.
+
+
 
 
